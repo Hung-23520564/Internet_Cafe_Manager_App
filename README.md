@@ -1,1 +1,1 @@
-# Internet Cafe Manager App
+# Internet Café Manager App
