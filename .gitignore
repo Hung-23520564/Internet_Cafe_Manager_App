@@ -1,0 +1,26 @@
+# Thư mục và file tạm của Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Thư mục chứa file build (không nên đưa lên Git)
+[Bb]in/
+[Oo]bj/
+
+# File cấu hình Rider (nếu dùng)
+.idea/
+
+# Cấu hình Resharper (nếu dùng)
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# File xác thực Firebase (TUYỆT ĐỐI KHÔNG COMMIT LÊN GIT!!!)
+# Thay 'your-service-account-file.json' bằng tên file key Firebase của anh nếu có
+# Ví dụ: serviceAccountKey.json
+*.json
+
+# Các file hệ thống khác
+Thumbs.db
+Desktop.ini
