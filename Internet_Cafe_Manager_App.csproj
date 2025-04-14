@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="UI\Admin\" />
+    <Folder Include="UI\Users\" />
+  </ItemGroup>
+
 </Project>
