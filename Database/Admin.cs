@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DoAnLTM.Database
+namespace Internet_Cafe_Manager_App.Database
 {
     /// <summary>
     /// Đại diện cho mô hình dữ liệu của một tài khoản Quản trị viên (Admin).

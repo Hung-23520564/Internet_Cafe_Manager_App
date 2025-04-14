@@ -2,8 +2,8 @@
 using FireSharp.Interfaces;
 using FireSharp.Response;
 // Đảm bảo bạn đã using đúng namespace cho AdminModel và Users
-using QL_NET.Entity; // Giả sử Users nằm ở đây
-using DoAnLTM.Database; // Giả sử AdminModel nằm ở đây
+
+using Internet_Cafe_Manager_App.Database; // Giả sử AdminModel nằm ở đây
 using System;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.ApplicationServices;
