@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Internet_Cafe_Manager_App.Database
+namespace Internet_Cafe_Manager_App.Entity
 {
     public class Users
     {
@@ -17,8 +17,4 @@ namespace Internet_Cafe_Manager_App.Database
 
         public Users() { }
     }
-
-
-
-
 }

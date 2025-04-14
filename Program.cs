@@ -1,3 +1,5 @@
+using Internet_Cafe_Manager_App.UI.Users;
+
 namespace Internet_Cafe_Manager_App
 {
     internal static class Program
@@ -11,7 +13,7 @@ namespace Internet_Cafe_Manager_App
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Admin());
+            Application.Run(new User());
         }
     }
 }
