@@ -39,7 +39,7 @@
             pictureBox2 = new PictureBox();
             pictureBox3 = new PictureBox();
             button1 = new Button();
-            button2 = new Button();
+            btnUser = new Button();
             label1 = new Label();
             panel1.SuspendLayout();
             panel3.SuspendLayout();
@@ -151,18 +151,18 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += btnChooseAdmin_Click;
             // 
-            // button2
+            // btnUser
             // 
-            button2.BackColor = Color.FromArgb(0, 192, 192);
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(644, 454);
-            button2.Name = "button2";
-            button2.Size = new Size(207, 55);
-            button2.TabIndex = 9;
-            button2.Text = "USER";
-            button2.UseVisualStyleBackColor = false;
-           // button2.Click += btnChooseUser_Click; ( Hồng Huy code phần đăng nhập User )
+            btnUser.BackColor = Color.FromArgb(0, 192, 192);
+            btnUser.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUser.ForeColor = SystemColors.ControlLightLight;
+            btnUser.Location = new Point(644, 454);
+            btnUser.Name = "btnUser";
+            btnUser.Size = new Size(207, 55);
+            btnUser.TabIndex = 9;
+            btnUser.Text = "USER";
+            btnUser.UseVisualStyleBackColor = false;
+            btnUser.Click += btnChooseUserClick;
             // 
             // label1
             // 
@@ -182,7 +182,7 @@
             BackColor = Color.FromArgb(54, 75, 109);
             ClientSize = new Size(1062, 676);
             Controls.Add(label1);
-            Controls.Add(button2);
+            Controls.Add(btnUser);
             Controls.Add(button1);
             Controls.Add(pictureBox3);
             Controls.Add(pictureBox2);
@@ -191,9 +191,9 @@
             Controls.Add(panel5);
             Controls.Add(panel3);
             Controls.Add(panel1);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form_InitialChoice";
-            Text = "Form1";
+            Text = "Chọn vai trò";
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
@@ -215,7 +215,7 @@
         private PictureBox pictureBox2;
         private PictureBox pictureBox3;
         private Button button1;
-        private Button button2;
+        private Button btnUser;
         private Label label1;
     }
 }

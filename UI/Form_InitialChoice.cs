@@ -8,10 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Internet_Cafe_Manager_App.UI.Admin;
+using Internet_Cafe_Manager_App.UI.User;
 
 namespace Internet_Cafe_Manager_App.UI
 {
-    public partial class Form_InitialChoice : Form 
+    public partial class Form_InitialChoice : Form
     {
         public Form_InitialChoice()
         {
@@ -30,17 +31,14 @@ namespace Internet_Cafe_Manager_App.UI
             this.Hide();
         }
 
-        //private void btnChooseUser_Click(object sender, EventArgs e)
-        //{
-            // Tạo một đối tượng của Form đăng nhập User
-        //    Form_UserLogin adminLoginForm = new Form_UserLogin();
+        private void btnChooseUserClick(object sender, EventArgs e)
+        {
+            Form_UserLogin userLoginForm = new Form_UserLogin();
 
-            // Hiển thị form đăng nhập User
-        //    adminLoginForm.Show();
+            userLoginForm.Show();
 
-            // Ẩn form chọn vai trò hiện tại đi
-        //    this.Hide();
-        
+            this.Hide();
 
+        }
     }
 }

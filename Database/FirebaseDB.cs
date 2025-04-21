@@ -1,111 +1,211 @@
 ﻿using FireSharp.Config;
 using FireSharp.Interfaces;
 using FireSharp.Response;
-// Đảm bảo bạn đã using đúng namespace cho AdminModel và Users
-
-using Internet_Cafe_Manager_App.Database;
+// Đảm bảo bạn đã using đúng namespace cho lớp Users và Admin
+using Internet_Cafe_Manager_App.Database; // Giả sử lớp Users, Admin nằm ở đây
 using System;
 using System.Threading.Tasks;
-using Microsoft.VisualBasic.ApplicationServices;
-using System.IO;
-using System.Net;
+// using Microsoft.VisualBasic.ApplicationServices; // Mấy using không cần thiết có thể bỏ đi
+// using System.IO;
+// using System.Net; // System.Net.HttpStatusCode dùng ở dưới nên giữ lại
 
 namespace Internet_Cafe_Manager_App.Database
 {
     public class FirebaseDB
     {
+        // --- Phần cấu hình Firebase Client (Giữ nguyên như cũ) ---
         private static IFirebaseConfig config = new FirebaseConfig
         {
-
-            AuthSecret = "BOTfpnJFZLR8Gy4VewguWS1q607MXDSlAs8yAKvS",
-            BasePath = "https://doanltm-49335-default-rtdb.asia-southeast1.firebasedatabase.app/"
+            // !!! CẢNH BÁO: KHÔNG NÊN HARDCODE SECRET/KEY VÀ BASEPATH Ở ĐÂY !!!
+            // Nên đọc từ file cấu hình (app.config, appsettings.json)
+            AuthSecret = "AIzaSyAkdx8etqkdQj8OPDVGkUwrLbZUiUYjJ74", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
+            BasePath = "https://internet-cafe-manager-ap-9e088-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         public IFirebaseClient client;
 
         public FirebaseDB()
         {
-            client = new FireSharp.FirebaseClient(config);
-            if (client == null)
+            try
             {
-                throw new Exception("Không thể kết nối đến Firebase!");
+                client = new FireSharp.FirebaseClient(config);
+                // Kiểm tra client sau khi khởi tạo (dù FireSharp thường không trả về null ở đây)
+                if (client == null)
+                {
+                    // Ghi log hoặc throw exception rõ ràng hơn
+                    throw new InvalidOperationException("Không thể khởi tạo FirebaseClient!");
+                }
+                // Có thể thêm một lần kiểm tra kết nối đơn giản nếu cần, ví dụ GetAsync tới root "/"
+                // var response = await client.GetAsync("/"); // Tuy nhiên, không nên gọi async trong constructor
+            }
+            catch (Exception ex)
+            {
+                // Ghi log lỗi khởi tạo
+                Console.WriteLine("Lỗi nghiêm trọng khi khởi tạo FirebaseDB: " + ex.Message);
+                // Rethrow hoặc xử lý phù hợp, ví dụ: throw new Exception(...) để báo lỗi ra ngoài
+                throw new Exception("Không thể kết nối đến Firebase! Chi tiết: " + ex.Message, ex);
             }
         }
 
-        // --- Các phương thức CRUD cho Users ---
+        // --- Các phương thức CRUD cho Users (Đã "nâng cấp") ---
 
-        public async Task<bool> AddUser(Users user)
+        /// <summary>
+        /// Thêm hoặc cập nhật thông tin một User vào Firebase.
+        /// Sử dụng username làm khóa. Ghi đè nếu username đã tồn tại.
+        /// </summary>
+        /// <param name="user">Đối tượng Users chứa thông tin cần lưu.</param>
+        /// <returns>True nếu thành công, False nếu có lỗi.</returns>
+        public async Task<bool> AddOrUpdateUser(Users user) // Đã đổi tên từ AddUser
         {
+            // 1. Kiểm tra đầu vào cơ bản
+            if (user == null)
+            {
+                Console.WriteLine("Lỗi: Đối tượng User không được null.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(user.Username)) // Giả sử thuộc tính username là 'username'
+            {
+                Console.WriteLine("Lỗi: User username không được để trống.");
+                return false;
+            }
+
             try
             {
-                // Sử dụng SetAsync để ghi đè hoặc tạo mới nếu chưa có
-                SetResponse response = await client.SetAsync("Users/" + user.username, user);
+                // 2. Gọi Firebase API (Dùng SetAsync để Add hoặc Update)
+                // Đảm bảo đường dẫn node đúng là "Users/"
+                SetResponse response = await client.SetAsync("Users/" + user.Username, user);
+
+                // 3. Kiểm tra kết quả trả về từ Firebase
+                // FireSharp thường trả về StatusCode OK ngay cả khi có lỗi logic (vd: permission denied nếu dùng rules)
+                // nhưng kiểm tra OK là bước cơ bản nhất
                 return (response.StatusCode == System.Net.HttpStatusCode.OK);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi thêm user: " + ex.Message);
+                // 4. Ghi log lỗi chi tiết
+                Console.WriteLine($"Lỗi khi lưu (Add/Update) user '{user.Username}': " + ex.Message);
+                // Có thể xem xét log thêm ex.ToString() để có stack trace
                 return false;
             }
         }
 
+        /// <summary>
+        /// Lấy thông tin một User từ Firebase dựa vào username.
+        /// </summary>
+        /// <param name="username">Username của User cần lấy.</param>
+        /// <returns>Đối tượng Users nếu tìm thấy, null nếu không tìm thấy hoặc có lỗi.</returns>
         public async Task<Users> GetUser(string username)
         {
+            // 1. Kiểm tra đầu vào
+            if (string.IsNullOrEmpty(username))
+            {
+                Console.WriteLine("Lỗi: Username để lấy thông tin User không được để trống.");
+                return null;
+            }
+
             try
             {
+                // 2. Gọi Firebase API
                 FirebaseResponse response = await client.GetAsync("Users/" + username);
-                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+
+                // 3. Kiểm tra kết quả
+                // Quan trọng: Phải kiểm tra cả StatusCode và Body != "null"
+                if (response == null || response.StatusCode != System.Net.HttpStatusCode.OK || response.Body == "null")
                 {
-                    return null; // Không tìm thấy hoặc lỗi
+                    // Không tìm thấy user hoặc có lỗi kết nối/quyền -> trả về null
+                    // Không cần log ở đây vì user không tồn tại không hẳn là lỗi
+                    return null;
                 }
+
+                // 4. Parse kết quả thành đối tượng Users
                 Users user = response.ResultAs<Users>();
+                // Quan trọng: Gán lại username từ key vào object nếu object không tự chứa nó
+                // (Tùy thuộc vào cách bạn định nghĩa lớp Users và cách lưu trên Firebase)
+                if (user != null && string.IsNullOrEmpty(user.Username))
+                {
+                    user.Username = username;
+                }
                 return user;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi lấy user: " + ex.Message);
+                // 5. Ghi log lỗi chi tiết
+                Console.WriteLine($"Lỗi khi lấy user '{username}': " + ex.Message);
                 return null;
             }
         }
 
-        public async Task<bool> DeleteUser(string username)
-        {
-            try
-            {
-                FirebaseResponse response = await client.DeleteAsync("Users/" + username);
-                // Kiểm tra StatusCode để đảm bảo thành công
-                return response.StatusCode == System.Net.HttpStatusCode.OK;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Lỗi khi xóa user: " + ex.Message);
-                return false;
-            }
-        }
-
+        /// <summary>
+        /// Cập nhật thông tin một User hiện có trong Firebase.
+        /// Lưu ý: Chỉ cập nhật các trường có trong đối tượng user được cung cấp.
+        /// Nếu muốn ghi đè toàn bộ, hãy dùng AddOrUpdateUser.
+        /// </summary>
+        /// <param name="user">Đối tượng Users chứa thông tin cần cập nhật (phải có username).</param>
+        /// <returns>True nếu thành công, False nếu có lỗi.</returns>
         public async Task<bool> UpdateUser(Users user)
         {
+            // 1. Kiểm tra đầu vào
+            if (user == null)
+            {
+                Console.WriteLine("Lỗi: Đối tượng User không được null khi cập nhật.");
+                return false;
+            }
+            if (string.IsNullOrEmpty(user.Username))
+            {
+                Console.WriteLine("Lỗi: User username không được để trống khi cập nhật.");
+                return false;
+            }
+
             try
             {
-                // Lưu ý: Đường dẫn trong UpdateAsync nên là "Users/" chứ không phải "User/"
-                FirebaseResponse response = await client.UpdateAsync("Users/" + user.username, user);
+                // 2. Gọi Firebase API (UpdateAsync chỉ cập nhật các trường có trong `user`)
+                FirebaseResponse response = await client.UpdateAsync("Users/" + user.Username, user);
+
+                // 3. Kiểm tra kết quả
                 return response.StatusCode == System.Net.HttpStatusCode.OK;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Lỗi khi cập nhật user: " + ex.Message);
+                // 4. Ghi log lỗi
+                Console.WriteLine($"Lỗi khi cập nhật user '{user.Username}': " + ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Xóa một User khỏi Firebase dựa vào username.
+        /// </summary>
+        /// <param name="username">Username của User cần xóa.</param>
+        /// <returns>True nếu xóa thành công, False nếu có lỗi hoặc user không tồn tại.</returns>
+        public async Task<bool> DeleteUser(string username)
+        {
+            // 1. Kiểm tra đầu vào
+            if (string.IsNullOrEmpty(username))
+            {
+                Console.WriteLine("Lỗi: Username để xóa User không được để trống.");
+                return false;
+            }
+
+            try
+            {
+                // 2. Gọi Firebase API
+                FirebaseResponse response = await client.DeleteAsync("Users/" + username);
+
+                // 3. Kiểm tra kết quả
+                // DeleteAsync thành công ngay cả khi node không tồn tại, nó chỉ đảm bảo node đó không còn
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                // 4. Ghi log lỗi
+                Console.WriteLine($"Lỗi khi xóa user '{username}': " + ex.Message);
                 return false;
             }
         }
 
 
-        // --- Các phương thức CRUD cho Admins (Mới) ---
+        // --- Các phương thức CRUD cho Admins (Giữ nguyên như code gốc anh cung cấp) ---
+        // ... (Copy các hàm AddOrUpdateAdmin, GetAdmin, DeleteAdmin, UpdateAdmin ở đây) ...
 
-        /// <summary>
-        /// Thêm hoặc cập nhật thông tin một Admin vào Firebase.
-        /// Sử dụng username của Admin làm khóa.
-        /// </summary>
-        /// <param name="admin">Đối tượng AdminModel chứa thông tin cần lưu.</param>
-        /// <returns>True nếu thành công, False nếu có lỗi.</returns>
         public async Task<bool> AddOrUpdateAdmin(Admin admin)
         {
             if (string.IsNullOrEmpty(admin?.Username))
@@ -116,7 +216,6 @@ namespace Internet_Cafe_Manager_App.Database
 
             try
             {
-                // Sử dụng SetAsync để ghi đè hoặc tạo mới nếu chưa có admin với username này
                 SetResponse response = await client.SetAsync("Admin/" + admin.Username, admin);
                 return (response.StatusCode == System.Net.HttpStatusCode.OK);
             }
@@ -127,11 +226,6 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        /// <summary>
-        /// Lấy thông tin một Admin từ Firebase dựa vào username.
-        /// </summary>
-        /// <param name="adminUsername">Username của Admin cần lấy.</param>
-        /// <returns>Đối tượng AdminModel nếu tìm thấy, null nếu không tìm thấy hoặc có lỗi.</returns>
         public async Task<Admin> GetAdmin(string adminUsername)
         {
             if (string.IsNullOrEmpty(adminUsername)) return null;
@@ -139,12 +233,16 @@ namespace Internet_Cafe_Manager_App.Database
             try
             {
                 FirebaseResponse response = await client.GetAsync("Admin/" + adminUsername);
-                // Kiểm tra kỹ hơn: không phải null VÀ status code là OK
                 if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
                 {
-                    return null; // Không tìm thấy hoặc có lỗi xảy ra
+                    return null;
                 }
                 Admin admin = response.ResultAs<Admin>();
+                // Gán lại Username nếu cần
+                if (admin != null && string.IsNullOrEmpty(admin.Username))
+                {
+                    admin.Username = adminUsername;
+                }
                 return admin;
             }
             catch (Exception ex)
@@ -154,11 +252,6 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        /// <summary>
-        /// Xóa một Admin khỏi Firebase dựa vào username.
-        /// </summary>
-        /// <param name="adminUsername">Username của Admin cần xóa.</param>
-        /// <returns>True nếu xóa thành công, False nếu có lỗi.</returns>
         public async Task<bool> DeleteAdmin(string adminUsername)
         {
             if (string.IsNullOrEmpty(adminUsername)) return false;
@@ -166,7 +259,6 @@ namespace Internet_Cafe_Manager_App.Database
             try
             {
                 FirebaseResponse response = await client.DeleteAsync("Admin/" + adminUsername);
-                // Kiểm tra StatusCode để đảm bảo thành công
                 return response.StatusCode == System.Net.HttpStatusCode.OK;
             }
             catch (Exception ex)
@@ -176,13 +268,6 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        /// <summary>
-        /// Cập nhật thông tin một Admin hiện có trong Firebase.
-        /// Lưu ý: UpdateAsync chỉ cập nhật các trường có trong đối tượng admin, không ghi đè toàn bộ.
-        /// Nếu muốn ghi đè toàn bộ, hãy dùng AddOrUpdateAdmin (SetAsync).
-        /// </summary>
-        /// <param name="admin">Đối tượng AdminModel chứa thông tin cần cập nhật.</param>
-        /// <returns>True nếu thành công, False nếu có lỗi.</returns>
         public async Task<bool> UpdateAdmin(Admin admin)
         {
             if (string.IsNullOrEmpty(admin?.Username))
@@ -192,7 +277,6 @@ namespace Internet_Cafe_Manager_App.Database
             }
             try
             {
-                // UpdateAsync chỉ cập nhật các trường được cung cấp trong object admin
                 FirebaseResponse response = await client.UpdateAsync("Admin/" + admin.Username, admin);
                 return response.StatusCode == System.Net.HttpStatusCode.OK;
             }
@@ -203,6 +287,7 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        // Bạn có thể thêm các phương thức khác nếu cần, ví dụ: GetAllAdmins()
+        // Bạn có thể thêm các phương thức khác nếu cần
     }
 }
+   

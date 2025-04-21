@@ -1,4 +1,4 @@
-﻿using Internet_Cafe_Manager_App.Database; // Namespace chứa Admin model (nếu dùng Admin)
+﻿using Internet_Cafe_Manager_App.Database; // Namespace chứa User model
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions; // Cần cho việc kiểm tra Email (tùy chọn)
 
-namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực tế
+namespace Internet_Cafe_Manager_App.UI.User
 {
-    public partial class Form_AdminRegister : Form
+    public partial class Form_UserRegister : Form
     {
         private FirebaseDB firebaseDb;
 
-        public Form_AdminRegister()
+        public Form_UserRegister()
         {
             InitializeComponent();
             firebaseDb = new FirebaseDB();
@@ -36,7 +36,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
         {
             // 1. Lấy dữ liệu từ các TextBox
             string fullName = txtFullName.Text.Trim();
-            string username = txtAdminAccount.Text.Trim();
+            string username = txtUserAccount.Text.Trim();
             string password = txtPassword.Text; // Không Trim password
             string confirmPassword = txtConfirmPassword.Text;
             string email = txtEmail.Text.Trim();
@@ -54,8 +54,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             if (password != confirmPassword)
             {
                 MessageBox.Show("Mật khẩu và xác nhận mật khẩu không khớp.", "Lỗi Mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAdminAccount.Focus();
-                txtAdminAccount.SelectAll();
+                txtUserAccount.Focus();
+                txtUserAccount.SelectAll();
                 return;
             }
 
@@ -72,8 +72,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             if (password.Length < 6) // Ví dụ: yêu cầu ít nhất 6 ký tự
             {
                 MessageBox.Show("Mật khẩu phải có ít nhất 6 ký tự.", "Lỗi Mật khẩu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtAdminAccount.Focus();
-                txtAdminAccount.SelectAll();
+                txtUserAccount.Focus();
+                txtUserAccount.SelectAll();
                 return;
             }
 
@@ -86,8 +86,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             try
             {
                 // 3. Kiểm tra xem Username đã tồn tại chưa
-                Internet_Cafe_Manager_App.Database.Admin existingAdmin = await firebaseDb.GetAdmin(username);
-                if (existingAdmin != null)
+                Internet_Cafe_Manager_App.Database.Users existingUser = await firebaseDb.GetUser(username);
+                if (existingUser != null)
                 {
                     MessageBox.Show($"Username '{username}' đã tồn tại. Vui lòng chọn username khác.", "Trùng Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtFullName.Focus();
@@ -104,7 +104,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
                 // !!! --- Đảm bảo PasswordHelper.HashPassword dùng thuật toán an toàn (BCrypt...) --- !!!
 
                 // 5. Tạo đối tượng Admin mới
-                Internet_Cafe_Manager_App.Database.Admin newAdmin = new Internet_Cafe_Manager_App.Database.Admin
+                Internet_Cafe_Manager_App.Database.Users newUser = new Internet_Cafe_Manager_App.Database.Users
                 {
                     // AdminId có thể để Firebase tự tạo key hoặc bạn tự tạo (ví dụ: Guid)
                     // AdminId = Guid.NewGuid().ToString(), // Ví dụ tự tạo ID
@@ -113,24 +113,24 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
                     FullName = fullName,
                     Email = email,
                     PhoneNumber = phoneNumber,
-                    IsAdminActive = true, // Mặc định là active
+                    IsUserActive = true, // Mặc định là active
                     CreationTimestamp = DateTime.UtcNow, // Thời gian tạo (giờ UTC)
-                    Role = "Admin", // Gán vai trò mặc định (hoặc có thể cho chọn)
+                    Role = "User", // Gán vai trò mặc định
                     LastLoginTimestamp = null // Chưa đăng nhập lần nào
                 };
 
                 // 6. Lưu Admin mới vào Firebase
-                bool success = await firebaseDb.AddOrUpdateAdmin(newAdmin); // Dùng AddOrUpdateAdmin để tạo mới
+                bool success = await firebaseDb.AddOrUpdateUser(newUser); // Dùng AddOrUpdateAdmin để tạo mới
 
                 // 7. Thông báo kết quả và điều hướng
                 if (success)
                 {
-                    MessageBox.Show("Tạo tài khoản Admin thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Tạo tài khoản User thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Chuyển về trang đăng nhập
-                    Form_AdminLogin loginForm = new Form_AdminLogin();
+                    Form_UserLogin loginForm = new Form_UserLogin();
                     loginForm.Show();
-                    this.Hide(); // Ẩn form đăng ký hiện tại
+                    this.Close(); // Ẩn form đăng ký hiện tại
                 }
                 else
                 {
@@ -173,10 +173,10 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
 
 
         // --- Xử lý khi Form bị đóng ---
-        private void Form_AdminRegister_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form_UserRegister_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Khi form đăng ký đóng, nên hiển thị lại form đăng nhập
-            Form_AdminLogin loginForm = Application.OpenForms.OfType<Form_AdminLogin>().FirstOrDefault();
+            Form_UserLogin loginForm = Application.OpenForms.OfType<Form_UserLogin>().FirstOrDefault();
             if (loginForm != null)
             {
                 loginForm.Show(); // Hiển thị lại form đăng nhập nếu nó còn tồn tại
@@ -200,13 +200,11 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             }
         }
 
-
-        // (Tùy chọn) Thêm nút "Quay lại đăng nhập" và xử lý sự kiện cho nó
-        // private void btnBackToLogin_Click(object sender, EventArgs e)
-        // {
-        //     Form_AdminLogin loginForm = new Form_AdminLogin();
-        //     loginForm.Show();
-        //     this.Hide();
-        // }
+        private void llbBackToLogin_Click(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form_UserLogin loginForm = new Form_UserLogin();
+            loginForm.Show();
+            this.Close();
+        }
     }
 }
