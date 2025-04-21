@@ -4,14 +4,13 @@ using FireSharp.Response;
 // Đảm bảo bạn đã using đúng namespace cho AdminModel và Users
 
 using Internet_Cafe_Manager_App.Database;
-using Internet_Cafe_Manager_App.Entity;
 using System;
 using System.Threading.Tasks;
 using Microsoft.VisualBasic.ApplicationServices;
 using System.IO;
 using System.Net;
 
-namespace QL_NET.Database
+namespace Internet_Cafe_Manager_App.Database
 {
     public class FirebaseDB
     {

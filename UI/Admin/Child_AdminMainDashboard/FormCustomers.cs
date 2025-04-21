@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Internet_Cafe_Manager_App.UI.Users
+namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
-    public partial class User: Form
+    public partial class FormCustomers : Form
     {
-        public User()
+        public FormCustomers()
         {
             InitializeComponent();
         }

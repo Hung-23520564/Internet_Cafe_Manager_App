@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Internet_Cafe_Manager_App.Entity
+namespace Internet_Cafe_Manager_App.Database
 {
     public class Users
     {
