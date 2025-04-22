@@ -267,13 +267,13 @@
             // 
             // pictureBox2
             // 
-            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(311, 123);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Padding = new Padding(0, 0, 20, 0);
             pictureBox2.Size = new Size(558, 328);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
             // 
@@ -286,8 +286,10 @@
             Controls.Add(panelShadow);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form_AdminMainDashboard";
-            Text = "Form1";
+            Text = "Admin Main Dashboard";
+            FormClosed += Form_AdminMainDashboard_FormClosed;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

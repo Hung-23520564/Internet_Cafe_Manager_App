@@ -42,6 +42,7 @@
             label7 = new Label();
             txtPhoneNumber = new TextBox();
             btnRegister = new Button();
+            linkLabel1 = new LinkLabel();
             SuspendLayout();
             // 
             // txtAdminAccount
@@ -168,7 +169,7 @@
             btnRegister.BackColor = Color.FromArgb(0, 192, 192);
             btnRegister.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(90, 736);
+            btnRegister.Location = new Point(88, 736);
             btnRegister.Name = "btnRegister";
             btnRegister.Size = new Size(258, 65);
             btnRegister.TabIndex = 20;
@@ -176,12 +177,26 @@
             btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += btnRegister_Click;
             // 
+            // linkLabel1
+            // 
+            linkLabel1.AutoSize = true;
+            linkLabel1.ForeColor = Color.White;
+            linkLabel1.LinkColor = Color.WhiteSmoke;
+            linkLabel1.Location = new Point(80, 847);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(274, 20);
+            linkLabel1.TabIndex = 32;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Bạn đã có tài khoản, quay lại đăng nhập";
+            linkLabel1.LinkClicked += llbBackToLogin_Click;
+            // 
             // Form_AdminRegister
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(54, 75, 109);
-            ClientSize = new Size(439, 853);
+            ClientSize = new Size(439, 953);
+            Controls.Add(linkLabel1);
             Controls.Add(txtPhoneNumber);
             Controls.Add(txtEmail);
             Controls.Add(label6);
@@ -198,6 +213,7 @@
             Controls.Add(label2);
             Name = "Form_AdminRegister";
             Text = "Đăng Ký";
+            FormClosed += Form_AdminRegister_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -218,5 +234,6 @@
         private Label label7;
         private TextBox txtPhoneNumber;
         private Button btnRegister;
+        private LinkLabel linkLabel1;
     }
 }

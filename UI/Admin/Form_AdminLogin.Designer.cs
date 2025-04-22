@@ -127,6 +127,7 @@
             Controls.Add(label2);
             Name = "Form_AdminLogin";
             Text = "AdminLogin";
+            FormClosed += Form_AdminLogin_FormClosed;
             ResumeLayout(false);
             PerformLayout();
         }

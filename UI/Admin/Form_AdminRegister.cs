@@ -200,13 +200,11 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             }
         }
 
-
-        // (Tùy chọn) Thêm nút "Quay lại đăng nhập" và xử lý sự kiện cho nó
-        // private void btnBackToLogin_Click(object sender, EventArgs e)
-        // {
-        //     Form_AdminLogin loginForm = new Form_AdminLogin();
-        //     loginForm.Show();
-        //     this.Hide();
-        // }
+        private void llbBackToLogin_Click(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Form_AdminLogin loginForm = new Form_AdminLogin();
+            loginForm.Show();
+            this.Close();
+        }
     }
 }

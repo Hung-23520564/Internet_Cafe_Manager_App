@@ -25,8 +25,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             leftBorderBtn.Size = new Size(7, 64);
             panelMenu.Controls.Add(leftBorderBtn);
             //Form
-            this.Text = string.Empty;
-            this.ControlBox = false;
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
         }
@@ -174,6 +172,9 @@ namespace Internet_Cafe_Manager_App.UI.Admin
                 FormBorderStyle = FormBorderStyle.Sizable;
         }
 
-        
+        private void Form_AdminMainDashboard_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
