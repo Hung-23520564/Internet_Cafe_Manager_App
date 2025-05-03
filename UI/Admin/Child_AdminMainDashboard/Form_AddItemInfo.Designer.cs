@@ -77,6 +77,7 @@
             Controls.Add(panel1);
             Name = "Form_AddItemInfo";
             Text = "Form_AddItemInfo";
+            Load += Form__Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);

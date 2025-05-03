@@ -119,7 +119,7 @@
             Controls.Add(panel2);
             Controls.Add(panelTitleBar);
             Name = "FormOrders";
-            Text = "Form1";
+            Text = "FormOrders";
             panelTitleBar.ResumeLayout(false);
             panelTitleBar.PerformLayout();
             panel1.ResumeLayout(false);

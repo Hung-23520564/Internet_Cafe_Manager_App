@@ -80,7 +80,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             try
             {
                 // 2. Lấy thông tin Admin từ Firebase
-                 Internet_Cafe_Manager_App.Database.Admin admin = await firebaseDB.GetAdmin(username);
+                Internet_Cafe_Manager_App.Database.Admin admin = await firebaseDB.GetAdmin(username);
 
                 // 3. Kiểm tra kết quả
                 if (admin == null)
@@ -166,6 +166,11 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             {
                 Application.Exit(); // Thoát nếu không tìm thấy form chọn vai trò
             }
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

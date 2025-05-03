@@ -13,7 +13,7 @@ using Internet_Cafe_Manager_App.UI.Admin;
 
 namespace Internet_Cafe_Manager_App.UI.User
 {
-    public partial class Form_UserLogin: Form
+    public partial class Form_UserLogin : Form
     {
         FirebaseDB firebaseDB;
         public Form_UserLogin()
@@ -111,9 +111,9 @@ namespace Internet_Cafe_Manager_App.UI.User
                         await firebaseDB.UpdateUser(user); // Hoặc AddOrUpdateAdmin
 
                         // Mở trang chủ Admin
-                        Form_AdminMainDashboard dashboardForm = new Form_AdminMainDashboard();
+                        Form_UserMainDashboard form_UserMainDashboard = new Form_UserMainDashboard();
                         // Có thể truyền thông tin admin đã login qua dashboard bằng cách thay lệnh phía trên bằng lệnh : Form_AdminMainDashboard dashboardForm = new Form_AdminMainDashboard(admin);
-                        dashboardForm.Show();
+                        form_UserMainDashboard.ShowDialog();
 
                         // Ẩn form đăng nhập
                         this.Hide();
@@ -164,6 +164,16 @@ namespace Internet_Cafe_Manager_App.UI.User
             {
                 Application.Exit(); // Thoát nếu không tìm thấy form chọn vai trò
             }
+        }
+
+        private void Form_UserLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -8,18 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
+namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
-    public partial class Form_AddItemInfo : Form
+    public partial class Form_UserInfo: Form
     {
-        public Form_AddItemInfo()
+        public Form_UserInfo()
         {
             InitializeComponent();
-        }
-
-        private void Form__Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

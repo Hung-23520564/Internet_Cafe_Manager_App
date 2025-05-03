@@ -1,6 +1,6 @@
-﻿namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
+﻿namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
-    partial class FormDashboard
+    partial class Form_UserOrder
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // FormDashboard
+            // Form_UserOrder
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Name = "FormDashboard";
-            Text = "FormDashboard";
+            Name = "Form_UserOrder";
+            Text = "Orders";
             ResumeLayout(false);
         }
 
