@@ -1,5 +1,6 @@
 using Internet_Cafe_Manager_App.UI;
 using Internet_Cafe_Manager_App.UI.Admin;
+using Internet_Cafe_Manager_App.UI.User;
 
 namespace Internet_Cafe_Manager_App
 {
@@ -14,7 +15,9 @@ namespace Internet_Cafe_Manager_App
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+
             Application.Run(new Form_AdminMainDashboard());
+
         }
     }
 }

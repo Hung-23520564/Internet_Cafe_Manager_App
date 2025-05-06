@@ -1,6 +1,6 @@
-﻿namespace Internet_Cafe_Manager_App.UI.Admin
+﻿namespace Internet_Cafe_Manager_App.UI.User
 {
-    partial class Form_AdminMainDashboard
+    partial class Form_UserMainDashboard
     {
         /// <summary>
         /// Required designer variable.
@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AdminMainDashboard));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_UserMainDashboard));
             panelMenu = new Panel();
             btnSignOut = new FontAwesome.Sharp.IconButton();
-            btnSetting = new FontAwesome.Sharp.IconButton();
             btnChat = new FontAwesome.Sharp.IconButton();
-            btnSystem = new FontAwesome.Sharp.IconButton();
+            btnPayment = new FontAwesome.Sharp.IconButton();
             btnOrders = new FontAwesome.Sharp.IconButton();
-            btnDashboard = new FontAwesome.Sharp.IconButton();
+            btnUserInfo = new FontAwesome.Sharp.IconButton();
             panelLogo = new Panel();
             pictureBox1 = new PictureBox();
             btnHome = new PictureBox();
@@ -57,13 +56,12 @@
             // 
             // panelMenu
             // 
-            panelMenu.BackColor = Color.FromArgb(31, 32, 71);
+            panelMenu.BackColor = Color.Indigo;
             panelMenu.Controls.Add(btnSignOut);
-            panelMenu.Controls.Add(btnSetting);
             panelMenu.Controls.Add(btnChat);
-            panelMenu.Controls.Add(btnSystem);
+            panelMenu.Controls.Add(btnPayment);
             panelMenu.Controls.Add(btnOrders);
-            panelMenu.Controls.Add(btnDashboard);
+            panelMenu.Controls.Add(btnUserInfo);
             panelMenu.Controls.Add(panelLogo);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
@@ -77,41 +75,20 @@
             btnSignOut.FlatAppearance.BorderSize = 0;
             btnSignOut.FlatStyle = FlatStyle.Flat;
             btnSignOut.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSignOut.ForeColor = Color.FromArgb(222, 220, 220);
+            btnSignOut.ForeColor = Color.AliceBlue;
             btnSignOut.IconChar = FontAwesome.Sharp.IconChar.SignOut;
-            btnSignOut.IconColor = Color.Gainsboro;
+            btnSignOut.IconColor = Color.AliceBlue;
             btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSignOut.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSignOut.Location = new Point(0, 490);
+            btnSignOut.Location = new Point(0, 426);
             btnSignOut.Name = "btnSignOut";
             btnSignOut.Padding = new Padding(15, 0, 20, 0);
             btnSignOut.Size = new Size(250, 64);
-            btnSignOut.TabIndex = 7;
+            btnSignOut.TabIndex = 6;
             btnSignOut.Text = "Sign Out";
             btnSignOut.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSignOut.UseVisualStyleBackColor = true;
             btnSignOut.Click += btnSignOut_Click;
-            // 
-            // btnSetting
-            // 
-            btnSetting.Dock = DockStyle.Top;
-            btnSetting.FlatAppearance.BorderSize = 0;
-            btnSetting.FlatStyle = FlatStyle.Flat;
-            btnSetting.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSetting.ForeColor = Color.FromArgb(222, 220, 220);
-            btnSetting.IconChar = FontAwesome.Sharp.IconChar.Cog;
-            btnSetting.IconColor = Color.Gainsboro;
-            btnSetting.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSetting.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSetting.Location = new Point(0, 426);
-            btnSetting.Name = "btnSetting";
-            btnSetting.Padding = new Padding(15, 0, 20, 0);
-            btnSetting.Size = new Size(250, 64);
-            btnSetting.TabIndex = 6;
-            btnSetting.Text = "Setting";
-            btnSetting.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnSetting.UseVisualStyleBackColor = true;
-            btnSetting.Click += btnSetting_Click;
             // 
             // btnChat
             // 
@@ -119,9 +96,9 @@
             btnChat.FlatAppearance.BorderSize = 0;
             btnChat.FlatStyle = FlatStyle.Flat;
             btnChat.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnChat.ForeColor = Color.FromArgb(222, 220, 220);
+            btnChat.ForeColor = Color.AliceBlue;
             btnChat.IconChar = FontAwesome.Sharp.IconChar.Comments;
-            btnChat.IconColor = Color.Gainsboro;
+            btnChat.IconColor = Color.AliceBlue;
             btnChat.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnChat.ImageAlign = ContentAlignment.MiddleLeft;
             btnChat.Location = new Point(0, 362);
@@ -134,26 +111,26 @@
             btnChat.UseVisualStyleBackColor = true;
             btnChat.Click += btnChat_Click;
             // 
-            // btnSystem
+            // btnPayment
             // 
-            btnSystem.Dock = DockStyle.Top;
-            btnSystem.FlatAppearance.BorderSize = 0;
-            btnSystem.FlatStyle = FlatStyle.Flat;
-            btnSystem.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnSystem.ForeColor = Color.FromArgb(222, 220, 220);
-            btnSystem.IconChar = FontAwesome.Sharp.IconChar.Laptop;
-            btnSystem.IconColor = Color.Gainsboro;
-            btnSystem.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnSystem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSystem.Location = new Point(0, 298);
-            btnSystem.Name = "btnSystem";
-            btnSystem.Padding = new Padding(15, 0, 20, 0);
-            btnSystem.Size = new Size(250, 64);
-            btnSystem.TabIndex = 3;
-            btnSystem.Text = "System Manage";
-            btnSystem.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnSystem.UseVisualStyleBackColor = true;
-            btnSystem.Click += btnSystem_Click;
+            btnPayment.Dock = DockStyle.Top;
+            btnPayment.FlatAppearance.BorderSize = 0;
+            btnPayment.FlatStyle = FlatStyle.Flat;
+            btnPayment.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnPayment.ForeColor = Color.AliceBlue;
+            btnPayment.IconChar = FontAwesome.Sharp.IconChar.Wallet;
+            btnPayment.IconColor = Color.AliceBlue;
+            btnPayment.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnPayment.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPayment.Location = new Point(0, 298);
+            btnPayment.Name = "btnPayment";
+            btnPayment.Padding = new Padding(15, 0, 20, 0);
+            btnPayment.Size = new Size(250, 64);
+            btnPayment.TabIndex = 3;
+            btnPayment.Text = "Payment";
+            btnPayment.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPayment.UseVisualStyleBackColor = true;
+            btnPayment.Click += btnPayment_Click;
             // 
             // btnOrders
             // 
@@ -161,9 +138,9 @@
             btnOrders.FlatAppearance.BorderSize = 0;
             btnOrders.FlatStyle = FlatStyle.Flat;
             btnOrders.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnOrders.ForeColor = Color.FromArgb(222, 220, 220);
+            btnOrders.ForeColor = Color.AliceBlue;
             btnOrders.IconChar = FontAwesome.Sharp.IconChar.MugSaucer;
-            btnOrders.IconColor = Color.Gainsboro;
+            btnOrders.IconColor = Color.AliceBlue;
             btnOrders.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnOrders.ImageAlign = ContentAlignment.MiddleLeft;
             btnOrders.Location = new Point(0, 234);
@@ -176,26 +153,26 @@
             btnOrders.UseVisualStyleBackColor = true;
             btnOrders.Click += btnOrder_Click;
             // 
-            // btnDashboard
+            // btnUserInfo
             // 
-            btnDashboard.Dock = DockStyle.Top;
-            btnDashboard.FlatAppearance.BorderSize = 0;
-            btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnDashboard.ForeColor = Color.FromArgb(222, 220, 220);
-            btnDashboard.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
-            btnDashboard.IconColor = Color.Gainsboro;
-            btnDashboard.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnDashboard.ImageAlign = ContentAlignment.MiddleLeft;
-            btnDashboard.Location = new Point(0, 170);
-            btnDashboard.Name = "btnDashboard";
-            btnDashboard.Padding = new Padding(15, 0, 20, 0);
-            btnDashboard.Size = new Size(250, 64);
-            btnDashboard.TabIndex = 1;
-            btnDashboard.Text = "Dashboard";
-            btnDashboard.TextImageRelation = TextImageRelation.ImageBeforeText;
-            btnDashboard.UseVisualStyleBackColor = true;
-            btnDashboard.Click += btnDashboard_Click;
+            btnUserInfo.Dock = DockStyle.Top;
+            btnUserInfo.FlatAppearance.BorderSize = 0;
+            btnUserInfo.FlatStyle = FlatStyle.Flat;
+            btnUserInfo.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUserInfo.ForeColor = Color.AliceBlue;
+            btnUserInfo.IconChar = FontAwesome.Sharp.IconChar.HomeUser;
+            btnUserInfo.IconColor = Color.AliceBlue;
+            btnUserInfo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnUserInfo.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUserInfo.Location = new Point(0, 170);
+            btnUserInfo.Name = "btnUserInfo";
+            btnUserInfo.Padding = new Padding(15, 0, 20, 0);
+            btnUserInfo.Size = new Size(250, 64);
+            btnUserInfo.TabIndex = 1;
+            btnUserInfo.Text = "User Information";
+            btnUserInfo.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnUserInfo.UseVisualStyleBackColor = true;
+            btnUserInfo.Click += btnUserInfo_Click;
             // 
             // panelLogo
             // 
@@ -209,6 +186,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.Indigo;
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
@@ -235,21 +213,21 @@
             // 
             // panelTitleBar
             // 
-            panelTitleBar.BackColor = Color.FromArgb(24, 25, 59);
+            panelTitleBar.BackColor = Color.Indigo;
             panelTitleBar.Controls.Add(lblTitleChildForm);
             panelTitleBar.Controls.Add(iconCurrentChildForm);
             panelTitleBar.Dock = DockStyle.Top;
             panelTitleBar.Location = new Point(250, 0);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(1160, 87);
+            panelTitleBar.Size = new Size(1160, 81);
             panelTitleBar.TabIndex = 1;
             // 
             // lblTitleChildForm
             // 
             lblTitleChildForm.AutoSize = true;
             lblTitleChildForm.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblTitleChildForm.ForeColor = Color.Gainsboro;
-            lblTitleChildForm.Location = new Point(83, 37);
+            lblTitleChildForm.ForeColor = Color.AliceBlue;
+            lblTitleChildForm.Location = new Point(107, 36);
             lblTitleChildForm.Name = "lblTitleChildForm";
             lblTitleChildForm.Size = new Size(59, 19);
             lblTitleChildForm.TabIndex = 4;
@@ -257,13 +235,13 @@
             // 
             // iconCurrentChildForm
             // 
-            iconCurrentChildForm.BackColor = Color.FromArgb(24, 25, 59);
-            iconCurrentChildForm.ForeColor = Color.MediumPurple;
+            iconCurrentChildForm.BackColor = Color.Indigo;
+            iconCurrentChildForm.ForeColor = Color.AliceBlue;
             iconCurrentChildForm.IconChar = FontAwesome.Sharp.IconChar.House;
-            iconCurrentChildForm.IconColor = Color.MediumPurple;
+            iconCurrentChildForm.IconColor = Color.AliceBlue;
             iconCurrentChildForm.IconFont = FontAwesome.Sharp.IconFont.Auto;
             iconCurrentChildForm.IconSize = 34;
-            iconCurrentChildForm.Location = new Point(43, 27);
+            iconCurrentChildForm.Location = new Point(67, 26);
             iconCurrentChildForm.Name = "iconCurrentChildForm";
             iconCurrentChildForm.Size = new Size(34, 40);
             iconCurrentChildForm.TabIndex = 3;
@@ -271,36 +249,38 @@
             // 
             // panelShadow
             // 
-            panelShadow.BackColor = Color.FromArgb(34, 33, 74);
+            panelShadow.BackColor = Color.Indigo;
             panelShadow.Dock = DockStyle.Top;
-            panelShadow.Location = new Point(250, 87);
+            panelShadow.Location = new Point(250, 81);
             panelShadow.Name = "panelShadow";
             panelShadow.Size = new Size(1160, 11);
             panelShadow.TabIndex = 2;
             // 
             // panelDesktop
             // 
-            panelDesktop.BackColor = Color.FromArgb(34, 33, 74);
+            panelDesktop.BackColor = Color.Indigo;
             panelDesktop.Controls.Add(pictureBox2);
             panelDesktop.Dock = DockStyle.Fill;
-            panelDesktop.Location = new Point(250, 98);
+            panelDesktop.Location = new Point(250, 92);
             panelDesktop.Name = "panelDesktop";
-            panelDesktop.Size = new Size(1160, 585);
+            panelDesktop.Size = new Size(1160, 591);
             panelDesktop.TabIndex = 3;
+            panelDesktop.Paint += panelDesktop_Paint;
             // 
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(311, 123);
+            pictureBox2.Location = new Point(83, 39);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Padding = new Padding(0, 0, 20, 0);
-            pictureBox2.Size = new Size(558, 328);
+            pictureBox2.Size = new Size(1000, 500);
             pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
+            pictureBox2.Click += pictureBox2_Click;
             // 
-            // Form_AdminMainDashboard
+            // Form_UserMainDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -310,8 +290,8 @@
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "Form_AdminMainDashboard";
-            Text = "Admin Main Dashboard";
+            Name = "Form_UserMainDashboard";
+            Text = "User Main Dashboard";
             FormClosed += Form_AdminMainDashboard_FormClosed;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
@@ -328,11 +308,11 @@
         #endregion
 
         private Panel panelMenu;
-        private FontAwesome.Sharp.IconButton btnDashboard;
+        private FontAwesome.Sharp.IconButton btnUserInfo;
         private Panel panelLogo;
-        private FontAwesome.Sharp.IconButton btnSetting;
+        private FontAwesome.Sharp.IconButton btnSignOut;
         private FontAwesome.Sharp.IconButton btnChat;
-        private FontAwesome.Sharp.IconButton btnSystem;
+        private FontAwesome.Sharp.IconButton btnPayment;
         private FontAwesome.Sharp.IconButton btnOrders;
         private Panel panelTitleBar;
         private PictureBox btnHome;
@@ -342,6 +322,5 @@
         private Panel panelDesktop;
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
-        private FontAwesome.Sharp.IconButton btnSignOut;
     }
 }

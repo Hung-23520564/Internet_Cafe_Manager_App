@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
@@ -331,10 +332,12 @@
             timer1.Interval = 1000;
             timer1.Tick += UpdateTimer_Tick;
             // 
+
             // FormDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+
             ClientSize = new Size(1670, 893);
             Controls.Add(panel2);
             Controls.Add(panel1);
@@ -347,6 +350,8 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewPCs).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+
+
             ResumeLayout(false);
         }
 

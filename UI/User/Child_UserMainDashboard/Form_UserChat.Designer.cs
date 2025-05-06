@@ -1,6 +1,6 @@
-﻿namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
+﻿namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
-    partial class FormCustomers
+    partial class Form_UserChat
     {
         /// <summary>
         /// Required designer variable.
@@ -30,13 +30,13 @@
         {
             SuspendLayout();
             // 
-            // FormCustomers
+            // Form_UserChat
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Name = "FormCustomers";
-            Text = "FormCustomers";
+            ClientSize = new Size(1410, 683);
+            Name = "Form_UserChat";
+            Text = "Comment - Chat";
             ResumeLayout(false);
         }
 

@@ -75,6 +75,7 @@
             btnLogin.TabIndex = 20;
             btnLogin.Text = "Đăng Nhập";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // label4
             // 
@@ -125,6 +126,7 @@
             Name = "Form_UserLogin";
             Text = "Form_UserLogin";
             FormClosed += Form_UserLogin_FormClosed;
+            Load += Form_UserLogin_Load;
             ResumeLayout(false);
             PerformLayout();
         }

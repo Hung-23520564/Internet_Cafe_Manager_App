@@ -9,41 +9,24 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard;
-using Internet_Cafe_Manager_App.UI.User;
+using Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard;
 
-namespace Internet_Cafe_Manager_App.UI.Admin
+namespace Internet_Cafe_Manager_App.UI.User
 {
-    public partial class Form_AdminMainDashboard : Form
+    public partial class Form_UserMainDashboard : Form
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
-        public Form_AdminMainDashboard()
+        public Form_UserMainDashboard()
         {
             InitializeComponent();
-
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 64);
             panelMenu.Controls.Add(leftBorderBtn);
             //Form
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.WindowState = FormWindowState.Maximized;
-            this.Shown += Form_AdminMainDashboard_Shown;
-
-        }
-
-        public void Form_AdminMainDashboard_Shown(object sender, EventArgs e)
-        {
-            
-            int desktopPanelWidth = this.Width - panelMenu.Width;
-            int desktopPanelHeight = this.Height - panelTitleBar.Height - panelShadow.Height;
-
-            // Sử dụng Debug.WriteLine để xem output trong Visual Studio Output window
-            MessageBox.Show($"Desktop Panel Width (in Shown): {desktopPanelWidth}");
-            MessageBox.Show($"Desktop Panel Height (in Shown): {desktopPanelHeight}");
-
         }
 
         //Structs
@@ -62,20 +45,20 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             if (senderBtn != null)
             {
                 DisableButton();
-                //Button
+
                 currentBtn = (IconButton)senderBtn;
-                currentBtn.BackColor = Color.FromArgb(37, 36, 81);
+                currentBtn.BackColor = Color.FromArgb(51, 0, 102); // màu active
                 currentBtn.ForeColor = color;
                 currentBtn.TextAlign = ContentAlignment.MiddleCenter;
                 currentBtn.IconColor = color;
                 currentBtn.TextImageRelation = TextImageRelation.TextBeforeImage;
                 currentBtn.ImageAlign = ContentAlignment.MiddleRight;
-                //Left border button
+
                 leftBorderBtn.BackColor = color;
                 leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
                 leftBorderBtn.Visible = true;
                 leftBorderBtn.BringToFront();
-                //Current Child Form Icon
+
                 iconCurrentChildForm.IconChar = currentBtn.IconChar;
                 iconCurrentChildForm.IconColor = color;
             }
@@ -84,10 +67,10 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         {
             if (currentBtn != null)
             {
-                currentBtn.BackColor = Color.FromArgb(31, 30, 68);
-                currentBtn.ForeColor = Color.Gainsboro;
+                currentBtn.BackColor = Color.FromArgb(75, 0, 130); // màu nền chung
+                currentBtn.ForeColor = Color.White;
                 currentBtn.TextAlign = ContentAlignment.MiddleLeft;
-                currentBtn.IconColor = Color.Gainsboro;
+                currentBtn.IconColor = Color.White;
                 currentBtn.TextImageRelation = TextImageRelation.ImageBeforeText;
                 currentBtn.ImageAlign = ContentAlignment.MiddleLeft;
             }
@@ -129,30 +112,30 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             Reset();
         }
         //Menu Button_Clicks
-        private void btnDashboard_Click(object sender, EventArgs e)
-        {
-            ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(new FormDashboard());
-        }
         private void btnOrder_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
-            OpenChildForm(new FormOrders());
+            OpenChildForm(new Form_UserOrder());
         }
-        private void btnSystem_Click(object sender, EventArgs e)
+        private void btnPayment_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            OpenChildForm(new FormCustomers());
+            OpenChildForm(new Form_UserPayment());
         }
         private void btnChat_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color5);
-            OpenChildForm(new FormChat());
+            OpenChildForm(new Form_UserChat());
         }
-        private void btnSetting_Click(object sender, EventArgs e)
+        private void btnSignOut_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender, RGBColors.color6);
-            OpenChildForm(new FormSetting());
+            DialogResult result = MessageBox.Show("Bạn muốn đăng xuất?!?", "Thông báo!?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                Form_InitialChoice form_InitialChoice = new Form_InitialChoice();
+                form_InitialChoice.ShowDialog();
+                Close();
+            }
         }
         //Drag Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -194,15 +177,20 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             Application.Exit();
         }
 
-        private void btnSignOut_Click(object sender, EventArgs e)
+        private void panelDesktop_Paint(object sender, PaintEventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn muốn đăng xuất?!?", "Thông báo!?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.OK)
-            {
-                Form_InitialChoice form_InitialChoice = new Form_InitialChoice();
-                form_InitialChoice.ShowDialog();
-                Close();
-            }
+
+        }
+
+        private void btnUserInfo_Click(object sender, EventArgs e)
+        {
+            ActivateButton(sender, RGBColors.color1);
+            OpenChildForm(new Form_UserInfo());
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
