@@ -21,12 +21,28 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         public Form_AdminMainDashboard()
         {
             InitializeComponent();
+
             leftBorderBtn = new Panel();
             leftBorderBtn.Size = new Size(7, 64);
             panelMenu.Controls.Add(leftBorderBtn);
             //Form
             this.DoubleBuffered = true;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.WindowState = FormWindowState.Maximized;
+            this.Shown += Form_AdminMainDashboard_Shown;
+
+        }
+
+        public void Form_AdminMainDashboard_Shown(object sender, EventArgs e)
+        {
+            
+            int desktopPanelWidth = this.Width - panelMenu.Width;
+            int desktopPanelHeight = this.Height - panelTitleBar.Height - panelShadow.Height;
+
+            // Sử dụng Debug.WriteLine để xem output trong Visual Studio Output window
+            MessageBox.Show($"Desktop Panel Width (in Shown): {desktopPanelWidth}");
+            MessageBox.Show($"Desktop Panel Height (in Shown): {desktopPanelHeight}");
+
         }
 
         //Structs

@@ -17,5 +17,9 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             InitializeComponent();
         }
 
+        private void Form_AddItemInfo_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
