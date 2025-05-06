@@ -27,6 +27,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         public FormDashboard()
         {
             InitializeComponent();
+           
             // Này là để khởi tạo phương thức Active nghen mấy ní, để tui note lại cho Hưng và Hồng Huy đọc cho dễ hiểu. Cái này tui thấy lú lú á hai fen, note lại cho chắc, sau cô có hỏi thì còn nhớ :)))
             // Lý do cần phương thức ACtivated là vì :
             // - System.Windows.Forms.Timer hoạt động dựa trên luồng UI (UI thread) của ứng dụng Windows Forms. Nó phụ thuộc vào "message loop" của Form để kích hoạt sự kiện Tick
@@ -39,6 +40,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             pcList = new BindingList<PC>();
 
             dataGridViewPCs.DataSource = this.pcList;
+
+            LoadPCsFromFirebase();
 
             comboBoxEditStatus.DataSource = Enum.GetValues(typeof(PCStatus));
 
@@ -113,7 +116,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
 
 
-        private void buttonAddPC_Click(object sender, EventArgs e)
+        private async void buttonAddPC_Click(object sender, EventArgs e)
         {
             string sequenceNumberText = textBoxSequenceNumber.Text.Trim();
             if (string.IsNullOrEmpty(sequenceNumberText))
@@ -152,6 +155,19 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             };
 
             pcList.Add(newPC); // Thêm vào list
+
+            // *** LƯU PC MỚI LÊN FIREBASE ***
+            FirebaseDB firebaseDB = new FirebaseDB(); // Tạo instance
+            bool saveSuccess = await firebaseDB.AddOrUpdatePC(newPC);
+            if (saveSuccess)
+            {
+                MessageBox.Show($"Đã thêm và lưu máy '{pcName}' vào hệ thống.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"Đã thêm máy '{pcName}' vào danh sách tạm nhưng không lưu được lên Firebase!", "Lỗi Lưu trữ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Cần xử lý lỗi lưu trữ (ví dụ: thử lại, thông báo cho Admin)
+            }
 
             Debug.WriteLine($"pcList count after adding: {pcList.Count}");
 
@@ -209,6 +225,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
 
         }
+        
 
         private void ClearEditFields()
         {
@@ -223,7 +240,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
         }
 
-        private void buttonEditSave_Click(object sender, EventArgs e)
+        private async void buttonEditSave_Click(object sender, EventArgs e)
         {
             
             string NumberFromTextBox = textBoxEditPCName.Text.Trim();
@@ -352,6 +369,21 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 
             }
 
+            // *** LƯU PC ĐÃ CẬP NHẬT LÊN FIREBASE ***
+            FirebaseDB firebaseDB = new FirebaseDB(); // Tạo instance
+            bool saveSuccess = await firebaseDB.AddOrUpdatePC(pcToUpdate); // Dùng AddOrUpdatePC để cập nhật
+
+            if (saveSuccess)
+            {
+                MessageBox.Show($"Đã cập nhật và lưu thông tin cho máy '{pcToUpdate.Name}'.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // BindingList sẽ tự động cập nhật DataGridView khi pcToUpdate thay đổi
+            }
+            else
+            {
+                MessageBox.Show($"Đã cập nhật thông tin máy '{pcToUpdate.Name}' trong danh sách tạm nhưng không lưu được lên Firebase!", "Lỗi Lưu trữ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                // Cần xử lý lỗi lưu trữ
+            }
+
             textBoxEditPCName.Clear();
             textBoxEditDetailInfo.Clear();
             textBoxEditCurrentUser.Clear();
@@ -370,9 +402,10 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             comboBoxEditStatus.SelectedItem = PCStatus.Available;
         }
 
-        private void UpdateTimer_Tick(object sender, EventArgs e)
+        private async void UpdateTimer_Tick(object sender, EventArgs e)
         {
-            
+            List<PC> pcsToSave = new List<PC>();
+
             foreach (var pc in pcList)
             {
                 
@@ -388,9 +421,38 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                         
                     }
 
+                    if (pc.Status == PCStatus.TimeEnded) // Điều kiện này đã được xử lý trong DecrementTimeRemaining
+                    {
+                        // Đảm bảo logic khi hết giờ được xử lý đúng (StartTime = null, CurrentUser = null, Budget = 0)
+                        pc.StartTime = null;
+                        pc.CurrentUser = null;
+                        // Không đặt Budget về 0 ở đây trừ khi đó là quy tắc của bạn
+                        pc.TimeRemaining = TimeSpan.Zero;
+
+                        // Đánh dấu PC này cần được lưu lên Firebase
+                        pcsToSave.Add(pc);
+                    }
+
+
                 }
                 
             }
+
+            // *** LƯU CÁC PC CÓ THAY ĐỔI TRẠNG THÁI QUAN TRỌNG LÊN FIREBASE ***
+            if (pcsToSave.Count > 0)
+            {
+                FirebaseDB firebaseDB = new FirebaseDB(); // Tạo instance
+                foreach (PC pcToSave in pcsToSave)
+                {
+                    bool saveSuccess = await firebaseDB.AddOrUpdatePC(pcToSave);
+                    if (!saveSuccess)
+                    {
+                        Console.WriteLine($"Lỗi: Không lưu được trạng thái PC '{pcToSave.Name}' lên Firebase.");
+                        // Có thể cần hiển thị thông báo lỗi hoặc thử lại
+                    }
+                }
+            }
+
         }
 
 
@@ -410,7 +472,76 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             }
         }
 
-        
+        private async void LoadPCsFromFirebase()
+        {
+            // Tạo instance của FirebaseDB
+            FirebaseDB firebaseDB = new FirebaseDB();
+
+            // Tạm thời xóa dữ liệu cũ trong list hiển thị
+            pcList.Clear();
+
+            try
+            {
+                // Lấy dữ liệu từ Firebase
+                List<PC> loadedPCs = await firebaseDB.GetAllPCs();
+
+                // Kiểm tra nếu có dữ liệu được tải về
+                if (loadedPCs != null)
+                {
+                    // Lặp qua từng PC được tải về
+                    foreach (PC pc in loadedPCs)
+                    {
+                        // *** DI CHUYỂN LOGIC TÍNH TOÁN VÀO BÊN TRONG VÒNG LẶP ***
+                        // Chỉ tính toán lại TimeRemaining cho các máy đang được sử dụng
+                        if (pc.Status == PCStatus.InUse && pc.StartTime.HasValue)
+                        {
+                            // 1. Tính tổng thời gian của phiên dựa trên Budget đã lưu
+                            // Đảm bảo Budget có giá trị hợp lệ (ví dụ: >= 0)
+                            TimeSpan totalSessionTime = PC.CalculateTotalTimeFromBudget(pc.Budget >= 0 ? pc.Budget : 0);
+
+                            // 2. Tính thời gian đã trôi qua kể từ StartTime đến thời điểm HIỆN TẠI
+                            // Sử dụng DateTime.Now để tính thời gian thực tế đã trôi qua
+                            TimeSpan timeElapsed = DateTime.Now - pc.StartTime.Value;
+
+                            // 3. Tính thời gian còn lại thực tế
+                            TimeSpan actualTimeRemaining = totalSessionTime - timeElapsed;
+
+                            // 4. Gán thời gian còn lại thực tế này vào thuộc tính TimeRemaining của đối tượng PC
+                            // Đảm bảo giá trị không âm
+                            pc.TimeRemaining = (actualTimeRemaining > TimeSpan.Zero) ? actualTimeRemaining : TimeSpan.Zero;
+
+                            // Tùy chọn: Nếu thời gian còn lại <= 0 sau khi tính toán, cập nhật trạng thái ngay
+                            // Điều này xử lý trường hợp máy hết giờ khi ứng dụng Admin đóng
+                            if (pc.TimeRemaining.Value <= TimeSpan.Zero && pc.Status != PCStatus.TimeEnded)
+                            {
+                                pc.Status = PCStatus.TimeEnded;
+                                pc.StartTime = null; // Kết thúc phiên
+                                pc.CurrentUser = null; // Xóa người dùng
+                                pc.TimeRemaining = TimeSpan.Zero; // Đảm bảo là 0
+                                                                  // Cân nhắc lưu lại trạng thái này lên Firebase ngay nếu bạn thay đổi ở đây
+                                                                  // FirebaseDB dbToSave = new FirebaseDB();
+                                                                  // await dbToSave.AddOrUpdatePC(pc);
+                            }
+                        }
+                        // *** KẾT THÚC LOGIC TÍNH TOÁN ***
+
+                        // Thêm đối tượng PC (đã được cập nhật TimeRemaining nếu cần) vào BindingList
+                        pcList.Add(pc);
+                    }
+                }
+
+                // Cập nhật lại DataGridView (BindingList tự động cập nhật, nhưng Refresh() cũng không hại)
+                dataGridViewPCs.Refresh();
+                Console.WriteLine($"Đã tải {pcList.Count} PC từ Firebase."); // Debug log
+            }
+            catch (Exception ex)
+            {
+                // Xử lý lỗi khi tải dữ liệu từ Firebase
+                MessageBox.Show($"Lỗi khi tải dữ liệu PC từ Firebase: {ex.Message}", "Lỗi Tải Dữ Liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Console.WriteLine($"Chi tiết lỗi tải dữ liệu PC: {ex}"); // Log chi tiết lỗi
+            }
+        }
+
 
     }
 }

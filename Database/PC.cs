@@ -20,7 +20,7 @@ namespace Internet_Cafe_Manager_App.Database
     }
 
     
-    internal class PC : INotifyPropertyChanged
+    public class PC : INotifyPropertyChanged
     {
         
         private string _name;

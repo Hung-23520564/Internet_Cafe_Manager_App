@@ -287,7 +287,92 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        // Bạn có thể thêm các phương thức khác nếu cần
+        // Đây là các phương thức CRUD của Admin nghen 2 đứa kia
+
+        public async Task<bool> AddOrUpdatePC(PC pc)
+        {
+            if (string.IsNullOrEmpty(pc?.Name))
+            {
+                Console.WriteLine("Lỗi: Tên PC không được để trống.");
+                return false;
+            }
+
+            try
+            {
+                // Sử dụng tên PC làm khóa trong collection "PCs"
+                SetResponse response = await client.SetAsync("PCs/" + pc.Name, pc);
+                return (response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lưu PC '{pc.Name}': " + ex.Message);
+                return false;
+            }
+        }
+
+        // Trong lớp FirebaseDB
+        public async Task<PC> GetPC(string pcName)
+        {
+            if (string.IsNullOrEmpty(pcName)) return null;
+
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("PCs/" + pcName);
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return null;
+                }
+                PC pc = response.ResultAs<PC>();
+                // Có thể cần gán lại Name nếu Firebase không tự điền vào object
+                if (pc != null && string.IsNullOrEmpty(pc.Name))
+                {
+                    pc.Name = pcName; // Giả sử Name được lưu dưới dạng key
+                }
+                return pc;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy PC '{pcName}': " + ex.Message);
+                return null;
+            }
+        }
+
+        // Trong lớp FirebaseDB
+        public async Task<List<PC>> GetAllPCs()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("PCs/");
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<PC>(); // Trả về danh sách rỗng nếu không có dữ liệu hoặc lỗi
+                }
+
+                // Firebase trả về Dictionary<string, PC> khi lấy toàn bộ node
+                Dictionary<string, PC> pcsDictionary = response.ResultAs<Dictionary<string, PC>>();
+
+                if (pcsDictionary == null)
+                {
+                    return new List<PC>();
+                }
+
+                // Chuyển Dictionary thành List và đảm bảo gán lại Name (key Firebase) vào object PC
+                List<PC> pcList = new List<PC>();
+                foreach (var item in pcsDictionary)
+                {
+                    PC pc = item.Value;
+                    pc.Name = item.Key; // Gán key Firebase vào thuộc tính Name
+                    pcList.Add(pc);
+                }
+
+                return pcList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả PC: " + ex.Message);
+                return new List<PC>(); // Trả về danh sách rỗng nếu có lỗi
+            }
+        }
     }
 }
    

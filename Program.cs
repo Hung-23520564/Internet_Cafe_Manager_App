@@ -16,7 +16,7 @@ namespace Internet_Cafe_Manager_App
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new Form_AdminMainDashboard());
+            Application.Run(new Form_InitialChoice());
 
         }
     }
