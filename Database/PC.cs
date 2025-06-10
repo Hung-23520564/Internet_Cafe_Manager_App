@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Internet_Cafe_Manager_App.Database;
-using System.ComponentModel; // Thêm namespace này
-using System.Runtime.CompilerServices; // Thêm namespace này
+using System.ComponentModel; 
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace Internet_Cafe_Manager_App.Database
 {
@@ -22,7 +23,14 @@ namespace Internet_Cafe_Manager_App.Database
     
     public class PC : INotifyPropertyChanged
     {
-        
+
+        /// <summary>
+        /// Cờ để đánh dấu yêu cầu nạp tiền đã được gửi cho phiên này chưa.
+        /// [JsonIgnore] để không lưu thuộc tính này vào Firebase.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsTopUpRequestSent { get; set; }
+
         private string _name;
         public string Name
         {

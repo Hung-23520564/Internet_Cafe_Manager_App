@@ -1,5 +1,6 @@
 using Internet_Cafe_Manager_App.UI;
 using Internet_Cafe_Manager_App.UI.Admin;
+using Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard;
 using Internet_Cafe_Manager_App.UI.User;
 
 namespace Internet_Cafe_Manager_App
@@ -16,7 +17,7 @@ namespace Internet_Cafe_Manager_App
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            Application.Run(new Form_UserMacDinh());
+            Application.Run(new Form_InitialChoice());
 
         }
     }

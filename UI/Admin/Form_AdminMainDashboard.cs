@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard;
 using Internet_Cafe_Manager_App.UI.User;
+using Internet_Cafe_Manager_App.Database;
+using Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard;
 
 namespace Internet_Cafe_Manager_App.UI.Admin
 {
@@ -142,7 +144,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         private void btnSystem_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color4);
-            OpenChildForm(new FormCustomers());
+            OpenChildForm(new Form_ManageUser());
         }
         private void btnChat_Click(object sender, EventArgs e)
         {

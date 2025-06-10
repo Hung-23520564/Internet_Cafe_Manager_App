@@ -14,6 +14,7 @@ using Internet_Cafe_Manager_App.Database;
 using Internet_Cafe_Manager_App.UI.Admin;
 using Internet_Cafe_Manager_App.UI.User;
 using Internet_Cafe_Manager_App.CustomControls;
+using System.Runtime.CompilerServices;
 
 
 namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
@@ -32,6 +33,7 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
         private Label lblCartTitle;
         private Button btnCheckout;
         private IconButton btnCloseCart;
+        private readonly Internet_Cafe_Manager_App.Database.Users loggedInUser;
 
         public Form_UserOrder()
         {
@@ -43,6 +45,13 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             {
                 this.labelAllItems.BringToFront();
             }
+        }
+
+        public Form_UserOrder(Internet_Cafe_Manager_App.Database.Users user)
+        {
+            InitializeComponent();
+            this.loggedInUser = user; // Lưu lại người dùng để sử dụng sau
+            InitializeCartPanelUI();
         }
 
         private void InitializeCartPanelUI() // Giữ nguyên như lần trước
@@ -622,16 +631,50 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             }
         }
 
-        private void BtnCheckout_Click(object sender, EventArgs e)
+        private async void BtnCheckout_Click(object sender, EventArgs e)
         {
-            decimal grandTotal = shoppingCart.Sum(item => item.LineTotal);
-            if (grandTotal > 0)
+            if (!shoppingCart.Any())
             {
-                MessageBox.Show($"Total amount to pay: {grandTotal:N0}", "Checkout", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Your cart is empty.", "Checkout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (this.loggedInUser == null)
+            {
+                MessageBox.Show("Cannot identify logged in user. Please log in again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Tạo đối tượng Order mới
+            var newOrder = new Internet_Cafe_Manager_App.Database.Order
+            {
+                OrderId = Guid.NewGuid().ToString(),
+                UserID = this.loggedInUser.UserId,
+                Username = this.loggedInUser.Username,
+                UserFullName = this.loggedInUser.FullName,
+                Items = new List<CartItemEntry>(shoppingCart),
+                GrandTotal = shoppingCart.Sum(item => item.LineTotal),
+                Timestamp = DateTime.UtcNow,
+                Status = "Pending",
+                // <--- SỬA ĐỔI QUAN TRỌNG: Thêm dòng này ---
+                Type = TransactionType.FoodOrder,
+                Description = $"Gọi {shoppingCart.Count} món"
+            };
+
+            // Gọi phương thức lưu vào Firebase
+            FirebaseDB firebaseDB = new FirebaseDB();
+            bool success = await firebaseDB.AddOrder(newOrder);
+
+            if (success)
+            {
+                MessageBox.Show("Your order has been placed successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                shoppingCart.Clear();
+                RefreshCartOnScreen();
             }
             else
             {
-                MessageBox.Show("Your cart is empty.", "Checkout", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Failed to place your order. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

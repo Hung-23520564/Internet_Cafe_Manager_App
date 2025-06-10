@@ -18,8 +18,8 @@ namespace Internet_Cafe_Manager_App.Database
         {
             // !!! CẢNH BÁO: KHÔNG NÊN HARDCODE SECRET/KEY VÀ BASEPATH Ở ĐÂY !!!
             // Nên đọc từ file cấu hình (app.config, appsettings.json)
-            AuthSecret = "AIzaSyAkdx8etqkdQj8OPDVGkUwrLbZUiUYjJ74", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
-            BasePath = "https://internet-cafe-manager-ap-9e088-default-rtdb.asia-southeast1.firebasedatabase.app/"
+            AuthSecret = "BOTfpnJFZLR8Gy4VewguWS1q607MXDSlAs8yAKvS", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
+            BasePath = "https://doanltm-49335-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         public IFirebaseClient client;
 
@@ -371,6 +371,146 @@ namespace Internet_Cafe_Manager_App.Database
             {
                 Console.WriteLine("Lỗi khi lấy tất cả PC: " + ex.Message);
                 return new List<PC>(); // Trả về danh sách rỗng nếu có lỗi
+            }
+        }
+
+        public async Task<List<Users>> GetAllUsers()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Users/"); // Đường dẫn đến node Users
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<Users>();
+                }
+
+                Dictionary<string, Users> usersDictionary = response.ResultAs<Dictionary<string, Users>>();
+
+                if (usersDictionary == null)
+                {
+                    return new List<Users>();
+                }
+
+                List<Users> userList = new List<Users>();
+                foreach (var item in usersDictionary)
+                {
+                    Users user = item.Value;
+                    // Username thường là key, nên có thể cần gán lại nếu model Users không tự chứa nó
+                    // Hoặc đảm bảo Firebase lưu username bên trong object Users
+                    if (string.IsNullOrEmpty(user.Username))
+                    {
+                        user.Username = item.Key;
+                    }
+                    userList.Add(user);
+                }
+                return userList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả User: " + ex.Message);
+                return new List<Users>();
+            }
+        }
+
+
+        public async Task<bool> AddOrder(Order order)
+        {
+            if (order == null || string.IsNullOrEmpty(order.OrderId))
+            {
+                Console.WriteLine("Lỗi: Đối tượng Order hoặc OrderId không hợp lệ.");
+                return false;
+            }
+
+            try
+            {
+                // Lưu đơn hàng vào node "Orders" với OrderId làm khóa
+                SetResponse response = await client.SetAsync("Orders/" + order.OrderId, order);
+                return (response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lưu đơn hàng '{order.OrderId}': " + ex.Message);
+                return false;
+            }
+        }
+        // Trong lớp FirebaseDB
+        public async Task<List<Order>> GetAllOrders()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Orders/");
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<Order>();
+                }
+                Dictionary<string, Order> orders = response.ResultAs<Dictionary<string, Order>>();
+                return orders?.Values.ToList() ?? new List<Order>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả Order: " + ex.Message);
+                return new List<Order>();
+            }
+        }
+
+        public async Task<PC> GetActivePCForUser(string username)
+        {
+            if (string.IsNullOrEmpty(username)) return null;
+
+            try
+            {
+                var allPCs = await GetAllPCs();
+                // Tìm PC có CurrentUser trùng với username và đang trong trạng thái InUse
+                return allPCs.FirstOrDefault(pc => pc.CurrentUser == username && pc.Status == PCStatus.InUse);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tìm PC cho người dùng '{username}': {ex.Message}");
+                return null;
+            }
+        }
+
+
+        public async Task<List<Order>> GetOrdersForUser(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                Console.WriteLine("Username không được để trống khi lấy danh sách order.");
+                return new List<Order>();
+            }
+
+            try
+            {
+                // Lấy tất cả các order từ Firebase bằng phương thức đã có
+                List<Order> allOrders = await GetAllOrders();
+
+                // Dùng LINQ để lọc danh sách, chỉ giữ lại những order của người dùng được chỉ định
+                List<Order> userOrders = allOrders
+                                            .Where(order => string.Equals(order.Username, username, StringComparison.OrdinalIgnoreCase))
+                                            .ToList();
+
+                return userOrders;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy order cho người dùng '{username}': " + ex.Message);
+                return new List<Order>(); // Trả về danh sách rỗng nếu có lỗi
+            }
+        }
+
+        public async Task<bool> UpdateOrderStatus(string orderId, string newStatus)
+        {
+            if (string.IsNullOrEmpty(orderId)) return false;
+            try
+            {
+                var path = $"Orders/{orderId}/Status";
+                FirebaseResponse response = await client.SetAsync(path, newStatus);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật trạng thái cho Order ID '{orderId}': " + ex.Message);
+                return false;
             }
         }
     }

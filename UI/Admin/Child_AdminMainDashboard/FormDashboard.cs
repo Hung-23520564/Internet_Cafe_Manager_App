@@ -14,6 +14,7 @@ using static System.Windows.Forms.Timer;
 using Internet_Cafe_Manager_App.Database;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.ComponentModel.DataAnnotations;
+using Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard;
 
 namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
@@ -404,6 +405,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
         private async void UpdateTimer_Tick(object sender, EventArgs e)
         {
+            var notificationThreshold = TimeSpan.FromMinutes(60);
             List<PC> pcsToSave = new List<PC>();
 
             foreach (var pc in pcList)
@@ -421,6 +423,17 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                         
                     }
 
+                    // ---> BẮT ĐẦU LOGIC MỚI <---
+                    // 1. Kiểm tra điều kiện để tạo yêu cầu nạp tiền
+                    if (pc.TimeRemaining.HasValue && pc.TimeRemaining.Value < notificationThreshold && !pc.IsTopUpRequestSent)
+                    {
+                        // Đánh dấu đã gửi để không gửi lại trong phiên này
+                        pc.IsTopUpRequestSent = true;
+                        // Gọi hàm để tạo yêu cầu
+                        CreateAutoDepositRequest(pc);
+                    }
+                    // ---> KẾT THÚC LOGIC MỚI <---
+
                     if (pc.Status == PCStatus.TimeEnded) // Điều kiện này đã được xử lý trong DecrementTimeRemaining
                     {
                         // Đảm bảo logic khi hết giờ được xử lý đúng (StartTime = null, CurrentUser = null, Budget = 0)
@@ -428,14 +441,17 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                         pc.CurrentUser = null;
                         // Không đặt Budget về 0 ở đây trừ khi đó là quy tắc của bạn
                         pc.TimeRemaining = TimeSpan.Zero;
-
+                        // Khi phiên chơi kết thúc, reset cờ để phiên sau có thể tạo yêu cầu mới
+                        pc.IsTopUpRequestSent = false;
                         // Đánh dấu PC này cần được lưu lên Firebase
                         pcsToSave.Add(pc);
                     }
-
-
                 }
-                
+                else if (pc.IsTopUpRequestSent)
+                {
+                    pc.IsTopUpRequestSent = false;
+                }
+
             }
 
             // *** LƯU CÁC PC CÓ THAY ĐỔI TRẠNG THÁI QUAN TRỌNG LÊN FIREBASE ***
@@ -540,6 +556,37 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 MessageBox.Show($"Lỗi khi tải dữ liệu PC từ Firebase: {ex.Message}", "Lỗi Tải Dữ Liệu", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Console.WriteLine($"Chi tiết lỗi tải dữ liệu PC: {ex}"); // Log chi tiết lỗi
             }
+        }
+
+        
+        private async void CreateAutoDepositRequest(PC pc)
+        {
+            if (string.IsNullOrEmpty(pc.CurrentUser)) return;
+
+            // Giả sử số tiền mặc định cho mỗi lần yêu cầu nạp là 10,000
+            int defaultAmount = 10000;
+
+            FirebaseDB firebaseDB = new FirebaseDB();
+            Database.Users user = await firebaseDB.GetUser(pc.CurrentUser);
+            if (user == null) return; // Không tìm thấy user, không tạo yêu cầu
+
+            var depositOrder = new Order
+            {
+                OrderId = Guid.NewGuid().ToString(),
+                UserID = user.UserId,
+                Username = user.Username,
+                UserFullName = user.FullName,
+                GrandTotal = defaultAmount,
+                Timestamp = DateTime.UtcNow,
+                Status = "Pending", // Trạng thái chờ admin xác nhận
+                Type = TransactionType.PcUsage,
+                Description = $"Yêu cầu nạp tiền tự động cho máy {pc.Name}",
+                TimePurchased = PC.CalculateTotalTimeFromBudget(defaultAmount),
+                Items = new List<CartItemEntry>()
+            };
+
+            await firebaseDB.AddOrder(depositOrder);
+            Console.WriteLine($"Auto top-up request created for {user.Username} on {pc.Name}");
         }
 
 
