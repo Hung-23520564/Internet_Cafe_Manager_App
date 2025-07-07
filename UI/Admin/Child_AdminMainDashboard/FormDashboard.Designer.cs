@@ -183,7 +183,6 @@
             buttonEditClear.TabIndex = 12;
             buttonEditClear.Text = "Clear";
             buttonEditClear.UseVisualStyleBackColor = false;
-            buttonEditClear.Click += buttonEditClear_Click;
             // 
             // buttonEditSave
             // 
@@ -411,7 +410,6 @@
             labelTitle.TabIndex = 0;
             labelTitle.Text = "PC Dashboard";
             labelTitle.TextAlign = ContentAlignment.MiddleCenter;
-            labelTitle.Click += labelTitle_Click;
             // 
             // timer1
             // 

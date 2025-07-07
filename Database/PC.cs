@@ -23,11 +23,7 @@ namespace Internet_Cafe_Manager_App.Database
 
     public class PC : INotifyPropertyChanged
     {
-        [JsonIgnore]
-        public bool IsTopUpRequestSent { get; set; }
-
-        public DateTime? TimeEndedTimestamp { get; set; } // THÊM THUỘC TÍNH MỚI
-
+        
         private string _name;
         public string Name
         {

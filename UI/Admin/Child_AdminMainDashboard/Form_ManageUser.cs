@@ -289,7 +289,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 DialogResult result = MessageBox.Show(
                     "Bạn có chắc chắn muốn hoàn thành đơn hàng này không?",
                     "Xác nhận hoàn thành",
-                    MessageBoxButtons.OKCancel, 
                     MessageBoxIcon.Question
                 );
 
@@ -350,8 +349,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
             if (selectedUser == null) return;
 
-           
-            if (currentStatus == "Processing")
             {
                 DialogResult result = MessageBox.Show(
                     $"Xác nhận giao dịch nạp tiền cho người dùng '{selectedUser.Username}'?",

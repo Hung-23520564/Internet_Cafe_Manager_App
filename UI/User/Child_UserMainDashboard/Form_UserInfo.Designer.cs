@@ -55,7 +55,7 @@
             lblJoinedDate = new Label();
             lblUsername = new Label();
             lblFullName = new Label();
-            picProfile = new CustomControl.CircularIconPictureBox();
+            picProfile = new Internet_Cafe_Manager_App.UI.CustomControl.CircularIconPictureBox();
             panelMain.SuspendLayout();
             panelDetailView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDetailItems).BeginInit();
@@ -501,6 +501,7 @@
             lblFullName.Size = new Size(214, 54);
             lblFullName.TabIndex = 1;
             lblFullName.Text = "Full Name";
+            lblFullName.Click += lblFullName_Click;
             // 
             // picProfile
             // 
@@ -525,7 +526,6 @@
             Controls.Add(panelMain);
             Name = "Form_UserInfo";
             Text = "Thông tin người dùng";
-            Load += Form_UserInfo_Load;
             panelMain.ResumeLayout(false);
             panelDetailView.ResumeLayout(false);
             panelDetailView.PerformLayout();

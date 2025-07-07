@@ -437,14 +437,28 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 // Lưu thông tin PC đã cập nhật vào Firebase
                 bool saveSuccess = await firebaseDB.AddOrUpdatePC(pcToUpdate);
 
-                if (saveSuccess)
-                {
-                    MessageBox.Show($"Đã cập nhật và lưu thông tin cho máy '{pcToUpdate.Name}'.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (pc.TimeRemaining.HasValue && pc.TimeRemaining.Value > TimeSpan.Zero)
+                    {
+                        
+                        pc.DecrementTimeRemaining(TimeSpan.FromMilliseconds(timer1.Interval));
+                        
+                    }
+
+                    if (pc.Status == PCStatus.TimeEnded) // Điều kiện này đã được xử lý trong DecrementTimeRemaining
+                    {
+                        // Đảm bảo logic khi hết giờ được xử lý đúng (StartTime = null, CurrentUser = null, Budget = 0)
+                        pc.StartTime = null;
+                        pc.CurrentUser = null;
+                        // Không đặt Budget về 0 ở đây trừ khi đó là quy tắc của bạn
+                        pc.TimeRemaining = TimeSpan.Zero;
+
+                        // Đánh dấu PC này cần được lưu lên Firebase
+                        pcsToSave.Add(pc);
+                    }
+
+
                 }
-                else
-                {
-                    MessageBox.Show($"Cập nhật thông tin máy '{pcToUpdate.Name}' thất bại!", "Lỗi Lưu trữ", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
+                
             }
             else
             {
@@ -522,9 +536,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             await new FirebaseDB().AddOrder(depositOrder);
         }
 
-        private void labelTitle_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

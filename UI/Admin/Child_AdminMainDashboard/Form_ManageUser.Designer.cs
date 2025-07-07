@@ -349,7 +349,6 @@
             // 
             // colHireTotalAmount
             // 
-            colHireTotalAmount.DataPropertyName = "GrandTotal";
             dataGridViewCellStyle4.Format = "N0";
             colHireTotalAmount.DefaultCellStyle = dataGridViewCellStyle4;
             colHireTotalAmount.HeaderText = "Total";
