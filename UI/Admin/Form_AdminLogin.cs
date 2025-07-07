@@ -139,6 +139,25 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             }
         }
 
+        
+
+        private void btnTogglePassword_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra xem mật khẩu đang được che hay hiện
+            if (txtPassword.PasswordChar == '*')
+            {
+                // Nếu đang che, thì hiện ra và đổi icon thành hình con mắt
+                txtPassword.PasswordChar = '\0';
+                btnTogglePassword.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            }
+            else
+            {
+                // Nếu đang hiện, thì che lại và đổi icon thành hình con mắt gạch chéo
+                txtPassword.PasswordChar = '*';
+                btnTogglePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            }
+        }
+
         // --- Xử lý sự kiện Click cho link/nút Đăng Ký ---
         private void llblRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) // Hoặc btnRegister_Click nếu là Button
         {

@@ -19,6 +19,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
+        private readonly Internet_Cafe_Manager_App.Database.Users currentUser;
         public Form_UserMacDinh()
         {
             InitializeComponent();
@@ -32,6 +33,23 @@ namespace Internet_Cafe_Manager_App.UI.Admin
             this.WindowState = FormWindowState.Maximized;
             this.Shown += Form_UserMacDinh_Shown;
 
+        }
+
+        public Form_UserMacDinh(Internet_Cafe_Manager_App.Database.Users user)
+        {
+            InitializeComponent();
+
+            // Lưu người dùng được truyền vào
+            this.currentUser = user;
+
+            // Copy các dòng khởi tạo giao diện từ constructor cũ vào đây
+            leftBorderBtn = new Panel();
+            leftBorderBtn.Size = new Size(7, 64);
+            panelMenu.Controls.Add(leftBorderBtn);
+            this.DoubleBuffered = true;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.WindowState = FormWindowState.Maximized;
+            this.Shown += Form_UserMacDinh_Shown;
         }
 
         public void Form_UserMacDinh_Shown(object sender, EventArgs e)
@@ -132,12 +150,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            OpenChildForm(new Form_UserInfo());
+            OpenChildForm(new Form_UserInfo(this.currentUser));
         }
         private void btnOrder_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
-            OpenChildForm(new Form_UserOrder());
+            OpenChildForm(new Form_UserOrder(this.currentUser));
         }
         private void btnChat_Click(object sender, EventArgs e)
         {
@@ -147,7 +165,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         private void btnSetting_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color6);
-            OpenChildForm(new Form_UserPayment());
+            OpenChildForm(new Form_UserPayment(this.currentUser));
         }
         //Drag Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]

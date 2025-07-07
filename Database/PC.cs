@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Internet_Cafe_Manager_App.Database;
-using System.ComponentModel; // Thêm namespace này
-using System.Runtime.CompilerServices; // Thêm namespace này
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
 
 namespace Internet_Cafe_Manager_App.Database
 {
@@ -19,10 +20,14 @@ namespace Internet_Cafe_Manager_App.Database
         TimeEnded
     }
 
-    
+
     public class PC : INotifyPropertyChanged
     {
-        
+        [JsonIgnore]
+        public bool IsTopUpRequestSent { get; set; }
+
+        public DateTime? TimeEndedTimestamp { get; set; } // THÊM THUỘC TÍNH MỚI
+
         private string _name;
         public string Name
         {
@@ -32,7 +37,7 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_name != value)
                 {
                     _name = value;
-                    OnPropertyChanged(); 
+                    OnPropertyChanged();
                 }
             }
         }
@@ -51,7 +56,6 @@ namespace Internet_Cafe_Manager_App.Database
             }
         }
 
-        
         private PCStatus _status;
         public PCStatus Status
         {
@@ -61,12 +65,11 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_status != value)
                 {
                     _status = value;
-                    OnPropertyChanged(); 
+                    OnPropertyChanged();
                 }
             }
         }
 
-        
         private string _currentUser;
         public string CurrentUser
         {
@@ -76,12 +79,11 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_currentUser != value)
                 {
                     _currentUser = value;
-                    OnPropertyChanged(); 
+                    OnPropertyChanged();
                 }
             }
         }
 
-        
         private DateTime? _startTime;
         public DateTime? StartTime
         {
@@ -91,15 +93,12 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_startTime != value)
                 {
                     _startTime = value;
-                    OnPropertyChanged(); 
-                                         
+                    OnPropertyChanged();
                     OnPropertyChanged(nameof(TimeUsed));
                 }
             }
         }
 
-
-        // Riêng mục này lưu ý nghen ní , khó đấy, ko đùa được đâu
         private TimeSpan? _timeRemaining;
         public TimeSpan? TimeRemaining
         {
@@ -109,7 +108,7 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_timeRemaining != value)
                 {
                     _timeRemaining = value;
-                    OnPropertyChanged(); 
+                    OnPropertyChanged();
                 }
             }
         }
@@ -119,44 +118,23 @@ namespace Internet_Cafe_Manager_App.Database
 
         public static TimeSpan CalculateTotalTimeFromBudget(int budget)
         {
-            // Đảm bảo budget không âm
             if (budget <= 0)
             {
                 return TimeSpan.Zero;
             }
-
-            // Số lượng đơn vị 10000 trong budget
             int priceUnits = budget / PricePer30Minutes;
-
-            // Tổng thời gian = số đơn vị * thời gian cho mỗi đơn vị
             return TimeSpan.FromMinutes(priceUnits * 30);
-            
         }
 
         public void DecrementTimeRemaining(TimeSpan duration)
         {
             if (TimeRemaining.HasValue)
             {
-                // Tạo một biến tạm để lưu giá trị mới
                 TimeSpan newTimeRemaining = TimeRemaining.Value.Subtract(duration);
-
-                // Gán lại giá trị mới (sẽ gọi setter và kích hoạt OnPropertyChanged)
-                // Đảm bảo thời gian còn lại không âm
                 TimeRemaining = (newTimeRemaining > TimeSpan.Zero) ? newTimeRemaining : TimeSpan.Zero;
-
-                // Kiểm tra nếu hết giờ và trạng thái chưa phải TimeEnded
-                if (TimeRemaining.Value <= TimeSpan.Zero && Status != PCStatus.TimeEnded)
-                {
-                    // Xử lý khi hết giờ: đổi trạng thái
-                    Status = PCStatus.TimeEnded;
-                    // Bạn có thể thêm các xử lý khác ở đây khi hết giờ
-                }
+                // Logic thay đổi trạng thái đã được chuyển sang FormDashboard.cs
             }
         }
-
-        // Kết thúc phần TimeRemainning nè, phần này phức tạp nên t tách ra cho ae đọc dễ hiểu
-
-
 
         private int _budget;
         public int Budget
@@ -167,14 +145,11 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_budget != value)
                 {
                     _budget = value;
-                    OnPropertyChanged(); // Gọi sự kiện khi giá trị thay đổi
+                    OnPropertyChanged();
                 }
             }
         }
 
-
-        
-        // Cần đảm bảo nó được thông báo thay đổi khi StartTime thay đổi
         public TimeSpan TimeUsed
         {
             get
@@ -196,15 +171,13 @@ namespace Internet_Cafe_Manager_App.Database
                 if (_order != value)
                 {
                     _order = value;
-                    OnPropertyChanged(); 
+                    OnPropertyChanged();
                 }
             }
         }
 
-        
         public event PropertyChangedEventHandler PropertyChanged;
 
-       
         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -212,9 +185,8 @@ namespace Internet_Cafe_Manager_App.Database
 
         public void NotifyTimeUsedChanged()
         {
-            OnPropertyChanged(nameof(TimeUsed)); 
+            OnPropertyChanged(nameof(TimeUsed));
         }
-
 
         public PC(string name)
         {
@@ -225,7 +197,6 @@ namespace Internet_Cafe_Manager_App.Database
             TimeRemaining = null;
             Order = null;
             Budget = 0;
-
         }
     }
 }
