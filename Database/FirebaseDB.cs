@@ -19,8 +19,8 @@ namespace Internet_Cafe_Manager_App.Database
         {
             // !!! CẢNH BÁO: KHÔNG NÊN HARDCODE SECRET/KEY VÀ BASEPATH Ở ĐÂY !!!
             // Nên đọc từ file cấu hình (app.config, appsettings.json)
-            AuthSecret = "LUrH3rDtqWkRVSlAHvY7WvBcN0Y8a3eVkOXSsWPD", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
-            BasePath = "https://internet-cafe-manager-ap-9e088-default-rtdb.asia-southeast1.firebasedatabase.app/"
+            AuthSecret = "BOTfpnJFZLR8Gy4VewguWS1q607MXDSlAs8yAKvS", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
+            BasePath = "https://doanltm-49335-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         public IFirebaseClient client;
 

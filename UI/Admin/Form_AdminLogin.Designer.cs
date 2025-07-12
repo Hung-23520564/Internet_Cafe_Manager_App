@@ -70,7 +70,7 @@
             linkLabel1.Text = "Don't have an account? Register";
             linkLabel1.LinkClicked += llblRegister_LinkClicked;
             // 
-            // btnLogin
+            // txtUsername
             // 
             btnLogin.BackColor = Color.FromArgb(128, 179, 255);
             btnLogin.FlatAppearance.BorderSize = 0;
