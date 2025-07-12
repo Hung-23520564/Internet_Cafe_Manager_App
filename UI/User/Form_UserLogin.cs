@@ -111,7 +111,7 @@ namespace Internet_Cafe_Manager_App.UI.User
                         await firebaseDB.UpdateUser(user); // Hoặc AddOrUpdateAdmin
 
                         // Mở trang chủ Admin
-                        Form_UserMacDinh form_UserMacDinh = new Form_UserMacDinh(user);
+                        Form_UserMainDashboard form_UserMacDinh = new Form_UserMainDashboard(user);
                         // Có thể truyền thông tin admin đã login qua dashboard bằng cách thay lệnh phía trên bằng lệnh : Form_AdminMainDashboard dashboardForm = new Form_AdminMainDashboard(admin);
                         form_UserMacDinh.ShowDialog();
 

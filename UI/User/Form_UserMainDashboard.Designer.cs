@@ -1,6 +1,6 @@
 ﻿namespace Internet_Cafe_Manager_App.UI.Admin
 {
-    partial class Form_UserMacDinh
+    partial class Form_UserMainDashboard
     {
         /// <summary>
         /// Required designer variable.

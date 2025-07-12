@@ -1,7 +1,8 @@
-﻿// Dán toàn bộ mã này vào tệp Form_AdminMenu.Designer.cs
+﻿// Dán toàn bộ mã này vào tệp FormOrders.Designer.cs (tên cũ Form_AdminMenu.Designer.cs)
 
 namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
+    // Lưu ý: Tên lớp vẫn là Form_AdminMenu theo thiết kế ban đầu của bạn
     partial class Form_AdminMenu
     {
         private System.ComponentModel.IContainer components = null;
@@ -25,10 +26,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             lstCategory = new ComboBox();
             txtQuantity = new TextBox();
             lblQuantity = new Label();
-            btnClear = new Button();
-            btnDelete = new Button();
-            btnUpdate = new Button();
-            btnAdd = new Button();
+
+            // Thay đổi kiểu của các nút thành RoundedButton
+            btnClear = new CustomControls.RoundedButton();
+            btnUpdate = new CustomControls.RoundedButton();
+            btnAdd = new CustomControls.RoundedButton();
+
             btnUploadImage = new Button();
             picItemImage = new PictureBox();
             txtPrice = new TextBox();
@@ -73,7 +76,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             panelCRUD.Controls.Add(txtQuantity);
             panelCRUD.Controls.Add(lblQuantity);
             panelCRUD.Controls.Add(btnClear);
-            panelCRUD.Controls.Add(btnDelete);
             panelCRUD.Controls.Add(btnUpdate);
             panelCRUD.Controls.Add(btnAdd);
             panelCRUD.Controls.Add(btnUploadImage);
@@ -128,30 +130,15 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnClear.ForeColor = Color.White;
-            btnClear.Location = new Point(190, 725);
+            btnClear.Location = new Point(105, 718);
             btnClear.Margin = new Padding(3, 4, 3, 4);
             btnClear.Name = "btnClear";
-            btnClear.Size = new Size(140, 50);
+            btnClear.Size = new Size(140, 45);
             btnClear.TabIndex = 14;
             btnClear.Text = "Clear Fields";
             btnClear.UseVisualStyleBackColor = false;
+            ((CustomControls.RoundedButton)btnClear).CornerRadius = 15; // Bo góc
             btnClear.Click += btnClear_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.FromArgb(220, 53, 69);
-            btnDelete.FlatAppearance.BorderSize = 0;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(40, 725);
-            btnDelete.Margin = new Padding(3, 4, 3, 4);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(140, 50);
-            btnDelete.TabIndex = 13;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Click += btnDelete_Click;
             // 
             // btnUpdate
             // 
@@ -160,13 +147,14 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             btnUpdate.FlatStyle = FlatStyle.Flat;
             btnUpdate.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnUpdate.ForeColor = Color.White;
-            btnUpdate.Location = new Point(190, 650);
+            btnUpdate.Location = new Point(185, 650);
             btnUpdate.Margin = new Padding(3, 4, 3, 4);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(140, 50);
+            btnUpdate.Size = new Size(130, 50);
             btnUpdate.TabIndex = 12;
             btnUpdate.Text = "Update";
             btnUpdate.UseVisualStyleBackColor = false;
+            ((CustomControls.RoundedButton)btnUpdate).CornerRadius = 15; // Bo góc
             btnUpdate.Click += btnUpdate_Click;
             // 
             // btnAdd
@@ -176,13 +164,14 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             btnAdd.FlatStyle = FlatStyle.Flat;
             btnAdd.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAdd.ForeColor = Color.White;
-            btnAdd.Location = new Point(40, 650);
+            btnAdd.Location = new Point(35, 650);
             btnAdd.Margin = new Padding(3, 4, 3, 4);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(140, 50);
+            btnAdd.Size = new Size(130, 50);
             btnAdd.TabIndex = 11;
             btnAdd.Text = "Add New";
             btnAdd.UseVisualStyleBackColor = false;
+            ((CustomControls.RoundedButton)btnAdd).CornerRadius = 15; // Bo góc
             btnAdd.Click += btnAdd_Click;
             // 
             // btnUploadImage
@@ -282,7 +271,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             panelCRUD.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)picItemImage).EndInit();
             ResumeLayout(false);
-
         }
 
         #endregion
@@ -298,10 +286,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.PictureBox picItemImage;
         private System.Windows.Forms.Button btnUploadImage;
-        private System.Windows.Forms.Button btnClear;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnAdd;
+
+        // Đã thay đổi kiểu các nút
+        private CustomControls.RoundedButton btnClear;
+        private CustomControls.RoundedButton btnUpdate;
+        private CustomControls.RoundedButton btnAdd;
+
         private TextBox txtQuantity;
         private Label lblQuantity;
         private ComboBox lstCategory;

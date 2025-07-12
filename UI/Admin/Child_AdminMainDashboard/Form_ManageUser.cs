@@ -1,5 +1,4 @@
 ﻿// File: Form_ManageUser.cs
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -311,7 +310,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
                 if (result == DialogResult.OK)
                 {
-                    await UpdateOrderStatus(orderId, "Pending", selectedUser.Username);
+                    await UpdateOrderStatus(orderId, "Processing", selectedUser.Username);
                 }
             }
         }
@@ -452,6 +451,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 // Ép kiểu ô hiện tại thành một ô nút
                 DataGridViewButtonCell buttonCell = (DataGridViewButtonCell)dataGridViewUserOrders.Rows[e.RowIndex].Cells["colMarkAsCompleteOrder"];
 
+                if (status == "Pending")
+                {
+                    e.Value = "No Action";
+                    buttonCell.Style.BackColor = Color.DarkOrange;
+                    buttonCell.Style.SelectionBackColor = Color.BlueViolet;
+                }
                 if (status == "Completed")
                 {
                     // Nếu đã hoàn thành -> Đổi chữ thành "Change" và đổi màu
@@ -459,7 +464,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                     buttonCell.Style.BackColor = Color.CadetBlue; // Màu cam đỏ
                     buttonCell.Style.SelectionBackColor = Color.BlueViolet;
                 }
-                else // Mặc định là "Pending" hoặc trạng thái khác
+                if (status == "Processing")
                 {
                     // Nếu đang chờ -> Giữ nguyên là "Complete" và màu xanh
                     e.Value = "Complete";
@@ -468,7 +473,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 }
             }
         }
-
+       
         private void dataGridViewHireTime_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             // Kiểm tra xem có phải cột nút "Action" không
@@ -478,16 +483,24 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 string status = dataGridViewHireTime.Rows[e.RowIndex].Cells["colHireStatus"].Value?.ToString();
                 DataGridViewButtonCell buttonCell = (DataGridViewButtonCell)dataGridViewHireTime.Rows[e.RowIndex].Cells["colMarkAsCompleteHire"];
 
+                if (status == "Pending")
+                {
+                    e.Value = "No Action";
+                    buttonCell.Style.BackColor = Color.DarkOrange;
+                    buttonCell.Style.SelectionBackColor = Color.BlueViolet;
+                }
                 if (status == "Completed")
                 {
+                    // Nếu đã hoàn thành -> Đổi chữ thành "Change" và đổi màu
                     e.Value = "Change";
-                    buttonCell.Style.BackColor = Color.OrangeRed;
-                    buttonCell.Style.SelectionBackColor = Color.DarkRed;
+                    buttonCell.Style.BackColor = Color.CadetBlue; // Màu cam đỏ
+                    buttonCell.Style.SelectionBackColor = Color.BlueViolet;
                 }
-                else // Mặc định là "Pending"
+                if (status == "Processing")
                 {
+                    // Nếu đang chờ -> Giữ nguyên là "Complete" và màu xanh
                     e.Value = "Complete";
-                    buttonCell.Style.BackColor = Color.MediumSeaGreen;
+                    buttonCell.Style.BackColor = Color.MediumSeaGreen; // Màu xanh lá
                     buttonCell.Style.SelectionBackColor = Color.SeaGreen;
                 }
             }

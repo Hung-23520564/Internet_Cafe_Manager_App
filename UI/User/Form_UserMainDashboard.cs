@@ -14,13 +14,13 @@ using Internet_Cafe_Manager_App.UI.User;
 
 namespace Internet_Cafe_Manager_App.UI.Admin
 {
-    public partial class Form_UserMacDinh : Form
+    public partial class Form_UserMainDashboard : Form
     {
         private IconButton currentBtn;
         private Panel leftBorderBtn;
         private Form currentChildForm;
         private readonly Internet_Cafe_Manager_App.Database.Users currentUser;
-        public Form_UserMacDinh()
+        public Form_UserMainDashboard()
         {
             InitializeComponent();
 
@@ -35,7 +35,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin
 
         }
 
-        public Form_UserMacDinh(Internet_Cafe_Manager_App.Database.Users user)
+        public Form_UserMainDashboard(Internet_Cafe_Manager_App.Database.Users user)
         {
             InitializeComponent();
 

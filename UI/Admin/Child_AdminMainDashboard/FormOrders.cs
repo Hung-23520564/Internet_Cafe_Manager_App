@@ -1,29 +1,43 @@
-﻿// Dán toàn bộ mã này vào tệp Form_AdminMenu.cs
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-//using System.Windows.Controls;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using Internet_Cafe_Manager_App.CustomControls;
 using Internet_Cafe_Manager_App.Database;
+
+// THÊM 2 DÒNG USING NÀY ĐỂ SỬ DỤNG CLOUDINARY
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
 
 namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
     public partial class Form_AdminMenu : Form
     {
         private FirebaseDB firebaseDB;
-        private string selectedImagePath = null;
+
+        // BIẾN NÀY SẼ LƯU URL SAU KHI UPLOAD THÀNH CÔNG
+        private string uploadedImageUrl = null;
         private string selectedItemId = null;
+
+        // --- THÔNG TIN TÀI KHOẢN CLOUDINARY ---
+        private const string CLOUD_NAME = "dbdtxkpmk";
+        private const string API_KEY = "543779257993669";
+        private const string API_SECRET = "Yh7X2RX2e6ESUrxOOwS2gp-fhig";
+        private static Account cloudinaryAccount;
+        private static Cloudinary cloudinary;
+
 
         public Form_AdminMenu()
         {
             InitializeComponent();
             firebaseDB = new FirebaseDB();
+
+            // KHỞI TẠO TÀI KHOẢN CLOUDINARY
+            cloudinaryAccount = new Account(CLOUD_NAME, API_KEY, API_SECRET);
+            cloudinary = new Cloudinary(cloudinaryAccount);
         }
 
         private async void Form_AdminMenu_Load(object sender, EventArgs e)
@@ -64,7 +78,15 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Height = 120,
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Dock = DockStyle.Top,
-                ImageLocation = item.Url // Load ảnh từ URL
+                // RENDER ẢNH: Tải ảnh trực tiếp từ URL của Cloudinary
+                ImageLocation = item.ImageUrl
+            };
+            // Xử lý nếu URL không hợp lệ hoặc không có ảnh
+            pictureBox.LoadCompleted += (s, e) => {
+                if (e.Error != null)
+                {
+                    ((PictureBox)s).Image = null; // hoặc hiển thị ảnh placeholder
+                }
             };
 
             Label quantityLabel = new Label
@@ -74,7 +96,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Font = new Font("Segoe UI", 9F, FontStyle.Italic),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Dock = DockStyle.Top,
-                Height = 20, // Thêm dòng này
+                Height = 20,
                 AutoSize = false,
                 BackColor = Color.Transparent
             };
@@ -86,7 +108,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Font = new Font("Segoe UI", 11F, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Dock = DockStyle.Top,
-                Height = 32, // thêm
+                Height = 32,
                 AutoSize = false,
                 AutoEllipsis = true,
                 Padding = new Padding(0, 4, 0, 4),
@@ -100,15 +122,10 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Font = new Font("Segoe UI", 11F, FontStyle.Bold),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Dock = DockStyle.Top,
-                Height = 26, // thêm
+                Height = 26,
                 AutoSize = false,
                 BackColor = Color.Transparent
             };
-
-
-            
-            //Label nameLabel = new Label { Text = item.Name, ForeColor = Color.WhiteSmoke, Font = new Font("Segoe UI", 10.5F, FontStyle.Bold), TextAlign = ContentAlignment.MiddleCenter, Dock = DockStyle.Top, Padding = new Padding(0, 6, 0, 3), AutoSize = false, AutoEllipsis = true, Height = 28, BackColor = Color.Transparent };
-            //Label priceLabel = new Label { Text = $"{item.Price:N0} đ", ForeColor = Color.PaleGreen, Font = new Font("Segoe UI", 11F, FontStyle.Bold), TextAlign = ContentAlignment.MiddleCenter, Dock = DockStyle.Top, Padding = new Padding(0, 0, 0, 6), BackColor = Color.Transparent };
 
             Panel buttonPanel = new Panel { Height = 35, Dock = DockStyle.Bottom, BackColor = Color.Transparent };
 
@@ -117,13 +134,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             btnEdit.Click += (s, e) =>
             {
                 selectedItemId = item.Id;
-                //txtId.Text = item.Id;
                 txtName.Text = item.Name;
                 lstCategory.Text = item.Type;
                 txtPrice.Text = item.Price.ToString();
                 txtQuantity.Text = item.Quantity.ToString();
-                picItemImage.ImageLocation = item.Url;
-                selectedImagePath = null; // Reset image path
+                picItemImage.ImageLocation = item.ImageUrl;
+                uploadedImageUrl = item.ImageUrl; // Lưu lại URL ảnh hiện tại
             };
 
             Button btnDelete = new Button { Text = "Delete", Dock = DockStyle.Right, Width = 80, FlatStyle = FlatStyle.Flat, BackColor = Color.FromArgb(220, 53, 69), ForeColor = Color.White };
@@ -136,7 +152,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                     if (success)
                     {
                         MessageBox.Show("Xóa thành công!");
-                        await LoadAllItems(); // Tải lại danh sách
+                        await LoadAllItems();
                     }
                     else
                     {
@@ -147,62 +163,94 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
             buttonPanel.Controls.Add(btnEdit);
             buttonPanel.Controls.Add(btnDelete);
-            cardPanel.Controls.Add(buttonPanel);     // Bottom
-            cardPanel.Controls.Add(priceLabel);      // Dưới tên
-            cardPanel.Controls.Add(nameLabel);       // Trên giá
-            cardPanel.Controls.Add(quantityLabel);   // Trên tên
-            cardPanel.Controls.Add(pictureBox);      // Trên cùng
-
+            cardPanel.Controls.Add(buttonPanel);
+            cardPanel.Controls.Add(priceLabel);
+            cardPanel.Controls.Add(nameLabel);
+            cardPanel.Controls.Add(quantityLabel);
+            cardPanel.Controls.Add(pictureBox);
 
             return cardPanel;
         }
 
-        private void btnUploadImage_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Mở hộp thoại chọn file và UPLOAD ảnh lên Cloudinary.
+        /// </summary>
+        private async void btnUploadImage_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 ofd.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.gif)|*.jpg; *.jpeg; *.png; *.gif";
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    selectedImagePath = ofd.FileName;
-                    picItemImage.Image = Image.FromFile(selectedImagePath);
+                    // Hiển thị trạng thái đang tải lên
+                    btnUploadImage.Enabled = false;
+                    btnUploadImage.Text = "Uploading...";
+
+                    try
+                    {
+                        // Tạo các tham số để tải lên
+                        var uploadParams = new ImageUploadParams()
+                        {
+                            File = new FileDescription(ofd.FileName),
+                            // Tùy chọn: đặt tên file trên Cloudinary (nếu không sẽ tự tạo)
+                            PublicId = $"internet_cafe/items/{Path.GetFileNameWithoutExtension(ofd.FileName)}_{DateTime.Now.Ticks}"
+                        };
+
+                        // Thực hiện tải lên
+                        var uploadResult = await cloudinary.UploadAsync(uploadParams);
+
+                        // Lấy URL an toàn của ảnh sau khi tải lên thành công
+                        if (uploadResult.StatusCode == System.Net.HttpStatusCode.OK)
+                        {
+                            uploadedImageUrl = uploadResult.SecureUrl.ToString();
+                            picItemImage.ImageLocation = uploadedImageUrl; // Hiển thị ảnh vừa upload
+                            MessageBox.Show("Tải ảnh lên thành công!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Tải ảnh thất bại: {uploadResult.Error.Message}", "Lỗi Cloudinary", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        // Khôi phục lại trạng thái nút
+                        btnUploadImage.Enabled = true;
+                        btnUploadImage.Text = "Upload...";
+                    }
                 }
             }
         }
 
+        /// <summary>
+        /// Thêm sản phẩm mới vào Firebase với URL ảnh từ Cloudinary.
+        /// </summary>
         private async void btnAdd_Click(object sender, EventArgs e)
         {
-            
-
-            if (string.IsNullOrEmpty(txtName.Text) ||
-            string.IsNullOrEmpty(txtPrice.Text) ||
-            string.IsNullOrEmpty(lstCategory.Text) ||
-            string.IsNullOrEmpty(txtQuantity.Text))
-
+            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPrice.Text) || string.IsNullOrEmpty(lstCategory.Text) || string.IsNullOrEmpty(txtQuantity.Text))
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin.");
                 return;
             }
 
-            string imageUrl = null;
-            if (!string.IsNullOrEmpty(selectedImagePath))
+            // Nếu người dùng chưa tải ảnh lên, thì không cho thêm mới
+            if (string.IsNullOrEmpty(uploadedImageUrl))
             {
-                // Upload ảnh và lấy URL (chưa được triển khai trong FirebaseDB.cs)
-                // Giả sử bạn có một phương thức để làm điều này
-                // imageUrl = await firebaseDB.UploadImage(selectedImagePath);
-                // Vì chưa có, chúng ta sẽ tạm thời bỏ qua bước này
-                MessageBox.Show("Chức năng Upload ảnh chưa được hỗ trợ trong FirebaseDB.cs.");
+                MessageBox.Show("Vui lòng tải ảnh cho sản phẩm.", "Thiếu thông tin", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
             Item newItem = new Item
             {
-                //Id = string.IsNullOrEmpty(txtId.Text) ? Guid.NewGuid().ToString() : txtId.Text,
                 Id = Guid.NewGuid().ToString(),
                 Name = txtName.Text,
                 Type = lstCategory.Text,
                 Price = int.Parse(txtPrice.Text),
                 Quantity = int.Parse(txtQuantity.Text),
-                Url = imageUrl // Sẽ là null nếu chưa upload
+                ImageUrl = uploadedImageUrl // SỬ DỤNG URL TỪ CLOUDINARY
             };
 
             bool success = await firebaseDB.AddOrUpdateItem(newItem);
@@ -218,19 +266,15 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             }
         }
 
+        /// <summary>
+        /// Cập nhật sản phẩm với URL ảnh mới (nếu có).
+        /// </summary>
         private async void btnUpdate_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(selectedItemId))
             {
                 MessageBox.Show("Vui lòng chọn một sản phẩm để cập nhật.");
                 return;
-            }
-
-            string imageUrl = picItemImage.ImageLocation;
-            if (!string.IsNullOrEmpty(selectedImagePath))
-            {
-                MessageBox.Show("Chức năng Upload ảnh chưa được hỗ trợ trong FirebaseDB.cs.");
-                // imageUrl = await firebaseDB.UploadImage(selectedImagePath);
             }
 
             Item updatedItem = new Item
@@ -240,7 +284,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Type = lstCategory.Text,
                 Price = int.Parse(txtPrice.Text),
                 Quantity = int.Parse(txtQuantity.Text),
-                Url = imageUrl
+                ImageUrl = uploadedImageUrl // SỬ DỤNG URL MỚI HOẶC CŨ
             };
 
             bool success = await firebaseDB.AddOrUpdateItem(updatedItem);
@@ -256,30 +300,6 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             }
         }
 
-        private async void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(selectedItemId))
-            {
-                MessageBox.Show("Vui lòng chọn một sản phẩm để xóa.");
-                return;
-            }
-
-            if (MessageBox.Show($"Bạn có chắc muốn xóa sản phẩm này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                bool success = await firebaseDB.DeleteItem(selectedItemId);
-                if (success)
-                {
-                    MessageBox.Show("Xóa thành công!");
-                    await LoadAllItems();
-                    ClearFields();
-                }
-                else
-                {
-                    MessageBox.Show("Xóa thất bại.");
-                }
-            }
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             ClearFields();
@@ -287,18 +307,19 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
         private void ClearFields()
         {
-            //txtId.Clear();
             txtName.Clear();
             lstCategory.Text = string.Empty;
             txtPrice.Clear();
+            txtQuantity.Clear();
             picItemImage.Image = null;
-            selectedImagePath = null;
+            picItemImage.ImageLocation = null; // Xóa ảnh hiển thị
+            uploadedImageUrl = null; // Reset URL đã upload
             selectedItemId = null;
         }
 
         private void flowLayoutPanelItems_Paint(object sender, PaintEventArgs e)
         {
-
+            // Có thể để trống
         }
     }
 }

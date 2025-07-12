@@ -176,10 +176,10 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
         private void Form_AdminRegister_FormClosed(object sender, FormClosedEventArgs e)
         {
             // Khi form đăng ký đóng, nên hiển thị lại form đăng nhập
-            Form_AdminLogin loginForm = Application.OpenForms.OfType<Form_AdminLogin>().FirstOrDefault();
-            if (loginForm != null)
+            Form_AdminLogin adminLogin = Application.OpenForms.OfType<Form_AdminLogin>().FirstOrDefault();
+            if (adminLogin != null)
             {
-                loginForm.Show(); // Hiển thị lại form đăng nhập nếu nó còn tồn tại
+                adminLogin.Show(); // Hiển thị lại form đăng nhập nếu nó còn tồn tại
             }
             else // Nếu form login cũng bị đóng rồi thì có thể mở lại hoặc thoát
             {
@@ -205,6 +205,11 @@ namespace Internet_Cafe_Manager_App.UI.Admin // Thay bằng namespace thực t�
             Form_AdminLogin loginForm = new Form_AdminLogin();
             loginForm.Show();
             this.Close();
+        }
+
+        private void Form_AdminRegister_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }

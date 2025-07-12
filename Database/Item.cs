@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿// Tệp: Database/Item.cs
+
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,8 +23,8 @@ namespace Internet_Cafe_Manager_App.Database
         [JsonProperty("quantity")]
         public int Quantity { get; set; }
 
-        [JsonProperty("url")]
-        public string Url { get; set; }
+        [JsonProperty("image_url")]
+        public string ImageUrl { get; set; }
 
         [JsonProperty("price")]
         public int Price { get; set; }

@@ -1,4 +1,6 @@
-﻿using FontAwesome.Sharp;
+﻿// Dán toàn bộ mã này vào tệp Form_UserOrder.cs
+
+using FontAwesome.Sharp;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +21,6 @@ using System.Runtime.CompilerServices;
 
 namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
-
     public partial class Form_UserOrder : Form
     {
         private List<Item> allSampleItems = new List<Item>();
@@ -39,23 +40,20 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
         {
             InitializeComponent();
             InitializeCartPanelUI();
-            // Đảm bảo labelAllItems ở trên cùng nếu nó được thêm vào Form.Controls
-            // và không phải là con của flowLayoutPanelItems
             if (this.Controls.Contains(this.labelAllItems))
             {
                 this.labelAllItems.BringToFront();
             }
-            
         }
 
         public Form_UserOrder(Internet_Cafe_Manager_App.Database.Users user)
         {
             InitializeComponent();
-            this.loggedInUser = user; // Lưu lại người dùng để sử dụng sau
+            this.loggedInUser = user;
             InitializeCartPanelUI();
         }
 
-        private void InitializeCartPanelUI() // Giữ nguyên như lần trước
+        private void InitializeCartPanelUI()
         {
             panelCartView.Padding = new Padding(10);
             btnCloseCart = new IconButton
@@ -65,13 +63,11 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 IconSize = 20,
                 FlatStyle = FlatStyle.Flat,
                 Size = new Size(28, 28),
-                // Điều chỉnh Location của btnCloseCart dựa trên ClientSize của panelCartView để chính xác hơn
-                Location = new Point(panelCartView.ClientSize.Width - 28 - 3, 3), // 3 là padding nhỏ
+                Location = new Point(panelCartView.ClientSize.Width - 28 - 3, 3),
                 Anchor = AnchorStyles.Top | AnchorStyles.Right,
                 BackColor = Color.Transparent,
                 Cursor = Cursors.Hand
             };
-            // ... (phần còn lại của InitializeCartPanelUI giữ nguyên) ...
             btnCloseCart.FlatAppearance.BorderSize = 0;
             btnCloseCart.FlatAppearance.MouseDownBackColor = Color.FromArgb(100, 100, 100);
             btnCloseCart.FlatAppearance.MouseOverBackColor = Color.FromArgb(80, 80, 80);
@@ -149,20 +145,17 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
         private void FormOrders_Load(object sender, EventArgs e)
         {
             this.Text = "Products & Cart";
-            // Căn giữa labelCurrentTitle sau khi panel1 có kích thước
             panel1.Layout += (s, ev) =>
             {
                 if (panel1.Width > 0 && labelCurrentTitle.Width > 0)
-                { // Kiểm tra để tránh lỗi chia cho 0
+                {
                     labelCurrentTitle.Location = new Point((panel1.Width - labelCurrentTitle.Width) / 2, (panel1.Height - labelCurrentTitle.Height) / 2);
                 }
             };
-            // Kích hoạt layout một lần để căn giữa ban đầu nếu kích thước đã có
             if (panel1.Width > 0 && labelCurrentTitle.Width > 0)
             {
                 labelCurrentTitle.Location = new Point((panel1.Width - labelCurrentTitle.Width) / 2, (panel1.Height - labelCurrentTitle.Height) / 2);
             }
-
 
             btnViewOrder.Text = "View My Order";
             btnViewOrder.IconChar = IconChar.ShoppingCart;
@@ -170,28 +163,18 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             btnViewOrder.Click += btnViewOrder_Click;
             LoadCategoryFilters();
             LoadSampleItems();
-            //DisplayItems(allSampleItems);
+
             var allButton = panelFilters.Controls.OfType<FlowLayoutPanel>().FirstOrDefault()?.Controls.OfType<Button>().FirstOrDefault(b => b.Tag?.ToString() == "All");
             if (allButton != null)
             {
                 ActivateFilterButton(allButton);
             }
-            // Initial layout adjustment
             AdjustLayoutForCart();
         }
 
         private void AdjustLayoutForCart()
         {
-            // Chỉ cần ẩn/hiện panel và gọi PerformLayout để Docking tự xử lý
-            if (panelCartView.Visible)
-            {
-                panelRightActions.Visible = false;
-            }
-            else
-            {
-                panelRightActions.Visible = true;
-            }
-            // Buộc Form và các control con tính toán lại layout
+            panelRightActions.Visible = !panelCartView.Visible;
             this.PerformLayout();
         }
 
@@ -206,7 +189,7 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             AdjustLayoutForCart();
         }
 
-        private void LoadCategoryFilters() // Giữ nguyên như lần trước
+        private void LoadCategoryFilters()
         {
             panelFilters.Controls.Clear();
             string[] categories = { "All", "Rice", "Fried", "Drinks", "Meal" };
@@ -221,26 +204,22 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 WrapContents = false,
                 BackColor = Color.Transparent
             };
-            // Căn giữa các button trong panelFilters động hơn
+
             panelFilters.Layout += (s, ev) =>
             {
                 if (panelFilters.Width > 0)
-                { // Chỉ tính toán khi Width > 0
+                {
                     filterFlowPanel.Padding = new Padding(
                         Math.Max(0, (panelFilters.Width - (categories.Length * buttonWidth + (categories.Length - 1) * spacing)) / 2),
-                        (panelFilters.Height - buttonHeight) / 2,
-                        0,
-                        0);
+                        (panelFilters.Height - buttonHeight) / 2, 0, 0);
                 }
             };
-            // Kích hoạt một lần để căn giữa ban đầu
+
             if (panelFilters.Width > 0)
             {
                 filterFlowPanel.Padding = new Padding(
                    Math.Max(0, (panelFilters.Width - (categories.Length * buttonWidth + (categories.Length - 1) * spacing)) / 2),
-                   (panelFilters.Height - buttonHeight) / 2,
-                   0,
-                   0);
+                   (panelFilters.Height - buttonHeight) / 2, 0, 0);
             }
 
             for (int i = 0; i < categories.Length; i++)
@@ -264,9 +243,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             panelFilters.Controls.Add(filterFlowPanel);
         }
 
-        // ... (Các hàm còn lại: ActivateFilterButton, FilterButton_Click, LoadSampleItems, DisplayItems, CreateItemCard, LoadItemImage, AddToCart_Click, RefreshCartOnScreen, CreateCartItemPanel, BtnCartItemIncrement_Click, BtnCartItemDecrement_Click, BtnCartItemRemove_Click, BtnCheckout_Click giữ nguyên như phiên bản đã sửa nút +/- và xóa item)
-        // ... (Class ItemData giữ nguyên) ...
-        // Copy các hàm này từ phiên bản trước vào đây
         private void ActivateFilterButton(Button activeButton)
         {
             if (currentFilterButton != null)
@@ -301,13 +277,13 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 
         private Item ConvertToItemData(Item item)
         {
+            // Bây giờ lớp Item đã có ImageUrl, ta sẽ map nó
             return new Item
             {
-                Id = item.Id, // Giả sử Id là một thuộc tính của Item
+                Id = item.Id,
                 Name = item.Name,
-                //Description = item.Type, // hoặc item.Description nếu có
                 Price = item.Price,
-                Url = item.Url, // đường dẫn ảnh
+                ImageUrl = item.ImageUrl, // Sử dụng ImageUrl
                 Type = item.Type,
                 Quantity = item.Quantity
             };
@@ -328,24 +304,12 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                         allSampleItems.Add(ConvertToItemData(item));
                     }
                 }
-                //foreach (var item in firebaseItems)
-                //{
-                //    Console.WriteLine($"[Firebase] {item.Name} - Quantity: {item.Quantity}");
-                //    allSampleItems.Add(ConvertToItemData(item));
-                //}
-
-                DisplayItems(allSampleItems); // Hiển thị toàn bộ sản phẩm
+                DisplayItems(allSampleItems);
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Lỗi khi tải sản phẩm: {ex.Message}", "Firebase Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            //allSampleItems.Clear();
-
-            //allSampleItems.Add(new ItemData { Name = "7up Cane", Description = "Cool and crisp", Price = "10000", ImagePath = "images/7up_cane.png", Category = "Drinks" });
-            //allSampleItems.Add(new ItemData { Name = "Salad", Description = "Fresh and green", Price = "15000", ImagePath = "images/salad.png", Category = "Meal" });
-            //allSampleItems.Add(new ItemData { Name = "Egg with Bread", Description = "Classic breakfast", Price = "20000", ImagePath = "images/egg_with_bread.png", Category = "Meal" });
-            //allSampleItems.Add(new ItemData { Name = "Soup", Description = "Warm and comforting", Price = "22000", ImagePath = "images/soup.png", Category = "Meal" });
         }
 
         private void DisplayItems(List<Item> itemsToDisplay)
@@ -372,8 +336,7 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             }
         }
 
-
-            private Panel CreateItemCard(Item itemData) // Hàm này trả về Panel, nhưng chúng ta tạo RoundedPanel
+        private Panel CreateItemCard(Item itemData)
         {
             RoundedPanel cardPanel = new RoundedPanel
             {
@@ -387,10 +350,15 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 
             PictureBox pictureBox = new PictureBox
             {
-                Image = LoadItemImage(itemData.Url),
+                // THAY ĐỔI QUAN TRỌNG: Dùng ImageLocation để tải ảnh từ URL
+                ImageLocation = itemData.ImageUrl,
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = new Size(cardPanel.Width - 16, 110),
                 Location = new Point(8, 8)
+            };
+            // Xử lý nếu không tải được ảnh
+            pictureBox.LoadCompleted += (s, e) => {
+                if (e.Error != null) ((PictureBox)s).Image = null; // Hoặc hiển thị ảnh placeholder
             };
 
             Label nameLabel = new Label
@@ -415,21 +383,7 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 BackColor = Color.Transparent
             };
 
-            Label descriptionLabel = new Label
-            {
-                //Text = itemData.Description,
-                ForeColor = Color.FromArgb(180, 180, 180),
-                Font = new Font("Segoe UI", 7.5F),
-                TextAlign = ContentAlignment.MiddleCenter,
-                Dock = DockStyle.Top, // Sẽ nằm dưới nameLabel
-                Padding = new Padding(0, 0, 0, 6),
-                AutoSize = false,
-                AutoEllipsis = true,
-                Height = 36,
-                BackColor = Color.Transparent // Nền trong suốt
-            };
-
-            Panel bottomPanel = new Panel { Height = 45, Dock = DockStyle.Bottom, BackColor = Color.Transparent }; // Nền trong suốt
+            Panel bottomPanel = new Panel { Height = 45, Dock = DockStyle.Bottom, BackColor = Color.Transparent };
             decimal priceValue = (decimal)itemData.Price;
             Label priceLabel = new Label
             {
@@ -449,43 +403,31 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             bottomPanel.Controls.Add(addButton);
             addButton.BringToFront();
 
-            // Thứ tự thêm control vào cardPanel
-            cardPanel.Controls.Add(bottomPanel);      // Dock Bottom trước
-            cardPanel.Controls.Add(descriptionLabel); // Sau đó là các control Dock Top từ dưới lên
+            cardPanel.Controls.Add(bottomPanel);
             cardPanel.Controls.Add(quantityLabel);
             cardPanel.Controls.Add(nameLabel);
-            cardPanel.Controls.Add(pictureBox);       // PictureBox Dock Top sẽ ở trên cùng
+            cardPanel.Controls.Add(pictureBox);
 
-            return cardPanel; // Hàm vẫn trả về Panel, nhưng thực tế là một RoundedPanel
+            return cardPanel;
         }
 
-
+        // PHƯƠNG THỨC NÀY KHÔNG CÒN CẦN THIẾT NỮA VÌ DÙNG ImageLocation
+        /*
         private Image LoadItemImage(string imagePath)
         {
-            try
-            {
-                string basePath = AppDomain.CurrentDomain.BaseDirectory;
-                string fullPath = Path.Combine(basePath, imagePath);
-                if (File.Exists(fullPath)) { using (Image originalImage = Image.FromFile(fullPath)) { return new Bitmap(originalImage); } }
-                else { Console.WriteLine($"Image not found: {fullPath}"); }
-            }
-            catch (Exception ex) { Console.WriteLine($"Error loading image {imagePath}: {ex.Message}"); }
-            Bitmap placeholder = new Bitmap(100, 100);
-            using (Graphics g = Graphics.FromImage(placeholder)) { g.Clear(Color.FromArgb(60, 60, 60)); TextRenderer.DrawText(g, "No Image", new Font("Segoe UI", 8F), new Rectangle(0, 0, 100, 100), Color.DarkGray, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter); }
-            return placeholder;
+            // ...
         }
+        */
 
         private void AddToCart_Click(object sender, EventArgs e)
         {
             IconButton clickedButton = sender as IconButton;
             if (clickedButton != null && clickedButton.Tag is Item itemData)
             {
-                // Tìm sản phẩm đã có trong giỏ hàng
                 CartItemEntry existingCartItem = shoppingCart.FirstOrDefault(ci => ci.Product.Id == itemData.Id);
 
                 if (existingCartItem != null)
                 {
-                    // Nếu đã có trong giỏ hàng, kiểm tra tổng số lượng không vượt quá tồn kho
                     if (existingCartItem.Quantity >= itemData.Quantity)
                     {
                         MessageBox.Show($"Sản phẩm '{itemData.Name}' chỉ còn {itemData.Quantity} cái trong kho.");
@@ -496,7 +438,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 }
                 else
                 {
-                    // Nếu sản phẩm đã hết hàng
                     if (itemData.Quantity <= 0)
                     {
                         MessageBox.Show($"Sản phẩm '{itemData.Name}' đã hết hàng.");
@@ -542,8 +483,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             }
             panelWidth = Math.Max(280, panelWidth - 5);
 
-            
-
             Panel itemPanel = new Panel
             {
                 Width = panelWidth,
@@ -554,11 +493,18 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 
             PictureBox itemImage = new PictureBox
             {
-                Image = LoadItemImage(cartEntry.Product.Url),
+                // TƯƠNG TỰ: DÙNG ImageLocation
+                ImageLocation = cartEntry.Product.ImageUrl,
                 SizeMode = PictureBoxSizeMode.Zoom,
                 Size = new Size(50, 50),
                 Location = new Point(10, (itemPanel.Height - 50) / 2)
             };
+            itemImage.LoadCompleted += (s, e) => {
+                if (e.Error != null) ((PictureBox)s).Image = null;
+            };
+
+            // ... (Phần còn lại của hàm CreateCartItemPanel giữ nguyên)
+            // ... (Phần này không cần thay đổi logic) ...
 
             int rightMargin = 10;
             int currentX = itemPanel.Width - rightMargin;
@@ -683,11 +629,8 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             itemPanel.Controls.Add(lblLineTotal);
             itemPanel.Controls.Add(btnRemove);
 
-
-
             return itemPanel;
         }
-
 
         private void BtnCartItemIncrement_Click(object sender, EventArgs e)
         {
@@ -737,7 +680,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 return;
             }
 
-            // Tạo đối tượng Order mới
             var newOrder = new Internet_Cafe_Manager_App.Database.Order
             {
                 OrderId = Guid.NewGuid().ToString(),
@@ -761,7 +703,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 
                 foreach (var cartItem in shoppingCart)
                 {
-                    // Kiểm tra ID hợp lệ
                     if (string.IsNullOrEmpty(cartItem.Product.Id))
                     {
                         MessageBox.Show($" Sản phẩm '{cartItem.Product.Name}' không có ID. Không thể cập nhật tồn kho.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -769,10 +710,8 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                         continue;
                     }
 
-                    // Trừ tồn kho
                     cartItem.Product.Quantity -= cartItem.Quantity;
 
-                    // Cập nhật lại Firebase
                     bool updateSuccess = await firebaseDB.AddOrUpdateItem(cartItem.Product);
                     if (!updateSuccess)
                     {
@@ -790,7 +729,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                     MessageBox.Show("Đơn hàng đã đặt nhưng có lỗi khi cập nhật tồn kho một số sản phẩm.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
 
-                // Xoá giỏ hàng và làm mới giao diện
                 shoppingCart.Clear();
                 RefreshCartOnScreen();
                 await LoadSampleItems();
@@ -799,31 +737,13 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             {
                 MessageBox.Show(" Không thể đặt hàng. Vui lòng thử lại.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
-        private void panelFilters_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void labelCurrentTitle_Click(object sender, EventArgs e)
-        {
-
-        }
+        private void panelFilters_Paint(object sender, PaintEventArgs e) { }
+        private void labelCurrentTitle_Click(object sender, EventArgs e) { }
     }
-    
 
-    //public class ItemData
-    //{
-    //    public string Name { get; set; }
-    //    public string Description { get; set; }
-    //    public string Price { get; set; }
-    //    public string ImagePath { get; set; }
-    //    public string Category { get; set; }
-    //}
-
-    public class CartItemEntry // Không thay đổi
+    public class CartItemEntry
     {
         public Item Product { get; set; }
         public int Quantity { get; set; }
