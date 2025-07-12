@@ -2,15 +2,8 @@
 {
     partial class Form_AdminLogin
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,124 +15,219 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            label2 = new Label();
-            label1 = new Label();
-            label4 = new Label();
-            btnLogin = new Button();
+            panelMain = new Panel();
             linkLabel1 = new LinkLabel();
-            txtUsername = new TextBox();
+            btnLogin = new Button();
+            btnTogglePassword = new FontAwesome.Sharp.IconButton();
+            panelPasswordUnderline = new Panel();
             txtPassword = new TextBox();
+            label1 = new Label();
+            panelUsernameUnderline = new Panel();
+            txtUsername = new TextBox();
+            label4 = new Label();
+            label2 = new Label();
+            picLogo = new FontAwesome.Sharp.IconPictureBox();
+            panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
             SuspendLayout();
             // 
-            // label2
+            // panelMain
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 25.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(92, 34);
-            label2.Name = "label2";
-            label2.Size = new Size(259, 60);
-            label2.TabIndex = 6;
-            label2.Text = "Đăng Nhập";
+            panelMain.BackColor = Color.FromArgb(31, 32, 71);
+            panelMain.Controls.Add(linkLabel1);
+            panelMain.Controls.Add(btnLogin);
+            panelMain.Controls.Add(btnTogglePassword);
+            panelMain.Controls.Add(panelPasswordUnderline);
+            panelMain.Controls.Add(txtPassword);
+            panelMain.Controls.Add(label1);
+            panelMain.Controls.Add(panelUsernameUnderline);
+            panelMain.Controls.Add(txtUsername);
+            panelMain.Controls.Add(label4);
+            panelMain.Controls.Add(label2);
+            panelMain.Controls.Add(picLogo);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 0);
+            panelMain.Margin = new Padding(4, 5, 4, 5);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new Size(560, 892);
+            panelMain.TabIndex = 0;
+            panelMain.Paint += panelMain_Paint;
+            // 
+            // linkLabel1
+            // 
+            linkLabel1.ActiveLinkColor = Color.FromArgb(128, 179, 255);
+            linkLabel1.AutoSize = true;
+            linkLabel1.Font = new Font("Segoe UI", 9F);
+            linkLabel1.LinkColor = Color.WhiteSmoke;
+            linkLabel1.Location = new Point(153, 800);
+            linkLabel1.Margin = new Padding(4, 0, 4, 0);
+            linkLabel1.Name = "linkLabel1";
+            linkLabel1.Size = new Size(221, 20);
+            linkLabel1.TabIndex = 4;
+            linkLabel1.TabStop = true;
+            linkLabel1.Text = "Don't have an account? Register";
+            linkLabel1.LinkClicked += llblRegister_LinkClicked;
+            // 
+            // btnLogin
+            // 
+            btnLogin.BackColor = Color.FromArgb(128, 179, 255);
+            btnLogin.FlatAppearance.BorderSize = 0;
+            btnLogin.FlatStyle = FlatStyle.Flat;
+            btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnLogin.ForeColor = Color.White;
+            btnLogin.Location = new Point(80, 677);
+            btnLogin.Margin = new Padding(4, 5, 4, 5);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(400, 77);
+            btnLogin.TabIndex = 3;
+            btnLogin.Text = "LOGIN";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
+            // 
+            // btnTogglePassword
+            // 
+            btnTogglePassword.FlatAppearance.BorderSize = 0;
+            btnTogglePassword.FlatStyle = FlatStyle.Flat;
+            btnTogglePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
+            btnTogglePassword.IconColor = Color.Gainsboro;
+            btnTogglePassword.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnTogglePassword.IconSize = 24;
+            btnTogglePassword.Location = new Point(440, 551);
+            btnTogglePassword.Margin = new Padding(4, 5, 4, 5);
+            btnTogglePassword.Name = "btnTogglePassword";
+            btnTogglePassword.Size = new Size(40, 46);
+            btnTogglePassword.TabIndex = 2;
+            btnTogglePassword.UseVisualStyleBackColor = true;
+            btnTogglePassword.Click += btnTogglePassword_Click;
+            // 
+            // panelPasswordUnderline
+            // 
+            panelPasswordUnderline.BackColor = Color.WhiteSmoke;
+            panelPasswordUnderline.Location = new Point(80, 600);
+            panelPasswordUnderline.Margin = new Padding(4, 5, 4, 5);
+            panelPasswordUnderline.Name = "panelPasswordUnderline";
+            panelPasswordUnderline.Size = new Size(400, 2);
+            panelPasswordUnderline.TabIndex = 8;
+            // 
+            // txtPassword
+            // 
+            txtPassword.BackColor = Color.FromArgb(31, 32, 71);
+            txtPassword.BorderStyle = BorderStyle.None;
+            txtPassword.Font = new Font("Segoe UI", 12F);
+            txtPassword.ForeColor = Color.White;
+            txtPassword.Location = new Point(80, 557);
+            txtPassword.Margin = new Padding(4, 5, 4, 5);
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(360, 27);
+            txtPassword.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(74, 223);
+            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label1.ForeColor = Color.Gainsboro;
+            label1.Location = new Point(75, 508);
+            label1.Margin = new Padding(4, 0, 4, 0);
             label1.Name = "label1";
-            label1.Size = new Size(92, 25);
-            label1.TabIndex = 7;
+            label1.Size = new Size(82, 23);
+            label1.TabIndex = 6;
             label1.Text = "Password";
+            // 
+            // panelUsernameUnderline
+            // 
+            panelUsernameUnderline.BackColor = Color.WhiteSmoke;
+            panelUsernameUnderline.Location = new Point(80, 446);
+            panelUsernameUnderline.Margin = new Padding(4, 5, 4, 5);
+            panelUsernameUnderline.Name = "panelUsernameUnderline";
+            panelUsernameUnderline.Size = new Size(400, 2);
+            panelUsernameUnderline.TabIndex = 5;
+            // 
+            // txtUsername
+            // 
+            txtUsername.BackColor = Color.FromArgb(31, 32, 71);
+            txtUsername.BorderStyle = BorderStyle.None;
+            txtUsername.Font = new Font("Segoe UI", 12F);
+            txtUsername.ForeColor = Color.White;
+            txtUsername.Location = new Point(80, 403);
+            txtUsername.Margin = new Padding(4, 5, 4, 5);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(400, 27);
+            txtUsername.TabIndex = 0;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(74, 128);
+            label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            label4.ForeColor = Color.Gainsboro;
+            label4.Location = new Point(75, 354);
+            label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new Size(97, 25);
-            label4.TabIndex = 9;
+            label4.Size = new Size(87, 23);
+            label4.TabIndex = 3;
             label4.Text = "Username";
             // 
-            // btnLogin
+            // label2
             // 
-            btnLogin.BackColor = Color.FromArgb(0, 192, 192);
-            btnLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(110, 347);
-            btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(207, 55);
-            btnLogin.TabIndex = 13;
-            btnLogin.Text = "Đăng Nhập";
-            btnLogin.UseVisualStyleBackColor = false;
-            btnLogin.Click += btnLogin_Click;
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 24F, FontStyle.Bold);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(200, 246);
+            label2.Margin = new Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(145, 54);
+            label2.TabIndex = 1;
+            label2.Text = "LOGIN";
             // 
-            // linkLabel1
+            // picLogo
             // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.ForeColor = Color.White;
-            linkLabel1.LinkColor = Color.WhiteSmoke;
-            linkLabel1.Location = new Point(130, 461);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(166, 20);
-            linkLabel1.TabIndex = 14;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Bạn chưa có tài khoản ?";
-            linkLabel1.LinkClicked += llblRegister_LinkClicked;
-            // 
-            // txtUsername
-            // 
-            txtUsername.Location = new Point(71, 165);
-            txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(280, 27);
-            txtUsername.TabIndex = 15;
-            txtUsername.TextChanged += txtUsername_TextChanged;
-            txtUsername.KeyDown += TxtUsername_KeyDown;
-            // 
-            // txtPassword
-            // 
-            txtPassword.Location = new Point(71, 262);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(280, 27);
-            txtPassword.TabIndex = 16;
-            txtPassword.KeyDown += TxtPassword_KeyDown;
+            picLogo.BackColor = Color.FromArgb(31, 32, 71);
+            picLogo.ForeColor = Color.FromArgb(128, 179, 255);
+            picLogo.IconChar = FontAwesome.Sharp.IconChar.UserShield;
+            picLogo.IconColor = Color.FromArgb(128, 179, 255);
+            picLogo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            picLogo.IconSize = 107;
+            picLogo.Location = new Point(227, 92);
+            picLogo.Margin = new Padding(4, 5, 4, 5);
+            picLogo.Name = "picLogo";
+            picLogo.Size = new Size(107, 123);
+            picLogo.TabIndex = 0;
+            picLogo.TabStop = false;
             // 
             // Form_AdminLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(54, 75, 109);
-            ClientSize = new Size(439, 703);
-            Controls.Add(txtPassword);
-            Controls.Add(txtUsername);
-            Controls.Add(linkLabel1);
-            Controls.Add(btnLogin);
-            Controls.Add(label4);
-            Controls.Add(label1);
-            Controls.Add(label2);
+            ClientSize = new Size(560, 892);
+            Controls.Add(panelMain);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 5, 4, 5);
+            MaximizeBox = false;
             Name = "Form_AdminLogin";
-            Text = "AdminLogin";
-            FormClosed += Form_AdminLogin_FormClosed;
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Admin Login";
+            FormClosed += Form_AdminLogin_FormClosed_1;
+            panelMain.ResumeLayout(false);
+            panelMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Label label2;
-        private Label label1;
-        private Label label4;
-        private Button btnLogin;
-        private LinkLabel linkLabel1;
-        private TextBox txtUsername;
-        private TextBox txtPassword;
+
+        private System.Windows.Forms.Panel panelMain;
+        private FontAwesome.Sharp.IconPictureBox picLogo;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panelUsernameUnderline;
+        private System.Windows.Forms.TextBox txtUsername;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Panel panelPasswordUnderline;
+        private System.Windows.Forms.TextBox txtPassword;
+        private System.Windows.Forms.Label label1;
+        private FontAwesome.Sharp.IconButton btnTogglePassword;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.LinkLabel linkLabel1;
     }
 }

@@ -2,15 +2,8 @@
 {
     partial class FormDashboard
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,367 +15,431 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-
-            components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            labelDashBoard = new Label();
-            textBoxEditPCName = new TextBox();
-            textBoxEditDetailInfo = new TextBox();
-            panelInputPC = new Panel();
-            buttonEditClear = new Button();
-            buttonEditSave = new Button();
-            comboBoxEditStatus = new ComboBox();
-            label3 = new Label();
-            label4 = new Label();
-            textBoxEditSoTien = new TextBox();
-            textBoxEditCurrentUser = new TextBox();
-            label2 = new Label();
-            label1 = new Label();
-            textBoxPCName = new Label();
-            dataGridViewPCs = new DataGridView();
-            panel1 = new Panel();
-            buttonClearAddPC = new Button();
-            buttonAddPC = new Button();
-            label6 = new Label();
-            label5 = new Label();
-            textBoxSequenceNumber = new TextBox();
-            panel2 = new Panel();
-            timer1 = new System.Windows.Forms.Timer(components);
-            panelInputPC.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewPCs).BeginInit();
-            panel1.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.splitContainerMain = new System.Windows.Forms.SplitContainer();
+            this.dataGridViewPCs = new System.Windows.Forms.DataGridView();
+            this.panelControls = new System.Windows.Forms.Panel();
+            this.groupBoxEditPC = new System.Windows.Forms.GroupBox();
+            this.buttonEditClear = new System.Windows.Forms.Button();
+            this.buttonEditSave = new System.Windows.Forms.Button();
+            this.comboBoxEditStatus = new System.Windows.Forms.ComboBox();
+            this.labelEditStatus = new System.Windows.Forms.Label();
+            this.labelEditBudget = new System.Windows.Forms.Label();
+            this.textBoxEditSoTien = new System.Windows.Forms.TextBox();
+            this.textBoxEditCurrentUser = new System.Windows.Forms.TextBox();
+            this.labelEditUser = new System.Windows.Forms.Label();
+            this.labelEditDetails = new System.Windows.Forms.Label();
+            this.labelEditName = new System.Windows.Forms.Label();
+            this.textBoxEditPCName = new System.Windows.Forms.TextBox();
+            this.textBoxEditDetailInfo = new System.Windows.Forms.TextBox();
+            this.groupBoxAddPC = new System.Windows.Forms.GroupBox();
+            this.buttonClearAddPC = new System.Windows.Forms.Button();
+            this.buttonAddPC = new System.Windows.Forms.Button();
+            this.labelAddPC = new System.Windows.Forms.Label();
+            this.textBoxSequenceNumber = new System.Windows.Forms.TextBox();
+            this.panelTitle = new System.Windows.Forms.Panel();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).BeginInit();
+            this.splitContainerMain.Panel1.SuspendLayout();
+            this.splitContainerMain.Panel2.SuspendLayout();
+            this.splitContainerMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCs)).BeginInit();
+            this.panelControls.SuspendLayout();
+            this.groupBoxEditPC.SuspendLayout();
+            this.groupBoxAddPC.SuspendLayout();
+            this.panelTitle.SuspendLayout();
+            this.SuspendLayout();
             // 
-            // labelDashBoard
+            // panelMain
             // 
-            labelDashBoard.AutoSize = true;
-            labelDashBoard.Font = new Font("Century Gothic", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            labelDashBoard.ForeColor = Color.WhiteSmoke;
-            labelDashBoard.Location = new Point(93, 35);
-            labelDashBoard.Name = "labelDashBoard";
-            labelDashBoard.Size = new Size(346, 70);
-            labelDashBoard.TabIndex = 12;
-            labelDashBoard.Text = "DashBoard";
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.panelMain.Controls.Add(this.splitContainerMain);
+            this.panelMain.Controls.Add(this.panelTitle);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Padding = new System.Windows.Forms.Padding(10);
+            this.panelMain.Size = new System.Drawing.Size(1280, 720);
+            this.panelMain.TabIndex = 0;
             // 
-            // textBoxEditPCName
+            // splitContainerMain
             // 
-            textBoxEditPCName.Location = new Point(252, 129);
-            textBoxEditPCName.Margin = new Padding(3, 4, 3, 4);
-            textBoxEditPCName.Name = "textBoxEditPCName";
-            textBoxEditPCName.Size = new Size(229, 27);
-            textBoxEditPCName.TabIndex = 1;
-            textBoxEditPCName.Leave += textBoxEditPCName_Leave;
+            this.splitContainerMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerMain.Location = new System.Drawing.Point(10, 70);
+            this.splitContainerMain.Name = "splitContainerMain";
             // 
-            // textBoxEditDetailInfo
+            // splitContainerMain.Panel1
             // 
-            textBoxEditDetailInfo.Location = new Point(252, 177);
-            textBoxEditDetailInfo.Margin = new Padding(3, 4, 3, 4);
-            textBoxEditDetailInfo.Name = "textBoxEditDetailInfo";
-            textBoxEditDetailInfo.Size = new Size(229, 27);
-            textBoxEditDetailInfo.TabIndex = 3;
+            this.splitContainerMain.Panel1.Controls.Add(this.dataGridViewPCs);
             // 
-            // panelInputPC
+            // splitContainerMain.Panel2
             // 
-            panelInputPC.BackColor = Color.FromArgb(34, 33, 74);
-            panelInputPC.Controls.Add(buttonEditClear);
-            panelInputPC.Controls.Add(buttonEditSave);
-            panelInputPC.Controls.Add(comboBoxEditStatus);
-            panelInputPC.Controls.Add(label3);
-            panelInputPC.Controls.Add(label4);
-            panelInputPC.Controls.Add(textBoxEditSoTien);
-            panelInputPC.Controls.Add(textBoxEditCurrentUser);
-            panelInputPC.Controls.Add(label2);
-            panelInputPC.Controls.Add(label1);
-            panelInputPC.Controls.Add(textBoxPCName);
-            panelInputPC.Controls.Add(labelDashBoard);
-            panelInputPC.Controls.Add(textBoxEditPCName);
-            panelInputPC.Controls.Add(textBoxEditDetailInfo);
-            panelInputPC.Dock = DockStyle.Right;
-            panelInputPC.Location = new Point(1158, 0);
-            panelInputPC.Margin = new Padding(9, 0, 0, 0);
-            panelInputPC.Name = "panelInputPC";
-            panelInputPC.Padding = new Padding(9, 11, 9, 11);
-            panelInputPC.Size = new Size(512, 893);
-            panelInputPC.TabIndex = 16;
-            // 
-            // buttonEditClear
-            // 
-            buttonEditClear.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonEditClear.ForeColor = Color.DarkSlateBlue;
-            buttonEditClear.Location = new Point(276, 437);
-            buttonEditClear.Name = "buttonEditClear";
-            buttonEditClear.Size = new Size(205, 35);
-            buttonEditClear.TabIndex = 34;
-            buttonEditClear.Text = "Clear";
-            buttonEditClear.UseVisualStyleBackColor = true;
-            buttonEditClear.Click += buttonEditClear_Click;
-            // 
-            // buttonEditSave
-            // 
-            buttonEditSave.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonEditSave.ForeColor = Color.DarkSlateBlue;
-            buttonEditSave.Location = new Point(32, 437);
-            buttonEditSave.Name = "buttonEditSave";
-            buttonEditSave.Size = new Size(205, 35);
-            buttonEditSave.TabIndex = 33;
-            buttonEditSave.Text = "Save";
-            buttonEditSave.UseVisualStyleBackColor = true;
-            buttonEditSave.Click += buttonEditSave_Click;
-            // 
-            // comboBoxEditStatus
-            // 
-            comboBoxEditStatus.FormattingEnabled = true;
-            comboBoxEditStatus.Location = new Point(252, 275);
-            comboBoxEditStatus.Name = "comboBoxEditStatus";
-            comboBoxEditStatus.Size = new Size(229, 28);
-            comboBoxEditStatus.TabIndex = 32;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.WhiteSmoke;
-            label3.Location = new Point(44, 324);
-            label3.Name = "label3";
-            label3.Size = new Size(71, 22);
-            label3.TabIndex = 31;
-            label3.Text = "Số tiền ";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.ForeColor = Color.WhiteSmoke;
-            label4.Location = new Point(44, 227);
-            label4.Name = "label4";
-            label4.Size = new Size(112, 22);
-            label4.TabIndex = 30;
-            label4.Text = "Người dùng";
-            // 
-            // textBoxEditSoTien
-            // 
-            textBoxEditSoTien.Location = new Point(252, 324);
-            textBoxEditSoTien.Margin = new Padding(3, 4, 3, 4);
-            textBoxEditSoTien.Name = "textBoxEditSoTien";
-            textBoxEditSoTien.Size = new Size(229, 27);
-            textBoxEditSoTien.TabIndex = 29;
-            // 
-            // textBoxEditCurrentUser
-            // 
-            textBoxEditCurrentUser.Location = new Point(252, 226);
-            textBoxEditCurrentUser.Margin = new Padding(3, 4, 3, 4);
-            textBoxEditCurrentUser.Name = "textBoxEditCurrentUser";
-            textBoxEditCurrentUser.Size = new Size(229, 27);
-            textBoxEditCurrentUser.TabIndex = 28;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.WhiteSmoke;
-            label2.Location = new Point(44, 275);
-            label2.Name = "label2";
-            label2.Size = new Size(100, 22);
-            label2.TabIndex = 27;
-            label2.Text = "Trạng thái ";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.WhiteSmoke;
-            label1.Location = new Point(44, 178);
-            label1.Name = "label1";
-            label1.Size = new Size(169, 22);
-            label1.TabIndex = 26;
-            label1.Text = "Thông tin máy tính";
-            // 
-            // textBoxPCName
-            // 
-            textBoxPCName.AutoSize = true;
-            textBoxPCName.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            textBoxPCName.ForeColor = Color.WhiteSmoke;
-            textBoxPCName.Location = new Point(44, 129);
-            textBoxPCName.Name = "textBoxPCName";
-            textBoxPCName.Size = new Size(124, 22);
-            textBoxPCName.TabIndex = 21;
-            textBoxPCName.Text = "STT của máy ";
+            this.splitContainerMain.Panel2.Controls.Add(this.panelControls);
+            this.splitContainerMain.Size = new System.Drawing.Size(1260, 640);
+            this.splitContainerMain.SplitterDistance = 850;
+            this.splitContainerMain.TabIndex = 1;
             // 
             // dataGridViewPCs
             // 
-            dataGridViewPCs.AllowUserToAddRows = false;
-            dataGridViewPCs.AllowUserToDeleteRows = false;
-            dataGridViewPCs.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewPCs.BorderStyle = BorderStyle.None;
-            dataGridViewPCs.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewPCs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewPCs.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = SystemColors.Window;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F);
-            dataGridViewCellStyle2.ForeColor = SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewPCs.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewPCs.Location = new Point(50, 0);
-            dataGridViewPCs.Margin = new Padding(0);
-            dataGridViewPCs.Name = "dataGridViewPCs";
-            dataGridViewPCs.ReadOnly = true;
-            dataGridViewPCs.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewPCs.RowHeadersWidth = 51;
-            dataGridViewPCs.RowTemplate.Height = 25;
-            dataGridViewPCs.Size = new Size(1108, 688);
-            dataGridViewPCs.TabIndex = 15;
+            this.dataGridViewPCs.AllowUserToAddRows = false;
+            this.dataGridViewPCs.AllowUserToDeleteRows = false;
+            this.dataGridViewPCs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(38)))), ((int)(((byte)(65)))));
+            this.dataGridViewPCs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewPCs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridViewPCs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(38)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPCs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewPCs.ColumnHeadersHeight = 40;
+            
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPCs.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewPCs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPCs.EnableHeadersVisualStyles = false;
+            this.dataGridViewPCs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
+            this.dataGridViewPCs.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewPCs.Name = "dataGridViewPCs";
+            this.dataGridViewPCs.ReadOnly = true;
+            this.dataGridViewPCs.RowHeadersVisible = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.dataGridViewPCs.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewPCs.RowTemplate.Height = 35;
+            this.dataGridViewPCs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPCs.Size = new System.Drawing.Size(850, 640);
+            this.dataGridViewPCs.TabIndex = 0;
             // 
-            // panel1
+            // panelControls
             // 
-            panel1.BackColor = Color.FromArgb(34, 33, 74);
-            panel1.Controls.Add(buttonClearAddPC);
-            panel1.Controls.Add(buttonAddPC);
-            panel1.Controls.Add(label6);
-            panel1.Controls.Add(label5);
-            panel1.Controls.Add(textBoxSequenceNumber);
-            panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 688);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1158, 205);
-            panel1.TabIndex = 17;
+            this.panelControls.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(38)))), ((int)(((byte)(65)))));
+            this.panelControls.Controls.Add(this.groupBoxEditPC);
+            this.panelControls.Controls.Add(this.groupBoxAddPC);
+            this.panelControls.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelControls.Location = new System.Drawing.Point(0, 0);
+            this.panelControls.Name = "panelControls";
+            this.panelControls.Padding = new System.Windows.Forms.Padding(10);
+            this.panelControls.Size = new System.Drawing.Size(406, 640);
+            this.panelControls.TabIndex = 0;
+            // 
+            // groupBoxEditPC
+            // 
+            this.groupBoxEditPC.Controls.Add(this.buttonEditClear);
+            this.groupBoxEditPC.Controls.Add(this.buttonEditSave);
+            this.groupBoxEditPC.Controls.Add(this.comboBoxEditStatus);
+            this.groupBoxEditPC.Controls.Add(this.labelEditStatus);
+            this.groupBoxEditPC.Controls.Add(this.labelEditBudget);
+            this.groupBoxEditPC.Controls.Add(this.textBoxEditSoTien);
+            this.groupBoxEditPC.Controls.Add(this.textBoxEditCurrentUser);
+            this.groupBoxEditPC.Controls.Add(this.labelEditUser);
+            this.groupBoxEditPC.Controls.Add(this.labelEditDetails);
+            this.groupBoxEditPC.Controls.Add(this.labelEditName);
+            this.groupBoxEditPC.Controls.Add(this.textBoxEditPCName);
+            this.groupBoxEditPC.Controls.Add(this.textBoxEditDetailInfo);
+            this.groupBoxEditPC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxEditPC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBoxEditPC.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBoxEditPC.Location = new System.Drawing.Point(10, 160);
+            this.groupBoxEditPC.Name = "groupBoxEditPC";
+            this.groupBoxEditPC.Size = new System.Drawing.Size(386, 380);
+            this.groupBoxEditPC.TabIndex = 1;
+            this.groupBoxEditPC.TabStop = false;
+            this.groupBoxEditPC.Text = "Edit Selected PC";
+            // 
+            // buttonEditClear
+            // 
+            this.buttonEditClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
+            this.buttonEditClear.FlatAppearance.BorderSize = 0;
+            this.buttonEditClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditClear.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonEditClear.Location = new System.Drawing.Point(200, 310);
+            this.buttonEditClear.Name = "buttonEditClear";
+            this.buttonEditClear.Size = new System.Drawing.Size(120, 40);
+            this.buttonEditClear.TabIndex = 12;
+            this.buttonEditClear.Text = "Clear";
+            this.buttonEditClear.UseVisualStyleBackColor = false;
+            this.buttonEditClear.Click += new System.EventHandler(this.buttonEditClear_Click);
+            // 
+            // buttonEditSave
+            // 
+            this.buttonEditSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(123)))), ((int)(((byte)(255)))));
+            this.buttonEditSave.FlatAppearance.BorderSize = 0;
+            this.buttonEditSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonEditSave.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonEditSave.Location = new System.Drawing.Point(60, 310);
+            this.buttonEditSave.Name = "buttonEditSave";
+            this.buttonEditSave.Size = new System.Drawing.Size(120, 40);
+            this.buttonEditSave.TabIndex = 11;
+            this.buttonEditSave.Text = "Save";
+            this.buttonEditSave.UseVisualStyleBackColor = false;
+            this.buttonEditSave.Click += new System.EventHandler(this.buttonEditSave_Click);
+            // 
+            // comboBoxEditStatus
+            // 
+            this.comboBoxEditStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.comboBoxEditStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEditStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxEditStatus.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.comboBoxEditStatus.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.comboBoxEditStatus.FormattingEnabled = true;
+            this.comboBoxEditStatus.Location = new System.Drawing.Point(150, 200);
+            this.comboBoxEditStatus.Name = "comboBoxEditStatus";
+            this.comboBoxEditStatus.Size = new System.Drawing.Size(220, 25);
+            this.comboBoxEditStatus.TabIndex = 9;
+            // 
+            // labelEditStatus
+            // 
+            this.labelEditStatus.AutoSize = true;
+            this.labelEditStatus.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelEditStatus.Location = new System.Drawing.Point(20, 203);
+            this.labelEditStatus.Name = "labelEditStatus";
+            this.labelEditStatus.Size = new System.Drawing.Size(49, 19);
+            this.labelEditStatus.TabIndex = 8;
+            this.labelEditStatus.Text = "Status:";
+            // 
+            // labelEditBudget
+            // 
+            this.labelEditBudget.AutoSize = true;
+            this.labelEditBudget.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelEditBudget.Location = new System.Drawing.Point(20, 253);
+            this.labelEditBudget.Name = "labelEditBudget";
+            this.labelEditBudget.Size = new System.Drawing.Size(58, 19);
+            this.labelEditBudget.TabIndex = 10;
+            this.labelEditBudget.Text = "Budget:";
+            // 
+            // textBoxEditSoTien
+            // 
+            this.textBoxEditSoTien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.textBoxEditSoTien.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEditSoTien.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxEditSoTien.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxEditSoTien.Location = new System.Drawing.Point(150, 250);
+            this.textBoxEditSoTien.Name = "textBoxEditSoTien";
+            this.textBoxEditSoTien.Size = new System.Drawing.Size(220, 25);
+            this.textBoxEditSoTien.TabIndex = 10;
+            // 
+            // textBoxEditCurrentUser
+            // 
+            this.textBoxEditCurrentUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.textBoxEditCurrentUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEditCurrentUser.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxEditCurrentUser.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxEditCurrentUser.Location = new System.Drawing.Point(150, 150);
+            this.textBoxEditCurrentUser.Name = "textBoxEditCurrentUser";
+            this.textBoxEditCurrentUser.Size = new System.Drawing.Size(220, 25);
+            this.textBoxEditCurrentUser.TabIndex = 7;
+            // 
+            // labelEditUser
+            // 
+            this.labelEditUser.AutoSize = true;
+            this.labelEditUser.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelEditUser.Location = new System.Drawing.Point(20, 153);
+            this.labelEditUser.Name = "labelEditUser";
+            this.labelEditUser.Size = new System.Drawing.Size(91, 19);
+            this.labelEditUser.TabIndex = 6;
+            this.labelEditUser.Text = "Current User:";
+            // 
+            // labelEditDetails
+            // 
+            this.labelEditDetails.AutoSize = true;
+            this.labelEditDetails.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelEditDetails.Location = new System.Drawing.Point(20, 103);
+            this.labelEditDetails.Name = "labelEditDetails";
+            this.labelEditDetails.Size = new System.Drawing.Size(84, 19);
+            this.labelEditDetails.TabIndex = 4;
+            this.labelEditDetails.Text = "Detail Info:";
+            // 
+            // labelEditName
+            // 
+            this.labelEditName.AutoSize = true;
+            this.labelEditName.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelEditName.Location = new System.Drawing.Point(20, 53);
+            this.labelEditName.Name = "labelEditName";
+            this.labelEditName.Size = new System.Drawing.Size(124, 19);
+            this.labelEditName.TabIndex = 2;
+            this.labelEditName.Text = "PC Sequence No.:";
+            // 
+            // textBoxEditPCName
+            // 
+            this.textBoxEditPCName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.textBoxEditPCName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEditPCName.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxEditPCName.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxEditPCName.Location = new System.Drawing.Point(150, 50);
+            this.textBoxEditPCName.Name = "textBoxEditPCName";
+            this.textBoxEditPCName.Size = new System.Drawing.Size(220, 25);
+            this.textBoxEditPCName.TabIndex = 3;
+            this.textBoxEditPCName.Leave += new System.EventHandler(this.textBoxEditPCName_Leave);
+            // 
+            // textBoxEditDetailInfo
+            // 
+            this.textBoxEditDetailInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.textBoxEditDetailInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxEditDetailInfo.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxEditDetailInfo.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxEditDetailInfo.Location = new System.Drawing.Point(150, 100);
+            this.textBoxEditDetailInfo.Name = "textBoxEditDetailInfo";
+            this.textBoxEditDetailInfo.Size = new System.Drawing.Size(220, 25);
+            this.textBoxEditDetailInfo.TabIndex = 5;
+            // 
+            // groupBoxAddPC
+            // 
+            this.groupBoxAddPC.Controls.Add(this.buttonClearAddPC);
+            this.groupBoxAddPC.Controls.Add(this.buttonAddPC);
+            this.groupBoxAddPC.Controls.Add(this.labelAddPC);
+            this.groupBoxAddPC.Controls.Add(this.textBoxSequenceNumber);
+            this.groupBoxAddPC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBoxAddPC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.groupBoxAddPC.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.groupBoxAddPC.Location = new System.Drawing.Point(10, 10);
+            this.groupBoxAddPC.Name = "groupBoxAddPC";
+            this.groupBoxAddPC.Size = new System.Drawing.Size(386, 150);
+            this.groupBoxAddPC.TabIndex = 0;
+            this.groupBoxAddPC.TabStop = false;
+            this.groupBoxAddPC.Text = "Add New PC";
             // 
             // buttonClearAddPC
             // 
-            buttonClearAddPC.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonClearAddPC.ForeColor = Color.DarkSlateBlue;
-            buttonClearAddPC.Location = new Point(258, 158);
-            buttonClearAddPC.Name = "buttonClearAddPC";
-            buttonClearAddPC.Size = new Size(162, 35);
-            buttonClearAddPC.TabIndex = 37;
-            buttonClearAddPC.Text = "Clear";
-            buttonClearAddPC.UseVisualStyleBackColor = true;
-            buttonClearAddPC.Click += buttonClearAddPC_Click;
+            this.buttonClearAddPC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(108)))), ((int)(((byte)(117)))), ((int)(((byte)(125)))));
+            this.buttonClearAddPC.FlatAppearance.BorderSize = 0;
+            this.buttonClearAddPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonClearAddPC.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonClearAddPC.Location = new System.Drawing.Point(200, 90);
+            this.buttonClearAddPC.Name = "buttonClearAddPC";
+            this.buttonClearAddPC.Size = new System.Drawing.Size(120, 40);
+            this.buttonClearAddPC.TabIndex = 4;
+            this.buttonClearAddPC.Text = "Clear";
+            this.buttonClearAddPC.UseVisualStyleBackColor = false;
+            this.buttonClearAddPC.Click += new System.EventHandler(this.buttonClearAddPC_Click);
             // 
             // buttonAddPC
             // 
-            buttonAddPC.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            buttonAddPC.ForeColor = Color.DarkSlateBlue;
-            buttonAddPC.Location = new Point(28, 158);
-            buttonAddPC.Name = "buttonAddPC";
-            buttonAddPC.Size = new Size(162, 35);
-            buttonAddPC.TabIndex = 35;
-            buttonAddPC.Text = "Save";
-            buttonAddPC.UseVisualStyleBackColor = true;
-            buttonAddPC.Click += buttonAddPC_Click;
+            this.buttonAddPC.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
+            this.buttonAddPC.FlatAppearance.BorderSize = 0;
+            this.buttonAddPC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAddPC.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.buttonAddPC.Location = new System.Drawing.Point(60, 90);
+            this.buttonAddPC.Name = "buttonAddPC";
+            this.buttonAddPC.Size = new System.Drawing.Size(120, 40);
+            this.buttonAddPC.TabIndex = 3;
+            this.buttonAddPC.Text = "Add";
+            this.buttonAddPC.UseVisualStyleBackColor = false;
+            this.buttonAddPC.Click += new System.EventHandler(this.buttonAddPC_Click);
             // 
-            // label6
+            // labelAddPC
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Century Gothic", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.ForeColor = Color.WhiteSmoke;
-            label6.Location = new Point(58, 102);
-            label6.Name = "label6";
-            label6.Size = new Size(132, 22);
-            label6.TabIndex = 36;
-            label6.Text = "Số Thứ Tự Máy";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Century Gothic", 36F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label5.ForeColor = Color.WhiteSmoke;
-            label5.Location = new Point(103, 16);
-            label5.Name = "label5";
-            label5.Size = new Size(269, 70);
-            label5.TabIndex = 35;
-            label5.Text = "Add PC ";
+            this.labelAddPC.AutoSize = true;
+            this.labelAddPC.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelAddPC.Location = new System.Drawing.Point(20, 43);
+            this.labelAddPC.Name = "labelAddPC";
+            this.labelAddPC.Size = new System.Drawing.Size(95, 19);
+            this.labelAddPC.TabIndex = 1;
+            this.labelAddPC.Text = "Sequence No:";
             // 
             // textBoxSequenceNumber
             // 
-            textBoxSequenceNumber.Location = new Point(266, 102);
-            textBoxSequenceNumber.Margin = new Padding(3, 4, 3, 4);
-            textBoxSequenceNumber.Name = "textBoxSequenceNumber";
-            textBoxSequenceNumber.Size = new Size(154, 27);
-            textBoxSequenceNumber.TabIndex = 35;
+            this.textBoxSequenceNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.textBoxSequenceNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxSequenceNumber.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.textBoxSequenceNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.textBoxSequenceNumber.Location = new System.Drawing.Point(150, 40);
+            this.textBoxSequenceNumber.Name = "textBoxSequenceNumber";
+            this.textBoxSequenceNumber.Size = new System.Drawing.Size(220, 25);
+            this.textBoxSequenceNumber.TabIndex = 2;
             // 
-            // panel2
+            // panelTitle
             // 
-            panel2.BackColor = Color.FromArgb(34, 33, 74);
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(51, 688);
-            panel2.TabIndex = 18;
+            this.panelTitle.Controls.Add(this.labelTitle);
+            this.panelTitle.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelTitle.Location = new System.Drawing.Point(10, 10);
+            this.panelTitle.Name = "panelTitle";
+            this.panelTitle.Size = new System.Drawing.Size(1260, 60);
+            this.panelTitle.TabIndex = 0;
+            // 
+            // labelTitle
+            // 
+            this.labelTitle.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.labelTitle.Location = new System.Drawing.Point(0, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(1260, 60);
+            this.labelTitle.TabIndex = 0;
+            this.labelTitle.Text = "PC Dashboard";
+            this.labelTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timer1
             // 
-            timer1.Enabled = true;
-            timer1.Interval = 1000;
-            timer1.Tick += UpdateTimer_Tick;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
-
             // FormDashboard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(this.panelMain);
+            this.Name = "FormDashboard";
+            this.Text = "FormDashboard";
+            this.panelMain.ResumeLayout(false);
+            this.splitContainerMain.Panel1.ResumeLayout(false);
+            this.splitContainerMain.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerMain)).EndInit();
+            this.splitContainerMain.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewPCs)).EndInit();
+            this.panelControls.ResumeLayout(false);
+            this.groupBoxEditPC.ResumeLayout(false);
+            this.groupBoxEditPC.PerformLayout();
+            this.groupBoxAddPC.ResumeLayout(false);
+            this.groupBoxAddPC.PerformLayout();
+            this.panelTitle.ResumeLayout(false);
+            this.ResumeLayout(false);
 
-            ClientSize = new Size(1670, 893);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
-            Controls.Add(panelInputPC);
-            Controls.Add(dataGridViewPCs);
-            Name = "FormDashboard";
-            Text = "FormDashboard";
-            panelInputPC.ResumeLayout(false);
-            panelInputPC.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewPCs).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-
-
-            ResumeLayout(false);
         }
 
         #endregion
-        private Label labelDashBoard;
-        private Button ekleBtn;
-        private Label uyariLbl;
-        private Button duzenleBtn;
-        private CheckBox yoneticiChk;
-        private Button kaldirBtn;
-        private TextBox textBoxEditPCName;
-        private TextBox textBoxEditDetailInfo;
-        private Panel panelInputPC;
-        private DataGridView dataGridViewPCs;
-        private Label textBoxPCName;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
-        private TextBox textBoxEditSoTien;
-        private TextBox textBoxEditCurrentUser;
-        private Panel panel1;
-        private Panel panel2;
-        private ComboBox comboBoxEditStatus;
-        private Button buttonEditSave;
-        private Button buttonEditClear;
-        private Button buttonClearAddPC;
-        private Button buttonAddPC;
-        private Label label6;
-        private Label label5;
-        private TextBox textBoxSequenceNumber;
+
+        private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.Panel panelTitle;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.SplitContainer splitContainerMain;
+        private System.Windows.Forms.DataGridView dataGridViewPCs;
+        private System.Windows.Forms.Panel panelControls;
+        private System.Windows.Forms.GroupBox groupBoxAddPC;
+        private System.Windows.Forms.Button buttonAddPC;
+        private System.Windows.Forms.Label labelAddPC;
+        private System.Windows.Forms.TextBox textBoxSequenceNumber;
+        private System.Windows.Forms.Button buttonClearAddPC;
+        private System.Windows.Forms.GroupBox groupBoxEditPC;
+        private System.Windows.Forms.Button buttonEditClear;
+        private System.Windows.Forms.Button buttonEditSave;
+        private System.Windows.Forms.ComboBox comboBoxEditStatus;
+        private System.Windows.Forms.Label labelEditStatus;
+        private System.Windows.Forms.Label labelEditBudget;
+        private System.Windows.Forms.TextBox textBoxEditSoTien;
+        private System.Windows.Forms.TextBox textBoxEditCurrentUser;
+        private System.Windows.Forms.Label labelEditUser;
+        private System.Windows.Forms.Label labelEditDetails;
+        private System.Windows.Forms.Label labelEditName;
+        private System.Windows.Forms.TextBox textBoxEditPCName;
+        private System.Windows.Forms.TextBox textBoxEditDetailInfo;
         private System.Windows.Forms.Timer timer1;
     }
 }

@@ -1,37 +1,58 @@
 ﻿using System;
+using System.Collections.Generic;
+using Newtonsoft.Json; // <-- Thêm dòng này
 
 namespace Internet_Cafe_Manager_App.Database
 {
     public class Users
     {
-        // Đổi 'name' thành 'FullName' cho khớp với form
+        [JsonProperty("UserId")]
+        public string UserId { get; set; }
+
+        [JsonProperty("FullName")]
         public string FullName { get; set; }
 
-        // Giữ 'username' chữ thường nếu anh đã dùng nó làm key trên Firebase và trong các hàm CRUD
-        // Hoặc đổi thành 'Username' (chữ hoa) nếu muốn thống nhất và sửa lại cả trong hàm CRUD
-        public string Username { get; set; } // Hoặc public string Username { get; set; }
+        [JsonProperty("Username")]
+        public string Username { get; set; }
 
-        // !!! THAY 'password' BẰNG 'PasswordHash' !!!
+        [JsonProperty("PasswordHash")]
         public string PasswordHash { get; set; }
 
-        // Thêm thuộc tính Email
+        [JsonProperty("Email")]
         public string Email { get; set; }
 
-        // Đổi 'phoneNumber' thành 'PhoneNumber' cho khớp form (hoặc sửa ở form)
-        public string PhoneNumber { get; set; } // Hoặc public string phoneNumber { get; set; }
+        [JsonProperty("PhoneNumber")]
+        public string PhoneNumber { get; set; }
 
-        // Bỏ 'Budget' đi nếu không dùng trong đăng ký/đăng nhập? Hoặc giữ lại nếu cần sau này.
-        public int Budget { get; set; }
+        // Đề xuất đổi tên thành AccountBalance để rõ nghĩa hơn
+        [JsonProperty("Budget")]
+        public decimal Budget { get; set; } 
 
-        // Đổi 'isavailable' thành 'IsActive' cho khớp form và rõ nghĩa hơn
+        [JsonProperty("IsUserActive")]
         public bool IsUserActive { get; set; }
 
-        // !!! THÊM CÁC THUỘC TÍNH CÒN THIẾU !!!
-        public DateTime CreationTimestamp { get; set; } // Chính là cái gây lỗi nè!
-        public string Role { get; set; } // Thêm Role
-        public DateTime? LastLoginTimestamp { get; set; } // Thêm LastLogin, dùng DateTime? vì có thể null
+        [JsonProperty("CreationTimestamp")]
+        public DateTime CreationTimestamp { get; set; }
 
-        // Constructor rỗng giữ lại cũng được
-        public Users() { }
+        [JsonProperty("Role")]
+        public string Role { get; set; }
+
+        [JsonProperty("LastLoginTimestamp")]
+        public DateTime? LastLoginTimestamp { get; set; }
+
+        [JsonProperty("TotalMoneyDeposited")]
+        public decimal TotalMoneyDeposited { get; set; }
+
+        [JsonProperty("TotalTimePlayed")]
+        public TimeSpan TotalTimePlayed { get; set; }
+
+        [JsonProperty("OrderIds")]
+        public List<string> OrderIds { get; set; }
+
+        public Users()
+        {
+            OrderIds = new List<string>();
+            TotalTimePlayed = TimeSpan.Zero;
+        }
     }
 }

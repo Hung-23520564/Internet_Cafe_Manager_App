@@ -1,5 +1,4 @@
-﻿using Internet_Cafe_Manager_App.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Internet_Cafe_Manager_App.Database;
+using static System.Windows.Forms.DataFormats;
 
 namespace Internet_Cafe_Manager_App.UI.Admin
 {
     public partial class Form_AdminLogin : Form
     {
+        private Form_AdminMainDashboard dashboardForm;
         FirebaseDB firebaseDB;
         public Form_AdminLogin()
         {
@@ -112,7 +114,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin
                         await firebaseDB.UpdateAdmin(admin); // Hoặc AddOrUpdateAdmin
 
                         // Mở trang chủ Admin
-                        Form_AdminMainDashboard dashboardForm = new Form_AdminMainDashboard();
+                        if (dashboardForm == null || dashboardForm.IsDisposed)
+                            dashboardForm = new Form_AdminMainDashboard();
                         // Có thể truyền thông tin admin đã login qua dashboard bằng cách thay lệnh phía trên bằng lệnh : Form_AdminMainDashboard dashboardForm = new Form_AdminMainDashboard(admin);
                         dashboardForm.Show();
 
@@ -136,6 +139,25 @@ namespace Internet_Cafe_Manager_App.UI.Admin
                 btnLogin.Enabled = true;
                 btnLogin.Text = "Đăng Nhập";
                 this.UseWaitCursor = false;
+            }
+        }
+
+
+
+        private void btnTogglePassword_Click(object sender, EventArgs e)
+        {
+            // Kiểm tra xem mật khẩu đang được che hay hiện
+            if (txtPassword.PasswordChar == '*')
+            {
+                // Nếu đang che, thì hiện ra và đổi icon thành hình con mắt
+                txtPassword.PasswordChar = '\0';
+                btnTogglePassword.IconChar = FontAwesome.Sharp.IconChar.Eye;
+            }
+            else
+            {
+                // Nếu đang hiện, thì che lại và đổi icon thành hình con mắt gạch chéo
+                txtPassword.PasswordChar = '*';
+                btnTogglePassword.IconChar = FontAwesome.Sharp.IconChar.EyeSlash;
             }
         }
 
@@ -171,6 +193,24 @@ namespace Internet_Cafe_Manager_App.UI.Admin
         private void txtUsername_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form_AdminLogin_FormClosed_1(object sender, FormClosedEventArgs e)
+        {
+            Form_InitialChoice initialChoiceForm = Application.OpenForms.OfType<Form_InitialChoice>().FirstOrDefault();
+            if (initialChoiceForm != null)
+            {
+                initialChoiceForm.Show(); // Hiển thị lại form chọn vai trò
+            }
+            else
+            {
+                Application.Exit(); // Thoát nếu không tìm thấy form chọn vai trò
+            }
         }
     }
 

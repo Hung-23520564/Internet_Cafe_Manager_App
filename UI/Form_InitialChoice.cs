@@ -40,5 +40,10 @@ namespace Internet_Cafe_Manager_App.UI
             this.Hide();
 
         }
+
+        private void Form_InitialChoice_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit(); // Thoát ứng dụng khi form này bị đóng
+        }
     }
 }
