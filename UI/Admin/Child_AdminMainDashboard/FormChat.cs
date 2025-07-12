@@ -1,4 +1,3 @@
-﻿// Thay thế toàn bộ nội dung file: UI/Admin/Child_AdminMainDashboard/FormChat.cs
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -40,6 +39,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                     this.Invoke((MethodInvoker)async delegate
                     {
                         await RefreshChatSessions();
+
                         if (currentChatPartner != null)
                         {
                             LoadConversation(currentChatPartner);
@@ -52,6 +52,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         {
             allMessages = await firebaseDB.GetAllMessages();
             var onlinePCs = await firebaseDB.GetOnlinePCs();
+
 
             var chatPartners = onlinePCs
                 .Select(pc => pc.Name)
@@ -82,6 +83,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                     sessionButton.Text = $"{partner} (!)"; // THÊM DẤU HIỆU
                     sessionButton.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
                     sessionButton.BackColor = Color.FromArgb(125, 102, 211); // Màu nổi bật hơn
+
                 }
                 else
                 {
@@ -93,6 +95,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         }
 
         // KHI ADMIN CHỌN MỘT PHIÊN CHAT
+
         private async void SessionButton_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
@@ -104,6 +107,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             LoadConversation(partnerName);
 
             // ĐÁNH DẤU CÁC TIN NHẮN LÀ ĐÃ ĐỌC
+
             var unreadMessages = allMessages
                 .Where(m => m.Sender == partnerName && m.Receiver == "Admin" && !m.IsRead)
                 .ToList();
@@ -115,6 +119,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             // Tải lại danh sách phiên chat để xóa dấu "!"
             await RefreshChatSessions();
         }
+
 
         private void LoadConversation(string partnerName)
         {
@@ -153,6 +158,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 Content = content,
                 Timestamp = DateTime.UtcNow,
                 IsRead = false // Tin nhắn mới gửi luôn là chưa đọc
+
             };
 
             bool success = await firebaseDB.SendMessage(newMessage);

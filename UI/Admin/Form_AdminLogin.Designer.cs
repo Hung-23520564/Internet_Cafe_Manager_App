@@ -54,6 +54,7 @@
             panelMain.Size = new Size(560, 892);
             panelMain.TabIndex = 0;
             panelMain.Paint += panelMain_Paint;
+
             // 
             // linkLabel1
             // 
@@ -180,9 +181,7 @@
             label2.Size = new Size(145, 54);
             label2.TabIndex = 1;
             label2.Text = "LOGIN";
-            // 
-            // picLogo
-            // 
+
             picLogo.BackColor = Color.FromArgb(31, 32, 71);
             picLogo.ForeColor = Color.FromArgb(128, 179, 255);
             picLogo.IconChar = FontAwesome.Sharp.IconChar.UserShield;

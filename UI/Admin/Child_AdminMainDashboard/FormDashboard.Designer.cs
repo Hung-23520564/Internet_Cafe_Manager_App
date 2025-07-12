@@ -440,9 +440,9 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             // 
             // timer1
             // 
-            timer1.Enabled = true;
-            timer1.Interval = 1000;
-            timer1.Tick += UpdateTimer_Tick;
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.UpdateTimer_Tick);
             // 
             // FormDashboard
             // 

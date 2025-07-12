@@ -1,4 +1,3 @@
-﻿// Thay thế toàn bộ nội dung file: UI/User/Child_UserMainDashboard/Form_UserChat.cs
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,30 +36,24 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 this.Close();
                 return;
             }
-
             this.currentReceiver = "Admin"; // Người dùng mặc định chat với Admin
             await RefreshAllData();
             ListenForChanges();
         }
-
         private async Task RefreshAllData()
         {
             if (this.IsDisposed) return;
 
             allMessages = await firebaseDB.GetAllMessages();
             var onlinePCs = await firebaseDB.GetOnlinePCs();
-
             var chatPartners = onlinePCs
                 .Select(pc => pc.Name)
                 .Where(name => name != myPCName)
                 .ToList();
-
             chatPartners.Insert(0, "Admin");
-
             string selectedPartner = listBoxOnlinePCs.SelectedItem?.ToString();
 
             listBoxOnlinePCs.DataSource = chatPartners;
-
             if (selectedPartner != null && listBoxOnlinePCs.Items.Contains(selectedPartner))
             {
                 listBoxOnlinePCs.SelectedItem = selectedPartner;
@@ -82,7 +75,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                     this.Invoke((MethodInvoker)async delegate { await RefreshAllData(); });
                 });
         }
-
         private async void LoadConversation(string partnerName)
         {
             if (string.IsNullOrEmpty(partnerName))
@@ -153,7 +145,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
                 LoadConversation(currentReceiver);
             }
         }
-
         private void AddMessageToPanel(ChatMessage message)
         {
             // A. TẠO BONG BÓNG CHAT VÀ NỘI DUNG BÊN TRONG
