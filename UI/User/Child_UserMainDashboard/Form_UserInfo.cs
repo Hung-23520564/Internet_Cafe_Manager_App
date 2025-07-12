@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Internet_Cafe_Manager_App.Database;
+using System.Text;
 
 namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
