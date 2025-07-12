@@ -194,6 +194,7 @@
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "Form_InitialChoice";
             Text = "Chọn vai trò";
+            FormClosed += Form_InitialChoice_FormClosed;
             panel1.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

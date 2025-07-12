@@ -30,7 +30,6 @@
         {
             txtPassword = new TextBox();
             txtUsername = new TextBox();
-            linkLabel1 = new LinkLabel();
             btnLogin = new Button();
             label4 = new Label();
             label1 = new Label();
@@ -50,19 +49,6 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(280, 27);
             txtUsername.TabIndex = 22;
-            // 
-            // linkLabel1
-            // 
-            linkLabel1.AutoSize = true;
-            linkLabel1.ForeColor = Color.White;
-            linkLabel1.LinkColor = Color.WhiteSmoke;
-            linkLabel1.Location = new Point(130, 461);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(166, 20);
-            linkLabel1.TabIndex = 21;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Bạn chưa có tài khoản ?";
-            linkLabel1.LinkClicked += llblRegister_LinkClicked;
             // 
             // btnLogin
             // 
@@ -115,10 +101,9 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(54, 75, 109);
-            ClientSize = new Size(439, 703);
+            ClientSize = new Size(439, 465);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
-            Controls.Add(linkLabel1);
             Controls.Add(btnLogin);
             Controls.Add(label4);
             Controls.Add(label1);
@@ -135,7 +120,6 @@
 
         private TextBox txtPassword;
         private TextBox txtUsername;
-        private LinkLabel linkLabel1;
         private Button btnLogin;
         private Label label4;
         private Label label1;

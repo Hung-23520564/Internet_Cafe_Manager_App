@@ -61,6 +61,7 @@
             labelCurrentTitle.Size = new Size(248, 54);
             labelCurrentTitle.TabIndex = 0;
             labelCurrentTitle.Text = "Product List";
+            labelCurrentTitle.Click += labelCurrentTitle_Click;
             // 
             // panelRightActions
             // 
@@ -101,6 +102,7 @@
             panelFilters.Padding = new Padding(15, 8, 15, 8);
             panelFilters.Size = new Size(1688, 65);
             panelFilters.TabIndex = 1;
+            panelFilters.Paint += panelFilters_Paint;
             // 
             // flowLayoutPanelItems
             // 

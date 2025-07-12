@@ -1,16 +1,11 @@
-﻿namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
+﻿// Dán toàn bộ mã này vào tệp Form_AdminMenu.Designer.cs
+
+namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
-    partial class FormOrders
+    partial class Form_AdminMenu
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,119 +17,293 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            panelTitleBar = new Panel();
-            panel1 = new Panel();
-            label2 = new Label();
-            label1 = new Label();
-            panel2 = new Panel();
-            btnAddItem = new FontAwesome.Sharp.IconButton();
-            panelTitleBar.SuspendLayout();
-            panel1.SuspendLayout();
-            panel2.SuspendLayout();
+            panelMain = new Panel();
+            flowLayoutPanelItems = new FlowLayoutPanel();
+            panelCRUD = new Panel();
+            lstCategory = new ComboBox();
+            txtQuantity = new TextBox();
+            lblQuantity = new Label();
+            btnClear = new Button();
+            btnDelete = new Button();
+            btnUpdate = new Button();
+            btnAdd = new Button();
+            btnUploadImage = new Button();
+            picItemImage = new PictureBox();
+            txtPrice = new TextBox();
+            lblPrice = new Label();
+            lblCategory = new Label();
+            txtName = new TextBox();
+            lblName = new Label();
+            lblTitle = new Label();
+            panelMain.SuspendLayout();
+            panelCRUD.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picItemImage).BeginInit();
             SuspendLayout();
             // 
-            // panelTitleBar
+            // panelMain
             // 
-            panelTitleBar.BackColor = Color.FromArgb(249, 118, 176);
-            panelTitleBar.Controls.Add(panel1);
-            panelTitleBar.Controls.Add(label1);
-            panelTitleBar.Dock = DockStyle.Top;
-            panelTitleBar.Location = new Point(0, 0);
-            panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(1118, 87);
-            panelTitleBar.TabIndex = 2;
+            panelMain.Controls.Add(flowLayoutPanelItems);
+            panelMain.Controls.Add(panelCRUD);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 0);
+            panelMain.Margin = new Padding(3, 4, 3, 4);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new Size(1338, 805);
+            panelMain.TabIndex = 0;
             // 
-            // panel1
+            // flowLayoutPanelItems
             // 
-            panel1.BackColor = Color.FromArgb(31, 40, 71);
-            panel1.Controls.Add(label2);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(1118, 87);
-            panel1.TabIndex = 4;
+            flowLayoutPanelItems.AutoScroll = true;
+            flowLayoutPanelItems.BackColor = Color.FromArgb(26, 28, 55);
+            flowLayoutPanelItems.Dock = DockStyle.Fill;
+            flowLayoutPanelItems.Location = new Point(0, 0);
+            flowLayoutPanelItems.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelItems.Name = "flowLayoutPanelItems";
+            flowLayoutPanelItems.Padding = new Padding(20, 25, 20, 25);
+            flowLayoutPanelItems.Size = new Size(988, 805);
+            flowLayoutPanelItems.TabIndex = 1;
+            flowLayoutPanelItems.Paint += flowLayoutPanelItems_Paint;
             // 
-            // label2
+            // panelCRUD
             // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Century Gothic", 31.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.ForeColor = Color.White;
-            label2.Location = new Point(380, 6);
-            label2.Name = "label2";
-            label2.Size = new Size(320, 64);
-            label2.TabIndex = 3;
-            label2.Text = "Product List";
+            panelCRUD.BackColor = Color.FromArgb(36, 38, 65);
+            panelCRUD.Controls.Add(lstCategory);
+            panelCRUD.Controls.Add(txtQuantity);
+            panelCRUD.Controls.Add(lblQuantity);
+            panelCRUD.Controls.Add(btnClear);
+            panelCRUD.Controls.Add(btnDelete);
+            panelCRUD.Controls.Add(btnUpdate);
+            panelCRUD.Controls.Add(btnAdd);
+            panelCRUD.Controls.Add(btnUploadImage);
+            panelCRUD.Controls.Add(picItemImage);
+            panelCRUD.Controls.Add(txtPrice);
+            panelCRUD.Controls.Add(lblPrice);
+            panelCRUD.Controls.Add(lblCategory);
+            panelCRUD.Controls.Add(txtName);
+            panelCRUD.Controls.Add(lblName);
+            panelCRUD.Controls.Add(lblTitle);
+            panelCRUD.Dock = DockStyle.Right;
+            panelCRUD.Location = new Point(988, 0);
+            panelCRUD.Margin = new Padding(3, 4, 3, 4);
+            panelCRUD.Name = "panelCRUD";
+            panelCRUD.Padding = new Padding(10, 12, 10, 12);
+            panelCRUD.Size = new Size(350, 805);
+            panelCRUD.TabIndex = 0;
             // 
-            // label1
+            // lstCategory
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Century Gothic", 31.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(54, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(320, 64);
-            label1.TabIndex = 3;
-            label1.Text = "Product List";
+            lstCategory.DropDownStyle = ComboBoxStyle.DropDownList;
+            lstCategory.FormattingEnabled = true;
+            lstCategory.Items.AddRange(new object[] { "Drinks", "Rice", "Fried", "Meal" });
+            lstCategory.Location = new Point(110, 135);
+            lstCategory.Name = "lstCategory";
+            lstCategory.Size = new Size(220, 28);
+            lstCategory.TabIndex = 0;
             // 
-            // panel2
+            // txtQuantity
             // 
-            panel2.BackColor = Color.FromArgb(31, 40, 71);
-            panel2.Controls.Add(btnAddItem);
-            panel2.Dock = DockStyle.Right;
-            panel2.Location = new Point(996, 87);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(122, 606);
-            panel2.TabIndex = 3;
+            txtQuantity.Location = new Point(110, 237);
+            txtQuantity.Margin = new Padding(3, 4, 3, 4);
+            txtQuantity.Name = "txtQuantity";
+            txtQuantity.Size = new Size(220, 27);
+            txtQuantity.TabIndex = 16;
             // 
-            // btnAddItem
+            // lblQuantity
             // 
-            btnAddItem.FlatAppearance.BorderSize = 0;
-            btnAddItem.FlatStyle = FlatStyle.Flat;
-            btnAddItem.Font = new Font("Century Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnAddItem.ForeColor = Color.White;
-            btnAddItem.IconChar = FontAwesome.Sharp.IconChar.Wallet;
-            btnAddItem.IconColor = Color.White;
-            btnAddItem.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            btnAddItem.ImageAlign = ContentAlignment.BottomCenter;
-            btnAddItem.Location = new Point(0, 176);
-            btnAddItem.Name = "btnAddItem";
-            btnAddItem.Size = new Size(128, 199);
-            btnAddItem.TabIndex = 0;
-            btnAddItem.Text = "Add Item";
-            btnAddItem.TextImageRelation = TextImageRelation.ImageAboveText;
-            btnAddItem.UseVisualStyleBackColor = true;
-            btnAddItem.Click += btnAddItem_Click;
+            lblQuantity.AutoSize = true;
+            lblQuantity.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            lblQuantity.ForeColor = Color.White;
+            lblQuantity.Location = new Point(20, 237);
+            lblQuantity.Name = "lblQuantity";
+            lblQuantity.Size = new Size(81, 23);
+            lblQuantity.TabIndex = 15;
+            lblQuantity.Text = "Quantity:";
             // 
-            // FormOrders
+            // btnClear
+            // 
+            btnClear.BackColor = Color.FromArgb(108, 117, 125);
+            btnClear.FlatAppearance.BorderSize = 0;
+            btnClear.FlatStyle = FlatStyle.Flat;
+            btnClear.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnClear.ForeColor = Color.White;
+            btnClear.Location = new Point(190, 725);
+            btnClear.Margin = new Padding(3, 4, 3, 4);
+            btnClear.Name = "btnClear";
+            btnClear.Size = new Size(140, 50);
+            btnClear.TabIndex = 14;
+            btnClear.Text = "Clear Fields";
+            btnClear.UseVisualStyleBackColor = false;
+            btnClear.Click += btnClear_Click;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = Color.FromArgb(220, 53, 69);
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDelete.ForeColor = Color.White;
+            btnDelete.Location = new Point(40, 725);
+            btnDelete.Margin = new Padding(3, 4, 3, 4);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(140, 50);
+            btnDelete.TabIndex = 13;
+            btnDelete.Text = "Delete";
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.BackColor = Color.FromArgb(0, 123, 255);
+            btnUpdate.FlatAppearance.BorderSize = 0;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnUpdate.ForeColor = Color.White;
+            btnUpdate.Location = new Point(190, 650);
+            btnUpdate.Margin = new Padding(3, 4, 3, 4);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(140, 50);
+            btnUpdate.TabIndex = 12;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = false;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.BackColor = Color.FromArgb(40, 167, 69);
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnAdd.ForeColor = Color.White;
+            btnAdd.Location = new Point(40, 650);
+            btnAdd.Margin = new Padding(3, 4, 3, 4);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(140, 50);
+            btnAdd.TabIndex = 11;
+            btnAdd.Text = "Add New";
+            btnAdd.UseVisualStyleBackColor = false;
+            btnAdd.Click += btnAdd_Click;
+            // 
+            // btnUploadImage
+            // 
+            btnUploadImage.Location = new Point(125, 535);
+            btnUploadImage.Margin = new Padding(3, 4, 3, 4);
+            btnUploadImage.Name = "btnUploadImage";
+            btnUploadImage.Size = new Size(100, 38);
+            btnUploadImage.TabIndex = 10;
+            btnUploadImage.Text = "Upload...";
+            btnUploadImage.UseVisualStyleBackColor = true;
+            btnUploadImage.Click += btnUploadImage_Click;
+            // 
+            // picItemImage
+            // 
+            picItemImage.BorderStyle = BorderStyle.FixedSingle;
+            picItemImage.Location = new Point(80, 335);
+            picItemImage.Margin = new Padding(3, 4, 3, 4);
+            picItemImage.Name = "picItemImage";
+            picItemImage.Size = new Size(200, 187);
+            picItemImage.SizeMode = PictureBoxSizeMode.Zoom;
+            picItemImage.TabIndex = 9;
+            picItemImage.TabStop = false;
+            // 
+            // txtPrice
+            // 
+            txtPrice.Location = new Point(110, 186);
+            txtPrice.Margin = new Padding(3, 4, 3, 4);
+            txtPrice.Name = "txtPrice";
+            txtPrice.Size = new Size(220, 27);
+            txtPrice.TabIndex = 8;
+            // 
+            // lblPrice
+            // 
+            lblPrice.AutoSize = true;
+            lblPrice.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            lblPrice.ForeColor = Color.White;
+            lblPrice.Location = new Point(20, 186);
+            lblPrice.Name = "lblPrice";
+            lblPrice.Size = new Size(51, 23);
+            lblPrice.TabIndex = 7;
+            lblPrice.Text = "Price:";
+            // 
+            // lblCategory
+            // 
+            lblCategory.AutoSize = true;
+            lblCategory.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            lblCategory.ForeColor = Color.White;
+            lblCategory.Location = new Point(20, 136);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new Size(85, 23);
+            lblCategory.TabIndex = 5;
+            lblCategory.Text = "Category:";
+            // 
+            // txtName
+            // 
+            txtName.Location = new Point(110, 86);
+            txtName.Margin = new Padding(3, 4, 3, 4);
+            txtName.Name = "txtName";
+            txtName.Size = new Size(220, 27);
+            txtName.TabIndex = 4;
+            // 
+            // lblName
+            // 
+            lblName.AutoSize = true;
+            lblName.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            lblName.ForeColor = Color.White;
+            lblName.Location = new Point(20, 86);
+            lblName.Name = "lblName";
+            lblName.Size = new Size(60, 23);
+            lblName.TabIndex = 3;
+            lblName.Text = "Name:";
+            // 
+            // lblTitle
+            // 
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold);
+            lblTitle.ForeColor = Color.White;
+            lblTitle.Location = new Point(80, 25);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(234, 38);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "Manage Product";
+            // 
+            // Form_AdminMenu
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1118, 693);
-            Controls.Add(panel2);
-            Controls.Add(panelTitleBar);
-            Name = "FormOrders";
-            Text = "FormOrders";
-            panelTitleBar.ResumeLayout(false);
-            panelTitleBar.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            panel2.ResumeLayout(false);
+            ClientSize = new Size(1338, 805);
+            Controls.Add(panelMain);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Form_AdminMenu";
+            Text = "Admin Menu Management";
+            Load += Form_AdminMenu_Load;
+            panelMain.ResumeLayout(false);
+            panelCRUD.ResumeLayout(false);
+            panelCRUD.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)picItemImage).EndInit();
             ResumeLayout(false);
+
         }
 
         #endregion
 
-        private Panel panelTitleBar;
-        private Label label1;
-        private Panel panel1;
-        private Label label2;
-        private Panel panel2;
-        private FontAwesome.Sharp.IconButton btnAddItem;
+        private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.Panel panelCRUD;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelItems;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.TextBox txtPrice;
+        private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.TextBox txtName;
+        private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.PictureBox picItemImage;
+        private System.Windows.Forms.Button btnUploadImage;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAdd;
+        private TextBox txtQuantity;
+        private Label lblQuantity;
+        private ComboBox lstCategory;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using FireSharp.Config;
+using FireSharp.EventStreaming;
 using FireSharp.Interfaces;
 using FireSharp.Response;
 // Đảm bảo bạn đã using đúng namespace cho lớp Users và Admin
@@ -18,7 +19,7 @@ namespace Internet_Cafe_Manager_App.Database
         {
             // !!! CẢNH BÁO: KHÔNG NÊN HARDCODE SECRET/KEY VÀ BASEPATH Ở ĐÂY !!!
             // Nên đọc từ file cấu hình (app.config, appsettings.json)
-            AuthSecret = "AIzaSyAkdx8etqkdQj8OPDVGkUwrLbZUiUYjJ74", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
+            AuthSecret = "LUrH3rDtqWkRVSlAHvY7WvBcN0Y8a3eVkOXSsWPD", // <<< VẪN KHUYÊN DÙNG SERVICE ACCOUNT KEY THAY CHO CÁI NÀY
             BasePath = "https://internet-cafe-manager-ap-9e088-default-rtdb.asia-southeast1.firebasedatabase.app/"
         };
         public IFirebaseClient client;
@@ -203,9 +204,18 @@ namespace Internet_Cafe_Manager_App.Database
         }
 
 
-        // --- Các phương thức CRUD cho Admins (Giữ nguyên như code gốc anh cung cấp) ---
-        // ... (Copy các hàm AddOrUpdateAdmin, GetAdmin, DeleteAdmin, UpdateAdmin ở đây) ...
+        public async Task<EventStreamResponse> ListenToPCChanges(string pcName, ValueChangedEventHandler handler)
+        {
+            if (client == null) return null;
 
+            // Lắng nghe sự thay đổi trên node của PC cụ thể
+            EventStreamResponse response = await client.OnAsync($"PCs/{pcName}",
+                (sender, args, context) => { }, // Callback cho ValueAdded (giữ nguyên)
+                handler,                      // THAY ĐỔI LẠI ĐÂY: Truyền handler trực tiếp
+                (sender, args, context) => { }  // Callback cho ValueRemoved (giữ nguyên)
+            );
+            return response;
+        }
         public async Task<bool> AddOrUpdateAdmin(Admin admin)
         {
             if (string.IsNullOrEmpty(admin?.Username))
@@ -373,6 +383,371 @@ namespace Internet_Cafe_Manager_App.Database
                 return new List<PC>(); // Trả về danh sách rỗng nếu có lỗi
             }
         }
+
+        public async Task<bool> DeletePC(string pcName)
+        {
+            if (string.IsNullOrEmpty(pcName))
+            {
+                Console.WriteLine("Lỗi: Tên PC để xóa không được để trống.");
+                return false;
+            }
+
+            try
+            {
+                // Gọi API để xóa node của PC cụ thể
+                FirebaseResponse response = await client.DeleteAsync("PCs/" + pcName);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi xóa PC '{pcName}': " + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<List<Users>> GetAllUsers()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Users/"); // Đường dẫn đến node Users
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<Users>();
+                }
+
+                Dictionary<string, Users> usersDictionary = response.ResultAs<Dictionary<string, Users>>();
+
+                if (usersDictionary == null)
+                {
+                    return new List<Users>();
+                }
+
+                List<Users> userList = new List<Users>();
+                foreach (var item in usersDictionary)
+                {
+                    Users user = item.Value;
+                    // Username thường là key, nên có thể cần gán lại nếu model Users không tự chứa nó
+                    // Hoặc đảm bảo Firebase lưu username bên trong object Users
+                    if (string.IsNullOrEmpty(user.Username))
+                    {
+                        user.Username = item.Key;
+                    }
+                    userList.Add(user);
+                }
+                return userList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả User: " + ex.Message);
+                return new List<Users>();
+            }
+        }
+
+
+        public async Task<bool> AddOrder(Order order)
+        {
+            if (order == null || string.IsNullOrEmpty(order.OrderId))
+            {
+                Console.WriteLine("Lỗi: Đối tượng Order hoặc OrderId không hợp lệ.");
+                return false;
+            }
+
+            try
+            {
+                // Lưu đơn hàng vào node "Orders" với OrderId làm khóa
+                SetResponse response = await client.SetAsync("Orders/" + order.OrderId, order);
+                return (response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lưu đơn hàng '{order.OrderId}': " + ex.Message);
+                return false;
+            }
+        }
+        // Trong lớp FirebaseDB
+        public async Task<List<Order>> GetAllOrders()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Orders/");
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<Order>();
+                }
+                Dictionary<string, Order> orders = response.ResultAs<Dictionary<string, Order>>();
+                return orders?.Values.ToList() ?? new List<Order>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả Order: " + ex.Message);
+                return new List<Order>();
+            }
+        }
+
+        public async Task<PC> GetActivePCForUser(string username)
+        {
+            if (string.IsNullOrEmpty(username)) return null;
+
+            try
+            {
+                var allPCs = await GetAllPCs();
+                // Tìm PC có CurrentUser trùng với username và đang trong trạng thái InUse
+                return allPCs.FirstOrDefault(pc => pc.CurrentUser == username && pc.Status == PCStatus.InUse);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tìm PC cho người dùng '{username}': {ex.Message}");
+                return null;
+            }
+        }
+
+
+        public async Task<List<Order>> GetOrdersForUser(string username)
+        {
+            if (string.IsNullOrEmpty(username))
+            {
+                Console.WriteLine("Username không được để trống khi lấy danh sách order.");
+                return new List<Order>();
+            }
+
+            try
+            {
+                // Lấy tất cả các order từ Firebase bằng phương thức đã có
+                List<Order> allOrders = await GetAllOrders();
+
+                // Dùng LINQ để lọc danh sách, chỉ giữ lại những order của người dùng được chỉ định
+                List<Order> userOrders = allOrders
+                                            .Where(order => string.Equals(order.Username, username, StringComparison.OrdinalIgnoreCase))
+                                            .ToList();
+
+                return userOrders;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy order cho người dùng '{username}': " + ex.Message);
+                return new List<Order>(); // Trả về danh sách rỗng nếu có lỗi
+            }
+        }
+
+        public async Task<bool> UpdateOrderStatus(string orderId, string newStatus)
+        {
+            if (string.IsNullOrEmpty(orderId)) return false;
+            try
+            {
+                var path = $"Orders/{orderId}/Status";
+                FirebaseResponse response = await client.SetAsync(path, newStatus);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật trạng thái cho Order ID '{orderId}': " + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<bool> AddOrUpdateItem(Item item)
+        {
+            if (item == null || string.IsNullOrEmpty(item.Id))
+            {
+                Console.WriteLine("Lỗi: Đối tượng Item hoặc Item.Id không được null/trống.");
+                return false;
+            }
+
+            try
+            {
+                SetResponse response = await client.SetAsync("Items/" + item.Id, item);
+                return (response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lưu (Add/Update) Item '{item.Id}': " + ex.Message);
+                return false;
+            }
+        }
+
+        public async Task<Item> GetItem(string itemId)
+        {
+            if (string.IsNullOrEmpty(itemId))
+            {
+                Console.WriteLine("Lỗi: ItemId để lấy thông tin Item không được để trống.");
+                return null;
+            }
+
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Items/" + itemId);
+                if (response == null || response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return null;
+                }
+                Item item = response.ResultAs<Item>();
+                if (item != null && string.IsNullOrEmpty(item.Id))
+                {
+                    item.Id = itemId; // Gán lại Id từ key Firebase
+                }
+                return item;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy Item '{itemId}': " + ex.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<Item>> GetAllItems()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Items/");
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<Item>();
+                }
+
+                Dictionary<string, Item> itemsDictionary = response.ResultAs<Dictionary<string, Item>>();
+
+                if (itemsDictionary == null)
+                {
+                    return new List<Item>();
+                }
+
+                List<Item> itemList = new List<Item>();
+                foreach (var entry in itemsDictionary)
+                {
+                    Item item = entry.Value;
+                    if (string.IsNullOrEmpty(item.Id))
+                    {
+                        item.Id = entry.Key; // Đảm bảo Id được gán từ key Firebase
+                    }
+                    itemList.Add(item);
+                }
+                return itemList;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả Items: " + ex.Message);
+                return new List<Item>();
+            }
+        }
+
+        public async Task<bool> DeleteItem(string itemId)
+        {
+            if (string.IsNullOrEmpty(itemId))
+            {
+                Console.WriteLine("Lỗi: ItemId để xóa Item không được để trống.");
+                return false;
+            }
+
+            try
+            {
+                FirebaseResponse response = await client.DeleteAsync("Items/" + itemId);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi xóa Item '{itemId}': " + ex.Message);
+                return false;
+            }
+        }
+
+        #region Chat and PC Status Methods
+
+        /// <summary>
+        /// Gửi một tin nhắn mới và lưu vào Firebase.
+        /// </summary>
+        public async Task<bool> SendMessage(ChatMessage message)
+        {
+            if (message == null || string.IsNullOrEmpty(message.MessageId)) return false;
+            try
+            {
+                SetResponse response = await client.SetAsync("Messages/" + message.MessageId, message);
+                return (response.StatusCode == System.Net.HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi gửi tin nhắn: {ex.Message}");
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Lấy tất cả tin nhắn từ Firebase.
+        /// </summary>
+        public async Task<List<ChatMessage>> GetAllMessages()
+        {
+            try
+            {
+                FirebaseResponse response = await client.GetAsync("Messages/");
+                if (response.Body == "null" || response.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new List<ChatMessage>();
+                }
+                Dictionary<string, ChatMessage> messages = response.ResultAs<Dictionary<string, ChatMessage>>();
+                return messages?.Values.ToList() ?? new List<ChatMessage>();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi khi lấy tất cả tin nhắn: " + ex.Message);
+                return new List<ChatMessage>();
+            }
+        }
+
+        /// <summary>
+        /// Đánh dấu một tin nhắn là đã đọc.
+        /// </summary>
+        public async Task<bool> MarkMessageAsRead(string messageId)
+        {
+            if (string.IsNullOrEmpty(messageId)) return false;
+            try
+            {
+                var path = $"Messages/{messageId}/IsRead";
+                FirebaseResponse response = await client.SetAsync(path, true);
+                return response.StatusCode == System.Net.HttpStatusCode.OK;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi cập nhật trạng thái tin nhắn '{messageId}': " + ex.Message);
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Lấy tên PC mà một người dùng cụ thể đang sử dụng.
+        /// </summary>
+        public async Task<string> GetPCNameForUser(string username)
+        {
+            if (string.IsNullOrEmpty(username)) return null;
+            try
+            {
+                var allPCs = await GetAllPCs();
+                var activePC = allPCs.FirstOrDefault(pc => pc.CurrentUser == username && pc.Status == PCStatus.InUse);
+                return activePC?.Name;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi tìm PC cho người dùng '{username}': {ex.Message}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Lấy danh sách tất cả các PC đang có người dùng.
+        /// </summary>
+        public async Task<List<PC>> GetOnlinePCs()
+        {
+            try
+            {
+                var allPCs = await GetAllPCs();
+                return allPCs.Where(pc => !string.IsNullOrEmpty(pc.CurrentUser) && pc.Status == PCStatus.InUse).ToList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi khi lấy danh sách PC online: {ex.Message}");
+                return new List<PC>();
+            }
+        }
+
+        #endregion
     }
 }
    

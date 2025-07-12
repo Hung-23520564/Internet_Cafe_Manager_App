@@ -78,7 +78,6 @@ namespace Internet_Cafe_Manager_App.UI.User
             }
 
 
-            // --- Bắt đầu xử lý bất đồng bộ ---
             btnRegister.Enabled = false;
             btnRegister.Text = "Đang xử lý...";
             this.UseWaitCursor = true;
@@ -92,45 +91,55 @@ namespace Internet_Cafe_Manager_App.UI.User
                     MessageBox.Show($"Username '{username}' đã tồn tại. Vui lòng chọn username khác.", "Trùng Username", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtFullName.Focus();
                     txtFullName.SelectAll();
-                    // Khôi phục trạng thái nút và con trỏ chuột sớm nếu lỗi
                     btnRegister.Enabled = true;
                     btnRegister.Text = "Tạo tài khoản";
                     this.UseWaitCursor = false;
-                    return; // Dừng lại nếu username đã tồn tại
+                    return;
                 }
 
-                // 4. Băm mật khẩu (QUAN TRỌNG - Sử dụng PasswordHelper đã cài đặt)
-                string passwordHash = PasswordHelper.HashPassword(password);
-                // !!! --- Đảm bảo PasswordHelper.HashPassword dùng thuật toán an toàn (BCrypt...) --- !!!
+                // --- BẮT ĐẦU LOGIC MỚI ---
+                // Lấy tổng số người dùng hiện có để tạo ID tuần tự
+                var allUsers = await firebaseDb.GetAllUsers();
+                int newUserNumber = allUsers.Count + 1;
 
-                // 5. Tạo đối tượng Admin mới
+                // Lấy ngày hiện tại theo định dạng yêu cầu (ngàyThángNăm)
+                string datePart = DateTime.Now.ToString("dMyy");
+
+                // Tạo UserId mới theo định dạng U<Số thứ tự>_<ngàyThángNăm>
+                string newUserId = $"U{newUserNumber}_{datePart}";
+                // --- KẾT THÚC LOGIC MỚI ---
+
+                // 4. Băm mật khẩu
+                string passwordHash = PasswordHelper.HashPassword(password);
+
+                // 5. Tạo đối tượng User mới với UserId đã được tùy chỉnh
                 Internet_Cafe_Manager_App.Database.Users newUser = new Internet_Cafe_Manager_App.Database.Users
                 {
-                    // AdminId có thể để Firebase tự tạo key hoặc bạn tự tạo (ví dụ: Guid)
-                    // AdminId = Guid.NewGuid().ToString(), // Ví dụ tự tạo ID
+                    // THAY ĐỔI: Sử dụng UserId mới thay vì Guid
+                    UserId = newUserId,
                     Username = username,
-                    PasswordHash = passwordHash, // Lưu mật khẩu đã băm
+                    PasswordHash = passwordHash,
                     FullName = fullName,
                     Email = email,
                     PhoneNumber = phoneNumber,
-                    IsUserActive = true, // Mặc định là active
-                    CreationTimestamp = DateTime.UtcNow, // Thời gian tạo (giờ UTC)
-                    Role = "User", // Gán vai trò mặc định
-                    LastLoginTimestamp = null // Chưa đăng nhập lần nào
+                    IsUserActive = true,
+                    CreationTimestamp = DateTime.UtcNow,
+                    Role = "User",
+                    LastLoginTimestamp = null
                 };
-
-                // 6. Lưu Admin mới vào Firebase
-                bool success = await firebaseDb.AddOrUpdateUser(newUser); // Dùng AddOrUpdateAdmin để tạo mới
+                // ... (phần còn lại của phương thức giữ nguyên) ...
+                // 6. Lưu User mới vào Firebase
+                bool success = await firebaseDb.AddOrUpdateUser(newUser);
 
                 // 7. Thông báo kết quả và điều hướng
                 if (success)
                 {
-                    MessageBox.Show("Tạo tài khoản User thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Tạo tài khoản User thành công! User ID của bạn là: {newUserId}", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     // Chuyển về trang đăng nhập
                     Form_UserLogin loginForm = new Form_UserLogin();
                     loginForm.Show();
-                    this.Close(); // Ẩn form đăng ký hiện tại
+                    this.Close();
                 }
                 else
                 {

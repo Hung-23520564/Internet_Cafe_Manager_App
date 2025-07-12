@@ -2,15 +2,8 @@
 {
     partial class Form_AdminMainDashboard
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,16 +15,13 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_AdminMainDashboard));
             panelMenu = new Panel();
             btnSignOut = new FontAwesome.Sharp.IconButton();
             btnSetting = new FontAwesome.Sharp.IconButton();
+            btnCreateUser = new FontAwesome.Sharp.IconButton(); // Nút mới
             btnChat = new FontAwesome.Sharp.IconButton();
             btnSystem = new FontAwesome.Sharp.IconButton();
             btnOrders = new FontAwesome.Sharp.IconButton();
@@ -47,12 +37,12 @@
             pictureBox2 = new PictureBox();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btnHome).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(btnHome)).BeginInit();
             panelTitleBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)iconCurrentChildForm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(iconCurrentChildForm)).BeginInit();
             panelDesktop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox2)).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
@@ -60,6 +50,7 @@
             panelMenu.BackColor = Color.FromArgb(31, 32, 71);
             panelMenu.Controls.Add(btnSignOut);
             panelMenu.Controls.Add(btnSetting);
+            panelMenu.Controls.Add(btnCreateUser); // Thêm nút mới vào panel
             panelMenu.Controls.Add(btnChat);
             panelMenu.Controls.Add(btnSystem);
             panelMenu.Controls.Add(btnOrders);
@@ -82,7 +73,7 @@
             btnSignOut.IconColor = Color.Gainsboro;
             btnSignOut.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSignOut.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSignOut.Location = new Point(0, 490);
+            btnSignOut.Location = new Point(0, 554);
             btnSignOut.Name = "btnSignOut";
             btnSignOut.Padding = new Padding(15, 0, 20, 0);
             btnSignOut.Size = new Size(250, 64);
@@ -103,7 +94,7 @@
             btnSetting.IconColor = Color.Gainsboro;
             btnSetting.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnSetting.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSetting.Location = new Point(0, 426);
+            btnSetting.Location = new Point(0, 490);
             btnSetting.Name = "btnSetting";
             btnSetting.Padding = new Padding(15, 0, 20, 0);
             btnSetting.Size = new Size(250, 64);
@@ -112,6 +103,27 @@
             btnSetting.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSetting.UseVisualStyleBackColor = true;
             btnSetting.Click += btnSetting_Click;
+            //
+            // btnCreateUser
+            //
+            btnCreateUser.Dock = DockStyle.Top;
+            btnCreateUser.FlatAppearance.BorderSize = 0;
+            btnCreateUser.FlatStyle = FlatStyle.Flat;
+            btnCreateUser.Font = new Font("Century Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCreateUser.ForeColor = Color.FromArgb(222, 220, 220);
+            btnCreateUser.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            btnCreateUser.IconColor = Color.Gainsboro;
+            btnCreateUser.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnCreateUser.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCreateUser.Location = new Point(0, 426);
+            btnCreateUser.Name = "btnCreateUser";
+            btnCreateUser.Padding = new Padding(15, 0, 20, 0);
+            btnCreateUser.Size = new Size(250, 64);
+            btnCreateUser.TabIndex = 5;
+            btnCreateUser.Text = "Create User";
+            btnCreateUser.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCreateUser.UseVisualStyleBackColor = true;
+            btnCreateUser.Click += new System.EventHandler(this.btnCreateUser_Click);
             // 
             // btnChat
             // 
@@ -315,13 +327,13 @@
             FormClosed += Form_AdminMainDashboard_FormClosed;
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btnHome).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(btnHome)).EndInit();
             panelTitleBar.ResumeLayout(false);
             panelTitleBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)iconCurrentChildForm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(iconCurrentChildForm)).EndInit();
             panelDesktop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox2)).EndInit();
             ResumeLayout(false);
         }
 
@@ -343,5 +355,6 @@
         private PictureBox pictureBox1;
         private PictureBox pictureBox2;
         private FontAwesome.Sharp.IconButton btnSignOut;
+        private FontAwesome.Sharp.IconButton btnCreateUser;
     }
 }
