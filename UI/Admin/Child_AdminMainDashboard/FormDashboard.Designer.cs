@@ -1,5 +1,4 @@
-﻿// Dán toàn bộ nội dung này vào file: UI/Admin/Child_AdminMainDashboard/FormDashboard.Designer.cs
-namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
+﻿namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
     partial class FormDashboard
     {
@@ -26,6 +25,13 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             splitContainerMain = new SplitContainer();
             dataGridViewPCs = new DataGridView();
             panelControls = new Panel();
+            groupBoxPriceSettings = new GroupBox();
+            labelPriceUnit = new Label();
+            txtNewTimeMinutes = new TextBox();
+            btnSavePriceSettings = new Button();
+            labelNewPrice = new Label();
+            txtNewPrice = new TextBox();
+            lblCurrentPrice = new Label();
             groupBoxEditPC = new GroupBox();
             buttonEditClear = new Button();
             buttonEditSave = new Button();
@@ -56,6 +62,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             splitContainerMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewPCs).BeginInit();
             panelControls.SuspendLayout();
+            groupBoxPriceSettings.SuspendLayout();
             groupBoxEditPC.SuspendLayout();
             groupBoxAddPC.SuspendLayout();
             panelTitle.SuspendLayout();
@@ -77,6 +84,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             // splitContainerMain
             // 
             splitContainerMain.Dock = DockStyle.Fill;
+            splitContainerMain.FixedPanel = FixedPanel.Panel2;
+            splitContainerMain.IsSplitterFixed = true;
             splitContainerMain.Location = new Point(10, 87);
             splitContainerMain.Margin = new Padding(3, 4, 3, 4);
             splitContainerMain.Name = "splitContainerMain";
@@ -136,6 +145,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             // panelControls
             // 
             panelControls.BackColor = Color.FromArgb(36, 38, 65);
+            panelControls.Controls.Add(groupBoxPriceSettings);
             panelControls.Controls.Add(groupBoxEditPC);
             panelControls.Controls.Add(groupBoxAddPC);
             panelControls.Dock = DockStyle.Fill;
@@ -145,6 +155,96 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             panelControls.Padding = new Padding(10, 12, 10, 12);
             panelControls.Size = new Size(406, 801);
             panelControls.TabIndex = 0;
+            // 
+            // groupBoxPriceSettings
+            // 
+            groupBoxPriceSettings.Controls.Add(labelPriceUnit);
+            groupBoxPriceSettings.Controls.Add(txtNewTimeMinutes);
+            groupBoxPriceSettings.Controls.Add(btnSavePriceSettings);
+            groupBoxPriceSettings.Controls.Add(labelNewPrice);
+            groupBoxPriceSettings.Controls.Add(txtNewPrice);
+            groupBoxPriceSettings.Controls.Add(lblCurrentPrice);
+            groupBoxPriceSettings.Dock = DockStyle.Top;
+            groupBoxPriceSettings.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            groupBoxPriceSettings.ForeColor = Color.WhiteSmoke;
+            groupBoxPriceSettings.Location = new Point(10, 687);
+            groupBoxPriceSettings.Margin = new Padding(3, 4, 3, 4);
+            groupBoxPriceSettings.Name = "groupBoxPriceSettings";
+            groupBoxPriceSettings.Padding = new Padding(10, 12, 10, 12);
+            groupBoxPriceSettings.Size = new Size(386, 170);
+            groupBoxPriceSettings.TabIndex = 2;
+            groupBoxPriceSettings.TabStop = false;
+            groupBoxPriceSettings.Text = "Price Per Unit Settings";
+            // 
+            // labelPriceUnit
+            // 
+            labelPriceUnit.AutoSize = true;
+            labelPriceUnit.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            labelPriceUnit.Location = new Point(243, 78);
+            labelPriceUnit.Name = "labelPriceUnit";
+            labelPriceUnit.Size = new Size(58, 23);
+            labelPriceUnit.TabIndex = 16;
+            labelPriceUnit.Text = "VND /";
+            // 
+            // txtNewTimeMinutes
+            // 
+            txtNewTimeMinutes.BackColor = Color.FromArgb(26, 28, 55);
+            txtNewTimeMinutes.BorderStyle = BorderStyle.FixedSingle;
+            txtNewTimeMinutes.Font = new Font("Segoe UI", 10F);
+            txtNewTimeMinutes.ForeColor = Color.WhiteSmoke;
+            txtNewTimeMinutes.Location = new Point(303, 76);
+            txtNewTimeMinutes.Margin = new Padding(3, 4, 3, 4);
+            txtNewTimeMinutes.Name = "txtNewTimeMinutes";
+            txtNewTimeMinutes.Size = new Size(70, 30);
+            txtNewTimeMinutes.TabIndex = 15;
+            // 
+            // btnSavePriceSettings
+            // 
+            btnSavePriceSettings.BackColor = Color.FromArgb(23, 162, 184);
+            btnSavePriceSettings.FlatAppearance.BorderSize = 0;
+            btnSavePriceSettings.FlatStyle = FlatStyle.Flat;
+            btnSavePriceSettings.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            btnSavePriceSettings.Location = new Point(135, 115);
+            btnSavePriceSettings.Margin = new Padding(3, 4, 3, 4);
+            btnSavePriceSettings.Name = "btnSavePriceSettings";
+            btnSavePriceSettings.Size = new Size(120, 50);
+            btnSavePriceSettings.TabIndex = 14;
+            btnSavePriceSettings.Text = "Save Price";
+            btnSavePriceSettings.UseVisualStyleBackColor = false;
+            btnSavePriceSettings.Click += btnSavePriceSettings_Click;
+            // 
+            // labelNewPrice
+            // 
+            labelNewPrice.AutoSize = true;
+            labelNewPrice.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
+            labelNewPrice.Location = new Point(20, 78);
+            labelNewPrice.Name = "labelNewPrice";
+            labelNewPrice.Size = new Size(91, 23);
+            labelNewPrice.TabIndex = 2;
+            labelNewPrice.Text = "New Price:";
+            // 
+            // txtNewPrice
+            // 
+            txtNewPrice.BackColor = Color.FromArgb(26, 28, 55);
+            txtNewPrice.BorderStyle = BorderStyle.FixedSingle;
+            txtNewPrice.Font = new Font("Segoe UI", 10F);
+            txtNewPrice.ForeColor = Color.WhiteSmoke;
+            txtNewPrice.Location = new Point(117, 76);
+            txtNewPrice.Margin = new Padding(3, 4, 3, 4);
+            txtNewPrice.Name = "txtNewPrice";
+            txtNewPrice.Size = new Size(120, 30);
+            txtNewPrice.TabIndex = 1;
+            // 
+            // lblCurrentPrice
+            // 
+            lblCurrentPrice.AutoSize = true;
+            lblCurrentPrice.Font = new Font("Segoe UI", 10F);
+            lblCurrentPrice.ForeColor = Color.FromArgb(170, 216, 211);
+            lblCurrentPrice.Location = new Point(20, 40);
+            lblCurrentPrice.Name = "lblCurrentPrice";
+            lblCurrentPrice.Size = new Size(192, 23);
+            lblCurrentPrice.TabIndex = 0;
+            lblCurrentPrice.Text = "Current Price: Loading...";
             // 
             // groupBoxEditPC
             // 
@@ -169,7 +269,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             groupBoxEditPC.Margin = new Padding(3, 4, 3, 4);
             groupBoxEditPC.Name = "groupBoxEditPC";
             groupBoxEditPC.Padding = new Padding(10, 12, 10, 12);
-            groupBoxEditPC.Size = new Size(386, 475);
+            groupBoxEditPC.Size = new Size(386, 487);
             groupBoxEditPC.TabIndex = 1;
             groupBoxEditPC.TabStop = false;
             groupBoxEditPC.Text = "Edit Selected PC";
@@ -216,7 +316,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             comboBoxEditStatus.Location = new Point(172, 256);
             comboBoxEditStatus.Margin = new Padding(3, 4, 3, 4);
             comboBoxEditStatus.Name = "comboBoxEditStatus";
-            comboBoxEditStatus.Size = new Size(201, 31);
+            comboBoxEditStatus.Size = new Size(204, 31);
             comboBoxEditStatus.TabIndex = 9;
             // 
             // labelEditStatus
@@ -249,7 +349,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             textBoxEditSoTien.Location = new Point(172, 306);
             textBoxEditSoTien.Margin = new Padding(3, 4, 3, 4);
             textBoxEditSoTien.Name = "textBoxEditSoTien";
-            textBoxEditSoTien.Size = new Size(201, 30);
+            textBoxEditSoTien.Size = new Size(204, 30);
             textBoxEditSoTien.TabIndex = 10;
             // 
             // txtEditPhoneNumber
@@ -262,7 +362,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             txtEditPhoneNumber.Location = new Point(172, 156);
             txtEditPhoneNumber.Margin = new Padding(3, 4, 3, 4);
             txtEditPhoneNumber.Name = "txtEditPhoneNumber";
-            txtEditPhoneNumber.Size = new Size(201, 30);
+            txtEditPhoneNumber.Size = new Size(204, 30);
             txtEditPhoneNumber.TabIndex = 7;
             // 
             // labelEditPhoneNumber
@@ -285,7 +385,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             textBoxEditCurrentUser.Location = new Point(172, 206);
             textBoxEditCurrentUser.Margin = new Padding(3, 4, 3, 4);
             textBoxEditCurrentUser.Name = "textBoxEditCurrentUser";
-            textBoxEditCurrentUser.Size = new Size(201, 30);
+            textBoxEditCurrentUser.Size = new Size(204, 30);
             textBoxEditCurrentUser.TabIndex = 8;
             // 
             // labelEditUser
@@ -328,7 +428,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             textBoxEditPCName.Location = new Point(172, 56);
             textBoxEditPCName.Margin = new Padding(3, 4, 3, 4);
             textBoxEditPCName.Name = "textBoxEditPCName";
-            textBoxEditPCName.Size = new Size(201, 30);
+            textBoxEditPCName.Size = new Size(204, 30);
             textBoxEditPCName.TabIndex = 3;
             textBoxEditPCName.Leave += textBoxEditPCName_Leave;
             // 
@@ -342,7 +442,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             textBoxEditDetailInfo.Location = new Point(172, 106);
             textBoxEditDetailInfo.Margin = new Padding(3, 4, 3, 4);
             textBoxEditDetailInfo.Name = "textBoxEditDetailInfo";
-            textBoxEditDetailInfo.Size = new Size(201, 30);
+            textBoxEditDetailInfo.Size = new Size(204, 30);
             textBoxEditDetailInfo.TabIndex = 5;
             // 
             // groupBoxAddPC
@@ -413,7 +513,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             textBoxSequenceNumber.Location = new Point(172, 50);
             textBoxSequenceNumber.Margin = new Padding(3, 4, 3, 4);
             textBoxSequenceNumber.Name = "textBoxSequenceNumber";
-            textBoxSequenceNumber.Size = new Size(201, 30);
+            textBoxSequenceNumber.Size = new Size(204, 30);
             textBoxSequenceNumber.TabIndex = 2;
             // 
             // panelTitle
@@ -440,9 +540,9 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.UpdateTimer_Tick);
+            timer1.Enabled = true;
+            timer1.Interval = 1000;
+            timer1.Tick += UpdateTimer_Tick;
             // 
             // FormDashboard
             // 
@@ -460,6 +560,8 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
             splitContainerMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewPCs).EndInit();
             panelControls.ResumeLayout(false);
+            groupBoxPriceSettings.ResumeLayout(false);
+            groupBoxPriceSettings.PerformLayout();
             groupBoxEditPC.ResumeLayout(false);
             groupBoxEditPC.PerformLayout();
             groupBoxAddPC.ResumeLayout(false);
@@ -498,5 +600,12 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label labelEditPhoneNumber;
         private System.Windows.Forms.TextBox txtEditPhoneNumber;
+        private System.Windows.Forms.GroupBox groupBoxPriceSettings;
+        private System.Windows.Forms.Label lblCurrentPrice;
+        private System.Windows.Forms.Label labelNewPrice;
+        private System.Windows.Forms.TextBox txtNewPrice;
+        private System.Windows.Forms.Button btnSavePriceSettings;
+        private System.Windows.Forms.TextBox txtNewTimeMinutes;
+        private System.Windows.Forms.Label labelPriceUnit;
     }
 }

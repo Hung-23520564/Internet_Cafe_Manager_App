@@ -2,15 +2,8 @@
 {
     partial class Form_UserMainDashboard
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,15 +15,11 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             panelMenu = new Panel();
             btnSignOut = new FontAwesome.Sharp.IconButton();
-            btnSetting = new FontAwesome.Sharp.IconButton();
+            btnSetting = new FontAwesome.Sharp.IconButton(); // KHÔI PHỤC LẠI NÚT
             btnChat = new FontAwesome.Sharp.IconButton();
             btnOrders = new FontAwesome.Sharp.IconButton();
             btnDashboard = new FontAwesome.Sharp.IconButton();
@@ -45,19 +34,19 @@
             pictureBox2 = new PictureBox();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)btnHome).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(btnHome)).BeginInit();
             panelTitleBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)iconCurrentChildForm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(iconCurrentChildForm)).BeginInit();
             panelDesktop.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox2)).BeginInit();
             SuspendLayout();
             // 
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(31, 32, 71);
             panelMenu.Controls.Add(btnSignOut);
-            panelMenu.Controls.Add(btnSetting);
+            panelMenu.Controls.Add(btnSetting); // KHÔI PHỤC LẠI NÚT
             panelMenu.Controls.Add(btnChat);
             panelMenu.Controls.Add(btnOrders);
             panelMenu.Controls.Add(btnDashboard);
@@ -273,7 +262,7 @@
             pictureBox2.TabIndex = 3;
             pictureBox2.TabStop = false;
             // 
-            // Form_UserMacDinh
+            // Form_UserMainDashboard
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -283,18 +272,17 @@
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             FormBorderStyle = FormBorderStyle.FixedSingle;
-            Name = "Form_UserMacDinh";
-            Text = "Admin Main Dashboard";
-            FormClosed += Form_UserMacDinh_FormClosed;
+            Name = "Form_UserMainDashboard";
+            Text = "User Main Dashboard";
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)btnHome).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(btnHome)).EndInit();
             panelTitleBar.ResumeLayout(false);
             panelTitleBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)iconCurrentChildForm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(iconCurrentChildForm)).EndInit();
             panelDesktop.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(pictureBox2)).EndInit();
             ResumeLayout(false);
         }
 

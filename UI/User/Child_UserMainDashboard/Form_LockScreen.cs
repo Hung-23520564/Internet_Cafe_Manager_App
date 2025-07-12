@@ -9,11 +9,10 @@ using System.Windows.Forms;
 
 namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 {
-    public partial class Form_UserPayment : Form
+    public partial class Form_LockScreen : Form
     {
         private readonly Database.Users currentUser;
         private readonly FirebaseDB firebaseDB;
-        private List<Order> unpaidFoodOrders;
         private string _currentPaymentType = "";
         private decimal _currentPaymentAmount = 0;
 
@@ -24,18 +23,37 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
         private const string ADMIN_ACCOUNT_NO = "0606062005";
         private const string ADMIN_ACCOUNT_NAME = "TRAN QUANG HUY";
 
-        public Form_UserPayment(Database.Users user)
+        public Form_LockScreen(Database.Users user)
         {
             InitializeComponent();
             this.currentUser = user;
             this.firebaseDB = new FirebaseDB();
-            this.unpaidFoodOrders = new List<Order>();
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            this.TopMost = true;
+
+            this.Load += Form_LockScreen_Load;
         }
 
-        private async void Form_UserPayment_Load(object sender, EventArgs e)
+        private async void Form_LockScreen_Load(object sender, EventArgs e)
         {
             await LoadPriceSettings();
-            await LoadUnpaidFoodOrders();
+
+            Label infoLabel = new Label
+            {
+                Text = "Thời gian của bạn đã hết!\nVui lòng nạp thêm tiền để tiếp tục.",
+                Font = new Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = Color.White,
+                BackColor = Color.Transparent,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Dock = DockStyle.Top,
+                Height = 150,
+                Padding = new Padding(0, 50, 0, 0)
+            };
+            this.Controls.Add(infoLabel);
+            infoLabel.BringToFront();
+
             CreateTopUpPackages();
         }
 
@@ -63,33 +81,18 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             }
         }
 
-        private async Task LoadUnpaidFoodOrders()
+        public void UnlockScreen()
         {
-            var allOrders = await firebaseDB.GetOrdersForUser(currentUser.Username);
-            unpaidFoodOrders = allOrders
-                .Where(o => o.Type == TransactionType.FoodOrder && o.Status == "Pending")
-                .ToList();
+            this.Close();
+        }
 
-            if (unpaidFoodOrders.Any())
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                var displayList = unpaidFoodOrders
-                    .SelectMany(o => o.Items.Select(item => new {
-                        ItemName = item.Product.Name,
-                        Quantity = item.Quantity,
-                        LineTotal = item.LineTotal
-                    }))
-                    .ToList();
-                dgvFoodOrders.DataSource = displayList;
-                decimal totalBill = unpaidFoodOrders.Sum(o => o.GrandTotal);
-                lblTotalFoodBill.Text = $"Tổng cộng: {totalBill:N0} đ";
-                btnPayFood.Enabled = true;
+                e.Cancel = true;
             }
-            else
-            {
-                dgvFoodOrders.DataSource = null;
-                lblTotalFoodBill.Text = "Không có hóa đơn chưa thanh toán.";
-                btnPayFood.Enabled = false;
-            }
+            base.OnFormClosing(e);
         }
 
         private void CreateTopUpPackages()
@@ -137,17 +140,6 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
             int hours = totalMinutes / 60;
             int minutes = totalMinutes % 60;
             return minutes == 0 ? $"+{hours} tiếng" : $"+{hours} tiếng {minutes} phút";
-        }
-
-        private void btnPayFood_Click(object sender, EventArgs e)
-        {
-            decimal totalBill = unpaidFoodOrders.Sum(o => o.GrandTotal);
-            if (totalBill > 0)
-            {
-                _currentPaymentType = "FoodOrder";
-                _currentPaymentAmount = totalBill;
-                ShowQRCode($"FoodOrder_{currentUser.Username}_{DateTime.Now.Ticks}", totalBill);
-            }
         }
 
         private void PackageButton_Click(object sender, EventArgs e)
@@ -204,42 +196,27 @@ namespace Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard
 
         private async void btnConfirmPayment_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(_currentPaymentType) || _currentPaymentAmount <= 0) return;
+            if (_currentPaymentType != "PCUsage" || _currentPaymentAmount <= 0) return;
 
-            bool success = false;
-            if (_currentPaymentType == "FoodOrder")
+            var topUpOrder = new Order
             {
-                List<Task> updateTasks = new List<Task>();
-                foreach (var order in unpaidFoodOrders)
-                {
-                    updateTasks.Add(firebaseDB.UpdateOrderStatus(order.OrderId, "Processing"));
-                }
-                await Task.WhenAll(updateTasks);
-                success = true;
-            }
-            else if (_currentPaymentType == "PCUsage")
-            {
-                var topUpOrder = new Order
-                {
-                    OrderId = Guid.NewGuid().ToString(),
-                    UserID = currentUser.UserId,
-                    Username = currentUser.Username,
-                    GrandTotal = _currentPaymentAmount,
-                    Timestamp = DateTime.UtcNow,
-                    Status = "Processing",
-                    Type = TransactionType.PcUsage,
-                    Description = $"Nạp {_currentPaymentAmount:N0} đ",
-                    TimePurchased = PC.CalculateTotalTimeFromBudget((int)_currentPaymentAmount, currentPricePerUnit, currentTimePerUnitMinutes)
-                };
-                success = await firebaseDB.AddOrder(topUpOrder);
-            }
+                OrderId = Guid.NewGuid().ToString(),
+                UserID = currentUser.UserId,
+                Username = currentUser.Username,
+                GrandTotal = _currentPaymentAmount,
+                Timestamp = DateTime.UtcNow,
+                Status = "Processing",
+                Type = TransactionType.PcUsage,
+                Description = $"Nạp {_currentPaymentAmount:N0} đ",
+                TimePurchased = PC.CalculateTotalTimeFromBudget((int)_currentPaymentAmount, currentPricePerUnit, currentTimePerUnitMinutes)
+            };
+            bool success = await firebaseDB.AddOrder(topUpOrder);
 
             if (success)
             {
                 MessageBox.Show("Đã gửi yêu cầu. Vui lòng chờ quản trị viên xác nhận.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 panelQRCode.Visible = false;
                 btnConfirmPayment.Visible = false;
-                await LoadUnpaidFoodOrders();
             }
             else
             {
