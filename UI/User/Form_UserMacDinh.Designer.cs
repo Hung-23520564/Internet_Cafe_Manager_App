@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_UserMacDinh));
             panelMenu = new Panel();
             btnSignOut = new FontAwesome.Sharp.IconButton();
             btnSetting = new FontAwesome.Sharp.IconButton();
@@ -186,6 +187,7 @@
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Padding = new Padding(0, 0, 20, 0);
@@ -265,6 +267,7 @@
             // pictureBox2
             // 
             pictureBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(311, 123);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Padding = new Padding(0, 0, 20, 0);
