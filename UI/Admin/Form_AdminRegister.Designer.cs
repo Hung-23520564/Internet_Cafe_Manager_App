@@ -17,360 +17,377 @@
 
         private void InitializeComponent()
         {
-            panelMain = new Panel();
-            linkLabel1 = new LinkLabel();
-            btnRegister = new Button();
-            panelConfirmPasswordUnderline = new Panel();
-            txtConfirmPassword = new TextBox();
-            label5 = new Label();
-            panelPasswordUnderline = new Panel();
-            txtPassword = new TextBox();
-            label3 = new Label();
-            panelPhoneNumberUnderline = new Panel();
-            txtPhoneNumber = new TextBox();
-            label7 = new Label();
-            panelEmailUnderline = new Panel();
-            txtEmail = new TextBox();
-            label6 = new Label();
-            panelUsernameUnderline = new Panel();
-            txtAdminAccount = new TextBox();
-            label1 = new Label();
-            panelFullNameUnderline = new Panel();
-            txtFullName = new TextBox();
-            label4 = new Label();
-            label2 = new Label();
-            picLogo = new FontAwesome.Sharp.IconPictureBox();
-            panelMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)picLogo).BeginInit();
-            SuspendLayout();
+            this.panelMain = new System.Windows.Forms.Panel();
+            this.llbBackToLogin = new System.Windows.Forms.LinkLabel();
+            this.btnRegister = new System.Windows.Forms.Button();
+            this.panelConfirmPasswordUnderline = new System.Windows.Forms.Panel();
+            this.txtConfirmPassword = new System.Windows.Forms.TextBox();
+            this.iconConfirmPassword = new FontAwesome.Sharp.IconPictureBox();
+            this.panelPasswordUnderline = new System.Windows.Forms.Panel();
+            this.txtPassword = new System.Windows.Forms.TextBox();
+            this.iconPassword = new FontAwesome.Sharp.IconPictureBox();
+            this.panelPhoneUnderline = new System.Windows.Forms.Panel();
+            this.txtPhoneNumber = new System.Windows.Forms.TextBox();
+            this.iconPhone = new FontAwesome.Sharp.IconPictureBox();
+            this.panelEmailUnderline = new System.Windows.Forms.Panel();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.iconEmail = new FontAwesome.Sharp.IconPictureBox();
+            this.panelUsernameUnderline = new System.Windows.Forms.Panel();
+            this.txtAdminAccount = new System.Windows.Forms.TextBox();
+            this.iconUsername = new FontAwesome.Sharp.IconPictureBox();
+            this.panelFullNameUnderline = new System.Windows.Forms.Panel();
+            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.iconFullName = new FontAwesome.Sharp.IconPictureBox();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.picLogo = new FontAwesome.Sharp.IconPictureBox();
+            this.panelMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconConfirmPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPassword)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPhone)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconEmail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconUsername)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconFullName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            this.SuspendLayout();
             // 
             // panelMain
             // 
-            panelMain.BackColor = Color.FromArgb(31, 32, 71);
-            panelMain.Controls.Add(linkLabel1);
-            panelMain.Controls.Add(btnRegister);
-            panelMain.Controls.Add(panelConfirmPasswordUnderline);
-            panelMain.Controls.Add(txtConfirmPassword);
-            panelMain.Controls.Add(label5);
-            panelMain.Controls.Add(panelPasswordUnderline);
-            panelMain.Controls.Add(txtPassword);
-            panelMain.Controls.Add(label3);
-            panelMain.Controls.Add(panelPhoneNumberUnderline);
-            panelMain.Controls.Add(txtPhoneNumber);
-            panelMain.Controls.Add(label7);
-            panelMain.Controls.Add(panelEmailUnderline);
-            panelMain.Controls.Add(txtEmail);
-            panelMain.Controls.Add(label6);
-            panelMain.Controls.Add(panelUsernameUnderline);
-            panelMain.Controls.Add(txtAdminAccount);
-            panelMain.Controls.Add(label1);
-            panelMain.Controls.Add(panelFullNameUnderline);
-            panelMain.Controls.Add(txtFullName);
-            panelMain.Controls.Add(label4);
-            panelMain.Controls.Add(label2);
-            panelMain.Controls.Add(picLogo);
-            panelMain.Dock = DockStyle.Fill;
-            panelMain.Location = new Point(0, 0);
-            panelMain.Margin = new Padding(4, 5, 4, 5);
-            panelMain.Name = "panelMain";
-            panelMain.Size = new Size(560, 1055);
-            panelMain.TabIndex = 0;
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.panelMain.Controls.Add(this.llbBackToLogin);
+            this.panelMain.Controls.Add(this.btnRegister);
+            this.panelMain.Controls.Add(this.panelConfirmPasswordUnderline);
+            this.panelMain.Controls.Add(this.txtConfirmPassword);
+            this.panelMain.Controls.Add(this.iconConfirmPassword);
+            this.panelMain.Controls.Add(this.panelPasswordUnderline);
+            this.panelMain.Controls.Add(this.txtPassword);
+            this.panelMain.Controls.Add(this.iconPassword);
+            this.panelMain.Controls.Add(this.panelPhoneUnderline);
+            this.panelMain.Controls.Add(this.txtPhoneNumber);
+            this.panelMain.Controls.Add(this.iconPhone);
+            this.panelMain.Controls.Add(this.panelEmailUnderline);
+            this.panelMain.Controls.Add(this.txtEmail);
+            this.panelMain.Controls.Add(this.iconEmail);
+            this.panelMain.Controls.Add(this.panelUsernameUnderline);
+            this.panelMain.Controls.Add(this.txtAdminAccount);
+            this.panelMain.Controls.Add(this.iconUsername);
+            this.panelMain.Controls.Add(this.panelFullNameUnderline);
+            this.panelMain.Controls.Add(this.txtFullName);
+            this.panelMain.Controls.Add(this.iconFullName);
+            this.panelMain.Controls.Add(this.labelTitle);
+            this.panelMain.Controls.Add(this.picLogo);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(480, 700);
+            this.panelMain.TabIndex = 0;
             // 
-            // linkLabel1
+            // llbBackToLogin
             // 
-            linkLabel1.ActiveLinkColor = Color.FromArgb(253, 138, 114);
-            linkLabel1.AutoSize = true;
-            linkLabel1.Font = new Font("Segoe UI", 9F);
-            linkLabel1.LinkColor = Color.WhiteSmoke;
-            linkLabel1.Location = new Point(147, 1100);
-            linkLabel1.Margin = new Padding(4, 0, 4, 0);
-            linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(219, 20);
-            linkLabel1.TabIndex = 7;
-            linkLabel1.TabStop = true;
-            linkLabel1.Text = "Already have an account? Login";
-            linkLabel1.LinkClicked += llbBackToLogin_Click;
+            this.llbBackToLogin.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(138)))), ((int)(((byte)(114)))));
+            this.llbBackToLogin.AutoSize = true;
+            this.llbBackToLogin.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.llbBackToLogin.LinkColor = System.Drawing.Color.WhiteSmoke;
+            this.llbBackToLogin.Location = new System.Drawing.Point(140, 650);
+            this.llbBackToLogin.Name = "llbBackToLogin";
+            this.llbBackToLogin.Size = new System.Drawing.Size(200, 15);
+            this.llbBackToLogin.TabIndex = 7;
+            this.llbBackToLogin.TabStop = true;
+            this.llbBackToLogin.Text = "Already have an account? Login";
+            this.llbBackToLogin.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llbBackToLogin_Click);
             // 
             // btnRegister
             // 
-            btnRegister.BackColor = Color.FromArgb(253, 138, 114);
-            btnRegister.FlatAppearance.BorderSize = 0;
-            btnRegister.FlatStyle = FlatStyle.Flat;
-            btnRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            btnRegister.ForeColor = Color.White;
-            btnRegister.Location = new Point(80, 1000);
-            btnRegister.Margin = new Padding(4, 5, 4, 5);
-            btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(400, 77);
-            btnRegister.TabIndex = 6;
-            btnRegister.Text = "CREATE ACCOUNT";
-            btnRegister.UseVisualStyleBackColor = false;
-            btnRegister.Click += btnRegister_Click;
+            this.btnRegister.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(138)))), ((int)(((byte)(114)))));
+            this.btnRegister.FlatAppearance.BorderSize = 0;
+            this.btnRegister.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRegister.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.btnRegister.ForeColor = System.Drawing.Color.White;
+            this.btnRegister.Location = new System.Drawing.Point(90, 580);
+            this.btnRegister.Name = "btnRegister";
+            this.btnRegister.Size = new System.Drawing.Size(300, 50);
+            this.btnRegister.TabIndex = 6;
+            this.btnRegister.Text = "CREATE ACCOUNT";
+            this.btnRegister.UseVisualStyleBackColor = false;
+            this.btnRegister.Click += new System.EventHandler(this.btnRegister_Click);
             // 
             // panelConfirmPasswordUnderline
             // 
-            panelConfirmPasswordUnderline.BackColor = Color.WhiteSmoke;
-            panelConfirmPasswordUnderline.Location = new Point(80, 923);
-            panelConfirmPasswordUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelConfirmPasswordUnderline.Name = "panelConfirmPasswordUnderline";
-            panelConfirmPasswordUnderline.Size = new Size(400, 2);
-            panelConfirmPasswordUnderline.TabIndex = 20;
+            this.panelConfirmPasswordUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelConfirmPasswordUnderline.Location = new System.Drawing.Point(90, 535);
+            this.panelConfirmPasswordUnderline.Name = "panelConfirmPasswordUnderline";
+            this.panelConfirmPasswordUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelConfirmPasswordUnderline.TabIndex = 22;
             // 
             // txtConfirmPassword
             // 
-            txtConfirmPassword.BackColor = Color.FromArgb(31, 32, 71);
-            txtConfirmPassword.BorderStyle = BorderStyle.None;
-            txtConfirmPassword.Font = new Font("Segoe UI", 12F);
-            txtConfirmPassword.ForeColor = Color.White;
-            txtConfirmPassword.Location = new Point(80, 880);
-            txtConfirmPassword.Margin = new Padding(4, 5, 4, 5);
-            txtConfirmPassword.Name = "txtConfirmPassword";
-            txtConfirmPassword.Size = new Size(400, 27);
-            txtConfirmPassword.TabIndex = 5;
+            this.txtConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtConfirmPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtConfirmPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtConfirmPassword.Location = new System.Drawing.Point(130, 505);
+            this.txtConfirmPassword.Name = "txtConfirmPassword";
+            this.txtConfirmPassword.PlaceholderText = "Confirm Password";
+            this.txtConfirmPassword.Size = new System.Drawing.Size(260, 22);
+            this.txtConfirmPassword.TabIndex = 5;
             // 
-            // label5
+            // iconConfirmPassword
             // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label5.ForeColor = Color.Gainsboro;
-            label5.Location = new Point(75, 831);
-            label5.Margin = new Padding(4, 0, 4, 0);
-            label5.Name = "label5";
-            label5.Size = new Size(149, 23);
-            label5.TabIndex = 18;
-            label5.Text = "Confirm Password";
+            this.iconConfirmPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconConfirmPassword.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconConfirmPassword.IconChar = FontAwesome.Sharp.IconChar.Lock;
+            this.iconConfirmPassword.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconConfirmPassword.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconConfirmPassword.IconSize = 24;
+            this.iconConfirmPassword.Location = new System.Drawing.Point(90, 503);
+            this.iconConfirmPassword.Name = "iconConfirmPassword";
+            this.iconConfirmPassword.Size = new System.Drawing.Size(24, 24);
+            this.iconConfirmPassword.TabIndex = 20;
+            this.iconConfirmPassword.TabStop = false;
             // 
             // panelPasswordUnderline
             // 
-            panelPasswordUnderline.BackColor = Color.WhiteSmoke;
-            panelPasswordUnderline.Location = new Point(80, 800);
-            panelPasswordUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelPasswordUnderline.Name = "panelPasswordUnderline";
-            panelPasswordUnderline.Size = new Size(400, 2);
-            panelPasswordUnderline.TabIndex = 17;
+            this.panelPasswordUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelPasswordUnderline.Location = new System.Drawing.Point(90, 475);
+            this.panelPasswordUnderline.Name = "panelPasswordUnderline";
+            this.panelPasswordUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelPasswordUnderline.TabIndex = 19;
             // 
             // txtPassword
             // 
-            txtPassword.BackColor = Color.FromArgb(31, 32, 71);
-            txtPassword.BorderStyle = BorderStyle.None;
-            txtPassword.Font = new Font("Segoe UI", 12F);
-            txtPassword.ForeColor = Color.White;
-            txtPassword.Location = new Point(80, 757);
-            txtPassword.Margin = new Padding(4, 5, 4, 5);
-            txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(400, 27);
-            txtPassword.TabIndex = 4;
+            this.txtPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtPassword.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPassword.Location = new System.Drawing.Point(130, 445);
+            this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PlaceholderText = "Password";
+            this.txtPassword.Size = new System.Drawing.Size(260, 22);
+            this.txtPassword.TabIndex = 4;
             // 
-            // label3
+            // iconPassword
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label3.ForeColor = Color.Gainsboro;
-            label3.Location = new Point(75, 708);
-            label3.Margin = new Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new Size(82, 23);
-            label3.TabIndex = 15;
-            label3.Text = "Password";
+            this.iconPassword.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconPassword.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconPassword.IconChar = FontAwesome.Sharp.IconChar.Lock;
+            this.iconPassword.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconPassword.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPassword.IconSize = 24;
+            this.iconPassword.Location = new System.Drawing.Point(90, 443);
+            this.iconPassword.Name = "iconPassword";
+            this.iconPassword.Size = new System.Drawing.Size(24, 24);
+            this.iconPassword.TabIndex = 17;
+            this.iconPassword.TabStop = false;
             // 
-            // panelPhoneNumberUnderline
+            // panelPhoneUnderline
             // 
-            panelPhoneNumberUnderline.BackColor = Color.WhiteSmoke;
-            panelPhoneNumberUnderline.Location = new Point(80, 677);
-            panelPhoneNumberUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelPhoneNumberUnderline.Name = "panelPhoneNumberUnderline";
-            panelPhoneNumberUnderline.Size = new Size(400, 2);
-            panelPhoneNumberUnderline.TabIndex = 14;
+            this.panelPhoneUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelPhoneUnderline.Location = new System.Drawing.Point(90, 415);
+            this.panelPhoneUnderline.Name = "panelPhoneUnderline";
+            this.panelPhoneUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelPhoneUnderline.TabIndex = 16;
             // 
             // txtPhoneNumber
             // 
-            txtPhoneNumber.BackColor = Color.FromArgb(31, 32, 71);
-            txtPhoneNumber.BorderStyle = BorderStyle.None;
-            txtPhoneNumber.Font = new Font("Segoe UI", 12F);
-            txtPhoneNumber.ForeColor = Color.White;
-            txtPhoneNumber.Location = new Point(80, 634);
-            txtPhoneNumber.Margin = new Padding(4, 5, 4, 5);
-            txtPhoneNumber.Name = "txtPhoneNumber";
-            txtPhoneNumber.Size = new Size(400, 27);
-            txtPhoneNumber.TabIndex = 3;
+            this.txtPhoneNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtPhoneNumber.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtPhoneNumber.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtPhoneNumber.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtPhoneNumber.Location = new System.Drawing.Point(130, 385);
+            this.txtPhoneNumber.Name = "txtPhoneNumber";
+            this.txtPhoneNumber.PlaceholderText = "Phone Number";
+            this.txtPhoneNumber.Size = new System.Drawing.Size(260, 22);
+            this.txtPhoneNumber.TabIndex = 3;
             // 
-            // label7
+            // iconPhone
             // 
-            label7.AutoSize = true;
-            label7.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label7.ForeColor = Color.Gainsboro;
-            label7.Location = new Point(75, 585);
-            label7.Margin = new Padding(4, 0, 4, 0);
-            label7.Name = "label7";
-            label7.Size = new Size(127, 23);
-            label7.TabIndex = 12;
-            label7.Text = "Phone Number";
+            this.iconPhone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconPhone.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconPhone.IconChar = FontAwesome.Sharp.IconChar.Phone;
+            this.iconPhone.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconPhone.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPhone.IconSize = 24;
+            this.iconPhone.Location = new System.Drawing.Point(90, 383);
+            this.iconPhone.Name = "iconPhone";
+            this.iconPhone.Size = new System.Drawing.Size(24, 24);
+            this.iconPhone.TabIndex = 14;
+            this.iconPhone.TabStop = false;
             // 
             // panelEmailUnderline
             // 
-            panelEmailUnderline.BackColor = Color.WhiteSmoke;
-            panelEmailUnderline.Location = new Point(80, 569);
-            panelEmailUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelEmailUnderline.Name = "panelEmailUnderline";
-            panelEmailUnderline.Size = new Size(400, 2);
-            panelEmailUnderline.TabIndex = 11;
+            this.panelEmailUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelEmailUnderline.Location = new System.Drawing.Point(90, 355);
+            this.panelEmailUnderline.Name = "panelEmailUnderline";
+            this.panelEmailUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelEmailUnderline.TabIndex = 13;
             // 
             // txtEmail
             // 
-            txtEmail.BackColor = Color.FromArgb(31, 32, 71);
-            txtEmail.BorderStyle = BorderStyle.None;
-            txtEmail.Font = new Font("Segoe UI", 12F);
-            txtEmail.ForeColor = Color.White;
-            txtEmail.Location = new Point(80, 526);
-            txtEmail.Margin = new Padding(4, 5, 4, 5);
-            txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(400, 27);
-            txtEmail.TabIndex = 2;
+            this.txtEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtEmail.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtEmail.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtEmail.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtEmail.Location = new System.Drawing.Point(130, 325);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.PlaceholderText = "Email";
+            this.txtEmail.Size = new System.Drawing.Size(260, 22);
+            this.txtEmail.TabIndex = 2;
             // 
-            // label6
+            // iconEmail
             // 
-            label6.AutoSize = true;
-            label6.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label6.ForeColor = Color.Gainsboro;
-            label6.Location = new Point(75, 477);
-            label6.Margin = new Padding(4, 0, 4, 0);
-            label6.Name = "label6";
-            label6.Size = new Size(51, 23);
-            label6.TabIndex = 9;
-            label6.Text = "Email";
+            this.iconEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconEmail.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconEmail.IconChar = FontAwesome.Sharp.IconChar.Envelope;
+            this.iconEmail.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconEmail.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconEmail.IconSize = 24;
+            this.iconEmail.Location = new System.Drawing.Point(90, 323);
+            this.iconEmail.Name = "iconEmail";
+            this.iconEmail.Size = new System.Drawing.Size(24, 24);
+            this.iconEmail.TabIndex = 11;
+            this.iconEmail.TabStop = false;
             // 
             // panelUsernameUnderline
             // 
-            panelUsernameUnderline.BackColor = Color.WhiteSmoke;
-            panelUsernameUnderline.Location = new Point(80, 462);
-            panelUsernameUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelUsernameUnderline.Name = "panelUsernameUnderline";
-            panelUsernameUnderline.Size = new Size(400, 2);
-            panelUsernameUnderline.TabIndex = 8;
+            this.panelUsernameUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelUsernameUnderline.Location = new System.Drawing.Point(90, 295);
+            this.panelUsernameUnderline.Name = "panelUsernameUnderline";
+            this.panelUsernameUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelUsernameUnderline.TabIndex = 10;
             // 
             // txtAdminAccount
             // 
-            txtAdminAccount.BackColor = Color.FromArgb(31, 32, 71);
-            txtAdminAccount.BorderStyle = BorderStyle.None;
-            txtAdminAccount.Font = new Font("Segoe UI", 12F);
-            txtAdminAccount.ForeColor = Color.White;
-            txtAdminAccount.Location = new Point(80, 418);
-            txtAdminAccount.Margin = new Padding(4, 5, 4, 5);
-            txtAdminAccount.Name = "txtAdminAccount";
-            txtAdminAccount.Size = new Size(400, 27);
-            txtAdminAccount.TabIndex = 1;
+            this.txtAdminAccount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtAdminAccount.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtAdminAccount.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtAdminAccount.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtAdminAccount.Location = new System.Drawing.Point(130, 265);
+            this.txtAdminAccount.Name = "txtAdminAccount";
+            this.txtAdminAccount.PlaceholderText = "Username";
+            this.txtAdminAccount.Size = new System.Drawing.Size(260, 22);
+            this.txtAdminAccount.TabIndex = 1;
             // 
-            // label1
+            // iconUsername
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label1.ForeColor = Color.Gainsboro;
-            label1.Location = new Point(75, 369);
-            label1.Margin = new Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new Size(128, 23);
-            label1.TabIndex = 6;
-            label1.Text = "Admin Account";
+            this.iconUsername.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconUsername.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconUsername.IconChar = FontAwesome.Sharp.IconChar.UserAlt;
+            this.iconUsername.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconUsername.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconUsername.IconSize = 24;
+            this.iconUsername.Location = new System.Drawing.Point(90, 263);
+            this.iconUsername.Name = "iconUsername";
+            this.iconUsername.Size = new System.Drawing.Size(24, 24);
+            this.iconUsername.TabIndex = 8;
+            this.iconUsername.TabStop = false;
             // 
             // panelFullNameUnderline
             // 
-            panelFullNameUnderline.BackColor = Color.WhiteSmoke;
-            panelFullNameUnderline.Location = new Point(80, 354);
-            panelFullNameUnderline.Margin = new Padding(4, 5, 4, 5);
-            panelFullNameUnderline.Name = "panelFullNameUnderline";
-            panelFullNameUnderline.Size = new Size(400, 2);
-            panelFullNameUnderline.TabIndex = 5;
+            this.panelFullNameUnderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelFullNameUnderline.Location = new System.Drawing.Point(90, 235);
+            this.panelFullNameUnderline.Name = "panelFullNameUnderline";
+            this.panelFullNameUnderline.Size = new System.Drawing.Size(300, 1);
+            this.panelFullNameUnderline.TabIndex = 7;
             // 
             // txtFullName
             // 
-            txtFullName.BackColor = Color.FromArgb(31, 32, 71);
-            txtFullName.BorderStyle = BorderStyle.None;
-            txtFullName.Font = new Font("Segoe UI", 12F);
-            txtFullName.ForeColor = Color.White;
-            txtFullName.Location = new Point(80, 311);
-            txtFullName.Margin = new Padding(4, 5, 4, 5);
-            txtFullName.Name = "txtFullName";
-            txtFullName.Size = new Size(400, 27);
-            txtFullName.TabIndex = 0;
+            this.txtFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.txtFullName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtFullName.Font = new System.Drawing.Font("Segoe UI", 12F);
+            this.txtFullName.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.txtFullName.Location = new System.Drawing.Point(130, 205);
+            this.txtFullName.Name = "txtFullName";
+            this.txtFullName.PlaceholderText = "Full Name";
+            this.txtFullName.Size = new System.Drawing.Size(260, 22);
+            this.txtFullName.TabIndex = 0;
             // 
-            // label4
+            // iconFullName
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI Semibold", 10F, FontStyle.Bold);
-            label4.ForeColor = Color.Gainsboro;
-            label4.Location = new Point(75, 262);
-            label4.Margin = new Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new Size(88, 23);
-            label4.TabIndex = 3;
-            label4.Text = "Full Name";
+            this.iconFullName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.iconFullName.ForeColor = System.Drawing.Color.Gainsboro;
+            this.iconFullName.IconChar = FontAwesome.Sharp.IconChar.AddressCard;
+            this.iconFullName.IconColor = System.Drawing.Color.Gainsboro;
+            this.iconFullName.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconFullName.IconSize = 24;
+            this.iconFullName.Location = new System.Drawing.Point(90, 203);
+            this.iconFullName.Name = "iconFullName";
+            this.iconFullName.Size = new System.Drawing.Size(24, 24);
+            this.iconFullName.TabIndex = 5;
+            this.iconFullName.TabStop = false;
             // 
-            // label2
+            // labelTitle
             // 
-            label2.Location = new Point(0, 0);
-            label2.Margin = new Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new Size(133, 35);
-            label2.TabIndex = 21;
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.labelTitle.ForeColor = System.Drawing.Color.White;
+            this.labelTitle.Location = new System.Drawing.Point(155, 120);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(166, 45);
+            this.labelTitle.TabIndex = 4;
+            this.labelTitle.Text = "REGISTER";
             // 
             // picLogo
             // 
-            picLogo.BackColor = Color.FromArgb(31, 32, 71);
-            picLogo.ForeColor = SystemColors.ControlText;
-            picLogo.IconChar = FontAwesome.Sharp.IconChar.None;
-            picLogo.IconColor = SystemColors.ControlText;
-            picLogo.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            picLogo.IconSize = 43;
-            picLogo.Location = new Point(0, 0);
-            picLogo.Margin = new Padding(4, 5, 4, 5);
-            picLogo.Name = "picLogo";
-            picLogo.Size = new Size(43, 49);
-            picLogo.TabIndex = 22;
-            picLogo.TabStop = false;
+            this.picLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(32)))), ((int)(((byte)(71)))));
+            this.picLogo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(138)))), ((int)(((byte)(114)))));
+            this.picLogo.IconChar = FontAwesome.Sharp.IconChar.UserPlus;
+            this.picLogo.IconColor = System.Drawing.Color.FromArgb(((int)(((byte)(253)))), ((int)(((byte)(138)))), ((int)(((byte)(114)))));
+            this.picLogo.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.picLogo.IconSize = 80;
+            this.picLogo.Location = new System.Drawing.Point(200, 30);
+            this.picLogo.Name = "picLogo";
+            this.picLogo.Size = new System.Drawing.Size(80, 80);
+            this.picLogo.TabIndex = 3;
+            this.picLogo.TabStop = false;
             // 
             // Form_AdminRegister
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(560, 1055);
-            Controls.Add(panelMain);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
-            Margin = new Padding(4, 5, 4, 5);
-            MaximizeBox = false;
-            Name = "Form_AdminRegister";
-            StartPosition = FormStartPosition.CenterScreen;
-            Text = "Admin Register";
-            FormClosed += Form_AdminRegister_FormClosed_1;
-            panelMain.ResumeLayout(false);
-            panelMain.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)picLogo).EndInit();
-            ResumeLayout(false);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(480, 700);
+            this.Controls.Add(this.panelMain);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.Name = "Form_AdminRegister";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Admin Register";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_AdminRegister_FormClosed);
+            this.panelMain.ResumeLayout(false);
+            this.panelMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconConfirmPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPassword)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPhone)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconEmail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconUsername)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iconFullName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
 
         private System.Windows.Forms.Panel panelMain;
         private FontAwesome.Sharp.IconPictureBox picLogo;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelTitle;
+        private FontAwesome.Sharp.IconPictureBox iconFullName;
         private System.Windows.Forms.TextBox txtFullName;
         private System.Windows.Forms.Panel panelFullNameUnderline;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox txtAdminAccount;
         private System.Windows.Forms.Panel panelUsernameUnderline;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtAdminAccount;
+        private FontAwesome.Sharp.IconPictureBox iconUsername;
         private System.Windows.Forms.Panel panelEmailUnderline;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtEmail;
+        private FontAwesome.Sharp.IconPictureBox iconEmail;
+        private System.Windows.Forms.Panel panelPhoneUnderline;
         private System.Windows.Forms.TextBox txtPhoneNumber;
-        private System.Windows.Forms.Panel panelPhoneNumberUnderline;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtPassword;
+        private FontAwesome.Sharp.IconPictureBox iconPhone;
         private System.Windows.Forms.Panel panelPasswordUnderline;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtConfirmPassword;
+        private System.Windows.Forms.TextBox txtPassword;
+        private FontAwesome.Sharp.IconPictureBox iconPassword;
         private System.Windows.Forms.Panel panelConfirmPasswordUnderline;
+        private System.Windows.Forms.TextBox txtConfirmPassword;
+        private FontAwesome.Sharp.IconPictureBox iconConfirmPassword;
         private System.Windows.Forms.Button btnRegister;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel llbBackToLogin;
     }
 }

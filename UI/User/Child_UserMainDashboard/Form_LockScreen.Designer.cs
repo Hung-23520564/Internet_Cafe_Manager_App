@@ -17,130 +17,136 @@
 
         private void InitializeComponent()
         {
-            this.panelMain = new System.Windows.Forms.Panel();
-            this.panelQRCode = new System.Windows.Forms.Panel();
-            this.lblQRInstruction = new System.Windows.Forms.Label();
-            this.picQRCode = new System.Windows.Forms.PictureBox();
-            this.lblQRTitle = new System.Windows.Forms.Label();
-            this.panelActions = new System.Windows.Forms.Panel();
-            this.btnConfirmPayment = new System.Windows.Forms.Button();
-            this.flowLayoutPanelPackages = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelMain.SuspendLayout();
-            this.panelQRCode.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).BeginInit();
-            this.panelActions.SuspendLayout();
-            this.SuspendLayout();
+            panelMain = new Panel();
+            panelQRCode = new Panel();
+            lblQRInstruction = new Label();
+            picQRCode = new PictureBox();
+            lblQRTitle = new Label();
+            panelActions = new Panel();
+            btnConfirmPayment = new Button();
+            flowLayoutPanelPackages = new FlowLayoutPanel();
+            panelMain.SuspendLayout();
+            panelQRCode.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picQRCode).BeginInit();
+            panelActions.SuspendLayout();
+            SuspendLayout();
             // 
             // panelMain
             // 
-            this.panelMain.Controls.Add(this.panelQRCode);
-            this.panelMain.Controls.Add(this.panelActions);
-            this.panelMain.Controls.Add(this.flowLayoutPanelPackages);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(0, 0);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(1200, 700);
-            this.panelMain.TabIndex = 0;
+            panelMain.Controls.Add(panelQRCode);
+            panelMain.Controls.Add(panelActions);
+            panelMain.Controls.Add(flowLayoutPanelPackages);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 0);
+            panelMain.Margin = new Padding(3, 4, 3, 4);
+            panelMain.Name = "panelMain";
+            panelMain.Padding = new Padding(20, 25, 20, 25);
+            panelMain.Size = new Size(1200, 875);
+            panelMain.TabIndex = 0;
             // 
             // panelQRCode
             // 
-            this.panelQRCode.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.panelQRCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(75)))));
-            this.panelQRCode.Controls.Add(this.lblQRInstruction);
-            this.panelQRCode.Controls.Add(this.picQRCode);
-            this.panelQRCode.Controls.Add(this.lblQRTitle);
-            this.panelQRCode.Location = new System.Drawing.Point(747, 169);
-            this.panelQRCode.Name = "panelQRCode";
-            this.panelQRCode.Padding = new System.Windows.Forms.Padding(15);
-            this.panelQRCode.Size = new System.Drawing.Size(360, 470);
-            this.panelQRCode.TabIndex = 2;
-            this.panelQRCode.Visible = false;
+            panelQRCode.Anchor = AnchorStyles.None;
+            panelQRCode.BackColor = Color.FromArgb(41, 44, 75);
+            panelQRCode.Controls.Add(lblQRInstruction);
+            panelQRCode.Controls.Add(picQRCode);
+            panelQRCode.Controls.Add(lblQRTitle);
+            panelQRCode.Location = new Point(747, 211);
+            panelQRCode.Margin = new Padding(3, 4, 3, 4);
+            panelQRCode.Name = "panelQRCode";
+            panelQRCode.Padding = new Padding(15, 19, 15, 19);
+            panelQRCode.Size = new Size(360, 588);
+            panelQRCode.TabIndex = 2;
+            panelQRCode.Visible = false;
             // 
             // lblQRInstruction
             // 
-            this.lblQRInstruction.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblQRInstruction.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQRInstruction.ForeColor = System.Drawing.Color.Gainsboro;
-            this.lblQRInstruction.Location = new System.Drawing.Point(15, 335);
-            this.lblQRInstruction.Name = "lblQRInstruction";
-            this.lblQRInstruction.Padding = new System.Windows.Forms.Padding(10, 20, 10, 0);
-            this.lblQRInstruction.Size = new System.Drawing.Size(330, 120);
-            this.lblQRInstruction.TabIndex = 2;
-            this.lblQRInstruction.Text = "Nội dung chuyển khoản...";
-            this.lblQRInstruction.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            lblQRInstruction.Dock = DockStyle.Fill;
+            lblQRInstruction.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblQRInstruction.ForeColor = Color.Gainsboro;
+            lblQRInstruction.Location = new Point(15, 419);
+            lblQRInstruction.Name = "lblQRInstruction";
+            lblQRInstruction.Padding = new Padding(10, 25, 10, 0);
+            lblQRInstruction.Size = new Size(330, 150);
+            lblQRInstruction.TabIndex = 2;
+            lblQRInstruction.Text = "Nội dung chuyển khoản...";
+            lblQRInstruction.TextAlign = ContentAlignment.TopCenter;
             // 
             // picQRCode
             // 
-            this.picQRCode.Dock = System.Windows.Forms.DockStyle.Top;
-            this.picQRCode.Location = new System.Drawing.Point(15, 55);
-            this.picQRCode.Name = "picQRCode";
-            this.picQRCode.Size = new System.Drawing.Size(330, 280);
-            this.picQRCode.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picQRCode.TabIndex = 1;
-            this.picQRCode.TabStop = false;
+            picQRCode.Dock = DockStyle.Top;
+            picQRCode.Location = new Point(15, 69);
+            picQRCode.Margin = new Padding(3, 4, 3, 4);
+            picQRCode.Name = "picQRCode";
+            picQRCode.Size = new Size(330, 350);
+            picQRCode.SizeMode = PictureBoxSizeMode.Zoom;
+            picQRCode.TabIndex = 1;
+            picQRCode.TabStop = false;
             // 
             // lblQRTitle
             // 
-            this.lblQRTitle.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblQRTitle.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQRTitle.ForeColor = System.Drawing.Color.White;
-            this.lblQRTitle.Location = new System.Drawing.Point(15, 15);
-            this.lblQRTitle.Name = "lblQRTitle";
-            this.lblQRTitle.Size = new System.Drawing.Size(330, 40);
-            this.lblQRTitle.TabIndex = 0;
-            this.lblQRTitle.Text = "Quét mã để thanh toán";
-            this.lblQRTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblQRTitle.Dock = DockStyle.Top;
+            lblQRTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblQRTitle.ForeColor = Color.White;
+            lblQRTitle.Location = new Point(15, 19);
+            lblQRTitle.Name = "lblQRTitle";
+            lblQRTitle.Size = new Size(330, 50);
+            lblQRTitle.TabIndex = 0;
+            lblQRTitle.Text = "Quét mã để thanh toán";
+            lblQRTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // panelActions
             // 
-            this.panelActions.Controls.Add(this.btnConfirmPayment);
-            this.panelActions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelActions.Location = new System.Drawing.Point(20, 600);
-            this.panelActions.Name = "panelActions";
-            this.panelActions.Size = new System.Drawing.Size(1160, 80);
-            this.panelActions.TabIndex = 1;
+            panelActions.Controls.Add(btnConfirmPayment);
+            panelActions.Dock = DockStyle.Bottom;
+            panelActions.Location = new Point(20, 750);
+            panelActions.Margin = new Padding(3, 4, 3, 4);
+            panelActions.Name = "panelActions";
+            panelActions.Size = new Size(1160, 100);
+            panelActions.TabIndex = 1;
             // 
             // btnConfirmPayment
             // 
-            this.btnConfirmPayment.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnConfirmPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(167)))), ((int)(((byte)(69)))));
-            this.btnConfirmPayment.FlatAppearance.BorderSize = 0;
-            this.btnConfirmPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnConfirmPayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnConfirmPayment.ForeColor = System.Drawing.Color.White;
-            this.btnConfirmPayment.Location = new System.Drawing.Point(825, 15);
-            this.btnConfirmPayment.Name = "btnConfirmPayment";
-            this.btnConfirmPayment.Size = new System.Drawing.Size(250, 50);
-            this.btnConfirmPayment.TabIndex = 0;
-            this.btnConfirmPayment.Text = "Tôi đã chuyển khoản";
-            this.btnConfirmPayment.UseVisualStyleBackColor = false;
-            this.btnConfirmPayment.Visible = false;
-            this.btnConfirmPayment.Click += new System.EventHandler(this.btnConfirmPayment_Click);
+            btnConfirmPayment.Anchor = AnchorStyles.Bottom;
+            btnConfirmPayment.BackColor = Color.FromArgb(40, 167, 69);
+            btnConfirmPayment.FlatAppearance.BorderSize = 0;
+            btnConfirmPayment.FlatStyle = FlatStyle.Flat;
+            btnConfirmPayment.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnConfirmPayment.ForeColor = Color.White;
+            btnConfirmPayment.Location = new Point(787, 21);
+            btnConfirmPayment.Margin = new Padding(3, 4, 3, 4);
+            btnConfirmPayment.Name = "btnConfirmPayment";
+            btnConfirmPayment.Size = new Size(250, 62);
+            btnConfirmPayment.TabIndex = 0;
+            btnConfirmPayment.Text = "Tôi đã chuyển khoản";
+            btnConfirmPayment.UseVisualStyleBackColor = false;
+            btnConfirmPayment.Visible = false;
+            btnConfirmPayment.Click += btnConfirmPayment_Click;
             // 
             // flowLayoutPanelPackages
             // 
-            this.flowLayoutPanelPackages.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.flowLayoutPanelPackages.Location = new System.Drawing.Point(93, 169);
-            this.flowLayoutPanelPackages.Name = "flowLayoutPanelPackages";
-            this.flowLayoutPanelPackages.Size = new System.Drawing.Size(600, 300);
-            this.flowLayoutPanelPackages.TabIndex = 0;
+            flowLayoutPanelPackages.Anchor = AnchorStyles.None;
+            flowLayoutPanelPackages.Location = new Point(93, 211);
+            flowLayoutPanelPackages.Margin = new Padding(3, 4, 3, 4);
+            flowLayoutPanelPackages.Name = "flowLayoutPanelPackages";
+            flowLayoutPanelPackages.Size = new Size(600, 515);
+            flowLayoutPanelPackages.TabIndex = 0;
             // 
             // Form_LockScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
-            this.ClientSize = new System.Drawing.Size(1200, 700);
-            this.Controls.Add(this.panelMain);
-            this.Name = "Form_LockScreen";
-            this.Text = "Lock Screen";
-            this.panelMain.ResumeLayout(false);
-            this.panelQRCode.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picQRCode)).EndInit();
-            this.panelActions.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(26, 28, 55);
+            ClientSize = new Size(1200, 875);
+            Controls.Add(panelMain);
+            Margin = new Padding(3, 4, 3, 4);
+            Name = "Form_LockScreen";
+            Text = "Lock Screen";
+            panelMain.ResumeLayout(false);
+            panelQRCode.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picQRCode).EndInit();
+            panelActions.ResumeLayout(false);
+            ResumeLayout(false);
         }
         #endregion
 

@@ -2,15 +2,8 @@
 {
     partial class Form_InitialChoice
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,201 +15,189 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_InitialChoice));
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
-            panel4 = new Panel();
-            panel5 = new Panel();
-            panel6 = new Panel();
-            pictureBox1 = new PictureBox();
-            pictureBox2 = new PictureBox();
-            pictureBox3 = new PictureBox();
-            button1 = new Button();
-            btnUser = new Button();
-            label1 = new Label();
-            panel1.SuspendLayout();
-            panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            panelMain = new Panel();
+            labelSubtitle = new Label();
+            labelTitle = new Label();
+            panelUser = new Panel();
+            btnChooseUser = new Button();
+            picUser = new FontAwesome.Sharp.IconPictureBox();
+            panelAdmin = new Panel();
+            btnChooseAdmin = new Button();
+            picAdmin = new FontAwesome.Sharp.IconPictureBox();
+            panelMain.SuspendLayout();
+            panelUser.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picUser).BeginInit();
+            panelAdmin.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)picAdmin).BeginInit();
             SuspendLayout();
             // 
-            // panel1
+            // panelMain
             // 
-            panel1.BackColor = Color.White;
-            panel1.BorderStyle = BorderStyle.FixedSingle;
-            panel1.Controls.Add(panel2);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(10, 676);
-            panel1.TabIndex = 0;
+            panelMain.BackColor = Color.FromArgb(31, 32, 71);
+            panelMain.Controls.Add(labelSubtitle);
+            panelMain.Controls.Add(labelTitle);
+            panelMain.Controls.Add(panelUser);
+            panelMain.Controls.Add(panelAdmin);
+            panelMain.Dock = DockStyle.Fill;
+            panelMain.Location = new Point(0, 0);
+            panelMain.Margin = new Padding(4, 5, 4, 5);
+            panelMain.Name = "panelMain";
+            panelMain.Size = new Size(1200, 769);
+            panelMain.TabIndex = 0;
             // 
-            // panel2
+            // labelSubtitle
             // 
-            panel2.BackColor = Color.White;
-            panel2.BorderStyle = BorderStyle.FixedSingle;
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(5, 674);
-            panel2.TabIndex = 1;
+            labelSubtitle.Anchor = AnchorStyles.Top;
+            labelSubtitle.Font = new Font("Segoe UI Semilight", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            labelSubtitle.ForeColor = Color.Gainsboro;
+            labelSubtitle.Location = new Point(16, 146);
+            labelSubtitle.Margin = new Padding(4, 0, 4, 0);
+            labelSubtitle.Name = "labelSubtitle";
+            labelSubtitle.Size = new Size(1168, 38);
+            labelSubtitle.TabIndex = 3;
+            labelSubtitle.Text = "Please select your role";
+            labelSubtitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel3
+            // labelTitle
             // 
-            panel3.BackColor = Color.White;
-            panel3.BorderStyle = BorderStyle.FixedSingle;
-            panel3.Controls.Add(panel4);
-            panel3.Dock = DockStyle.Right;
-            panel3.Location = new Point(1052, 0);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(10, 676);
-            panel3.TabIndex = 2;
+            labelTitle.Anchor = AnchorStyles.Top;
+            labelTitle.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            labelTitle.ForeColor = Color.White;
+            labelTitle.Location = new Point(16, 62);
+            labelTitle.Margin = new Padding(4, 0, 4, 0);
+            labelTitle.Name = "labelTitle";
+            labelTitle.Size = new Size(1168, 77);
+            labelTitle.TabIndex = 2;
+            labelTitle.Text = "WELCOME TO OUR CYBER";
+            labelTitle.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // panel4
+            // panelUser
             // 
-            panel4.BackColor = Color.White;
-            panel4.BorderStyle = BorderStyle.FixedSingle;
-            panel4.Dock = DockStyle.Right;
-            panel4.Location = new Point(3, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(5, 674);
-            panel4.TabIndex = 3;
+            panelUser.Anchor = AnchorStyles.None;
+            panelUser.BackColor = Color.FromArgb(37, 36, 81);
+            panelUser.Controls.Add(btnChooseUser);
+            panelUser.Controls.Add(picUser);
+            panelUser.Cursor = Cursors.Hand;
+            panelUser.Location = new Point(653, 246);
+            panelUser.Margin = new Padding(4, 5, 4, 5);
+            panelUser.Name = "panelUser";
+            panelUser.Size = new Size(333, 431);
+            panelUser.TabIndex = 1;
             // 
-            // panel5
+            // btnChooseUser
             // 
-            panel5.BackColor = Color.White;
-            panel5.Dock = DockStyle.Top;
-            panel5.Location = new Point(10, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(1042, 5);
-            panel5.TabIndex = 3;
+            btnChooseUser.BackColor = Color.FromArgb(253, 138, 114);
+            btnChooseUser.Dock = DockStyle.Bottom;
+            btnChooseUser.FlatAppearance.BorderSize = 0;
+            btnChooseUser.FlatStyle = FlatStyle.Flat;
+            btnChooseUser.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChooseUser.ForeColor = Color.White;
+            btnChooseUser.Location = new Point(0, 339);
+            btnChooseUser.Margin = new Padding(4, 5, 4, 5);
+            btnChooseUser.Name = "btnChooseUser";
+            btnChooseUser.Size = new Size(333, 92);
+            btnChooseUser.TabIndex = 1;
+            btnChooseUser.Text = "USER";
+            btnChooseUser.UseVisualStyleBackColor = false;
+            btnChooseUser.Click += btnChooseUserClick;
             // 
-            // panel6
+            // picUser
             // 
-            panel6.BackColor = Color.White;
-            panel6.Dock = DockStyle.Bottom;
-            panel6.Location = new Point(10, 671);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(1042, 5);
-            panel6.TabIndex = 4;
+            picUser.BackColor = Color.Transparent;
+            picUser.ForeColor = Color.FromArgb(253, 138, 114);
+            picUser.IconChar = FontAwesome.Sharp.IconChar.UserAstronaut;
+            picUser.IconColor = Color.FromArgb(253, 138, 114);
+            picUser.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            picUser.IconSize = 200;
+            picUser.Location = new Point(67, 62);
+            picUser.Margin = new Padding(4, 5, 4, 5);
+            picUser.Name = "picUser";
+            picUser.Size = new Size(200, 231);
+            picUser.SizeMode = PictureBoxSizeMode.CenterImage;
+            picUser.TabIndex = 0;
+            picUser.TabStop = false;
+            picUser.Click += btnChooseUserClick;
             // 
-            // pictureBox1
+            // panelAdmin
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 12);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(114, 96);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
+            panelAdmin.Anchor = AnchorStyles.None;
+            panelAdmin.BackColor = Color.FromArgb(37, 36, 81);
+            panelAdmin.Controls.Add(btnChooseAdmin);
+            panelAdmin.Controls.Add(picAdmin);
+            panelAdmin.Cursor = Cursors.Hand;
+            panelAdmin.Location = new Point(213, 246);
+            panelAdmin.Margin = new Padding(4, 5, 4, 5);
+            panelAdmin.Name = "panelAdmin";
+            panelAdmin.Size = new Size(333, 431);
+            panelAdmin.TabIndex = 0;
             // 
-            // pictureBox2
+            // btnChooseAdmin
             // 
-            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(202, 253);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(207, 177);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 6;
-            pictureBox2.TabStop = false;
+            btnChooseAdmin.BackColor = Color.FromArgb(128, 179, 255);
+            btnChooseAdmin.Dock = DockStyle.Bottom;
+            btnChooseAdmin.FlatAppearance.BorderSize = 0;
+            btnChooseAdmin.FlatStyle = FlatStyle.Flat;
+            btnChooseAdmin.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnChooseAdmin.ForeColor = Color.White;
+            btnChooseAdmin.Location = new Point(0, 339);
+            btnChooseAdmin.Margin = new Padding(4, 5, 4, 5);
+            btnChooseAdmin.Name = "btnChooseAdmin";
+            btnChooseAdmin.Size = new Size(333, 92);
+            btnChooseAdmin.TabIndex = 1;
+            btnChooseAdmin.Text = "ADMIN";
+            btnChooseAdmin.UseVisualStyleBackColor = false;
+            btnChooseAdmin.Click += btnChooseAdmin_Click;
             // 
-            // pictureBox3
+            // picAdmin
             // 
-            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
-            pictureBox3.Location = new Point(644, 253);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new Size(207, 177);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 7;
-            pictureBox3.TabStop = false;
-            // 
-            // button1
-            // 
-            button1.BackColor = Color.FromArgb(0, 192, 192);
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ButtonHighlight;
-            button1.Location = new Point(202, 454);
-            button1.Name = "button1";
-            button1.Size = new Size(207, 55);
-            button1.TabIndex = 8;
-            button1.Text = "ADMIN";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += btnChooseAdmin_Click;
-            // 
-            // btnUser
-            // 
-            btnUser.BackColor = Color.FromArgb(0, 192, 192);
-            btnUser.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnUser.ForeColor = SystemColors.ControlLightLight;
-            btnUser.Location = new Point(644, 454);
-            btnUser.Name = "btnUser";
-            btnUser.Size = new Size(207, 55);
-            btnUser.TabIndex = 9;
-            btnUser.Text = "USER";
-            btnUser.UseVisualStyleBackColor = false;
-            btnUser.Click += btnChooseUserClick;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(222, 125);
-            label1.Name = "label1";
-            label1.Size = new Size(617, 46);
-            label1.TabIndex = 10;
-            label1.Text = "Mời quý khách chọn vai trò của mình ";
+            picAdmin.BackColor = Color.Transparent;
+            picAdmin.ForeColor = Color.FromArgb(128, 179, 255);
+            picAdmin.IconChar = FontAwesome.Sharp.IconChar.UserShield;
+            picAdmin.IconColor = Color.FromArgb(128, 179, 255);
+            picAdmin.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            picAdmin.IconSize = 269;
+            picAdmin.Location = new Point(50, 38);
+            picAdmin.Margin = new Padding(4, 5, 4, 5);
+            picAdmin.Name = "picAdmin";
+            picAdmin.Size = new Size(269, 278);
+            picAdmin.SizeMode = PictureBoxSizeMode.CenterImage;
+            picAdmin.TabIndex = 0;
+            picAdmin.TabStop = false;
+            picAdmin.Click += btnChooseAdmin_Click;
             // 
             // Form_InitialChoice
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(54, 75, 109);
-            ClientSize = new Size(1062, 676);
-            Controls.Add(label1);
-            Controls.Add(btnUser);
-            Controls.Add(button1);
-            Controls.Add(pictureBox3);
-            Controls.Add(pictureBox2);
-            Controls.Add(pictureBox1);
-            Controls.Add(panel6);
-            Controls.Add(panel5);
-            Controls.Add(panel3);
-            Controls.Add(panel1);
+            ClientSize = new Size(1200, 769);
+            Controls.Add(panelMain);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(4, 5, 4, 5);
+            MaximizeBox = false;
             Name = "Form_InitialChoice";
-            Text = "Chọn vai trò";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Select Your Role";
             FormClosed += Form_InitialChoice_FormClosed;
-            panel1.ResumeLayout(false);
-            panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            panelMain.ResumeLayout(false);
+            panelUser.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picUser).EndInit();
+            panelAdmin.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)picAdmin).EndInit();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
 
-        private Panel panel1;
-        private Panel panel2;
-        private Panel panel3;
-        private Panel panel4;
-        private Panel panel5;
-        private Panel panel6;
-        private PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox3;
-        private Button button1;
-        private Button btnUser;
-        private Label label1;
+        private System.Windows.Forms.Panel panelMain;
+        private System.Windows.Forms.Panel panelAdmin;
+        private System.Windows.Forms.Panel panelUser;
+        private System.Windows.Forms.Button btnChooseAdmin;
+        private System.Windows.Forms.Button btnChooseUser;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Label labelSubtitle;
+        private FontAwesome.Sharp.IconPictureBox picUser;
+        private FontAwesome.Sharp.IconPictureBox picAdmin;
     }
 }

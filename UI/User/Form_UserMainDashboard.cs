@@ -108,16 +108,16 @@ namespace Internet_Cafe_Manager_App.UI.Admin
                     bool altPressed = (GetKeyState(0x12) & 0x8000) != 0;
                     bool shiftPressed = (GetKeyState(0x10) & 0x8000) != 0;
 
-                    if (ctrlPressed && shiftPressed && key == Keys.Escape) return (IntPtr)1;
-                    if (key == Keys.LWin || key == Keys.RWin) return (IntPtr)1;
+                    //if (ctrlPressed && shiftPressed && key == Keys.Escape) return (IntPtr)1;
+                    //if (key == Keys.LWin || key == Keys.RWin) return (IntPtr)1;
 
-                    if (altPressed && key == Keys.F4)
-                    {
-                        if (GetForegroundWindow() == this.Handle)
-                        {
-                            return (IntPtr)1;
-                        }
-                    }
+                    //if (altPressed && key == Keys.F4)
+                    //{
+                    //    if (GetForegroundWindow() == this.Handle)
+                    //    {
+                    //        return (IntPtr)1;
+                    //    }
+                   // }
                 }
             }
             return CallNextHookEx(_hookID, nCode, wParam, lParam);
