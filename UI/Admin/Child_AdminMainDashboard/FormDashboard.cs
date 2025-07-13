@@ -6,7 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FontAwesome.Sharp; // Thêm using này để sử dụng IconChar
+using FontAwesome.Sharp;
+using Internet_Cafe_Manager_App.UI.User.Child_UserMainDashboard;
 
 namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 {
@@ -165,6 +166,21 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
 
             if (pcToUpdate != null)
             {
+                if (textBoxEditSoTien.Text.Trim() == "00000")
+                {
+                    // Tìm và đóng Form_LockScreen nếu nó đang mở
+                    Form_LockScreen lockScreen = Application.OpenForms.OfType<Form_LockScreen>().FirstOrDefault();
+                    if (lockScreen != null)
+                    {
+                        lockScreen.UnlockScreen(); // Sử dụng phương thức UnlockScreen để đóng form
+                        MessageBox.Show($"Đã mở khóa màn hình cho người dùng của máy {pcToUpdate.Name}.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy màn hình khóa để mở.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    return; // Dừng xử lý sau khi mở khóa
+                }
                 string newCurrentUser = textBoxEditCurrentUser.Text.Trim();
                 string newDetailInfo = textBoxEditDetailInfo.Text.Trim();
 
@@ -361,21 +377,77 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
         }
         private void InitializeDataGridViewColumns()
         {
-            var isTopUpColumn = new DataGridViewCheckBoxColumn { Name = "colIsTopUpRequestSent", DataPropertyName = "IsTopUpRequestSent", HeaderText = "Tick", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 60, ReadOnly = true };
+            var isTopUpColumn = new DataGridViewCheckBoxColumn
+            {
+                Name = "colIsTopUpRequestSent",
+                DataPropertyName = "IsTopUpRequestSent",
+                HeaderText = "Tick",
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 60,
+                ReadOnly = true
+            };
             dataGridViewPCs.Columns.Add(isTopUpColumn);
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colName", DataPropertyName = "Name", HeaderText = "PC", Width = 60 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDetailInfo", DataPropertyName = "DetailInfo", HeaderText = "Detail", Width = 150 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colStatus", DataPropertyName = "Status", HeaderText = "Status", Width = 80 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colCurrentUser", DataPropertyName = "CurrentUser", HeaderText = "User", Width = 120 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colStartTime", DataPropertyName = "StartTime", HeaderText = "Start Time", DefaultCellStyle = new DataGridViewCellStyle { Format = "HH:mm:ss" }, Width = 90 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colTimeRemaining", DataPropertyName = "TimeRemaining", HeaderText = "Remaining", DefaultCellStyle = new DataGridViewCellStyle { Format = @"hh\:mm\:ss" }, Width = 90 });
+
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colName", DataPropertyName = "Name", HeaderText = "PC", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 60, });
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colDetailInfo", DataPropertyName = "DetailInfo", HeaderText = "Detail", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 150 });
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colStatus", DataPropertyName = "Status", HeaderText = "Status", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 80 });
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colCurrentUser", DataPropertyName = "CurrentUser", HeaderText = "User", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 200 });
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colStartTime", DataPropertyName = "StartTime", HeaderText = "StartTime", DefaultCellStyle = new DataGridViewCellStyle { Format = "HH:mm:ss" }, AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 180 });
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colTimeRemaining", DataPropertyName = "TimeRemaining", HeaderText = "Remaining", DefaultCellStyle = new DataGridViewCellStyle { Format = @"hh\:mm\:ss" }, AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 180 });
             dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colBudget", DataPropertyName = "Budget", HeaderText = "Budget", DefaultCellStyle = new DataGridViewCellStyle { Format = "N0" }, FillWeight = 80 });
-            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colTimeUsed", DataPropertyName = "TimeUsed", HeaderText = "Time Used", DefaultCellStyle = new DataGridViewCellStyle { Format = @"hh\:mm\:ss" }, Width = 90 });
-            var removeColumn = new DataGridViewImageColumn { Name = "colRemove", HeaderText = "Delete", ImageLayout = DataGridViewImageCellLayout.Zoom, AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 40, ToolTipText = "Click to remove PC" };
+            dataGridViewPCs.Columns.Add(new DataGridViewTextBoxColumn { Name = "colTimeUsed", DataPropertyName = "TimeUsed", HeaderText = "TimeUsed", DefaultCellStyle = new DataGridViewCellStyle { Format = @"hh\:mm\:ss" }, AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 180 });
+
+
+            // Giờ sẽ tới phần canh chỉnh lề nè mấy ae, tui tách riêng ra đọc cho dễ nha 2 ông thần
+            // Canh giữa nội dung của cột "Status"
+            dataGridViewPCs.Columns["colStatus"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            // Canh giữa tiêu đề của cột
+            dataGridViewPCs.Columns["colStatus"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colName"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colName"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colDetailInfo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colDetailInfo"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colCurrentUser"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colCurrentUser"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colStartTime"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colStartTime"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colTimeRemaining"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colTimeRemaining"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colBudget"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colBudget"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colTimeUsed"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewPCs.Columns["colTimeUsed"].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+
+            var removeColumn = new DataGridViewImageColumn
+            {
+                Name = "colRemove",
+                HeaderText = "Delete",
+                ImageLayout = DataGridViewImageCellLayout.Normal,
+                AutoSizeMode = DataGridViewAutoSizeColumnMode.None,
+                Width = 60,
+                ToolTipText = "Click to remove PC"
+            };
+
             try
             {
-                IconChar icon = FontAwesome.Sharp.IconChar.TrashAlt; int iconSize = 16; Color iconColor = Color.FromArgb(220, 53, 69); Bitmap iconBitmap = new Bitmap(iconSize, iconSize);
-                using (Graphics g = Graphics.FromImage(iconBitmap)) { using (Font font = new Font("Font Awesome 6 Free Solid", iconSize, GraphicsUnit.Pixel)) { string iconString = char.ConvertFromUtf32((int)icon); g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias; using (Brush brush = new SolidBrush(iconColor)) { g.DrawString(iconString, font, brush, new PointF(-2, 0)); } } }
+                IconChar icon = IconChar.TrashAlt;
+                int iconSize = 18;
+                Color iconColor = Color.FromArgb(220, 53, 69);
+                Bitmap iconBitmap = new Bitmap(iconSize, iconSize);
+                using (Graphics g = Graphics.FromImage(iconBitmap))
+                {
+                    using (Font font = new Font("Font Awesome 6 Free Solid", iconSize, GraphicsUnit.Pixel))
+                    {
+                        string iconString = char.ConvertFromUtf32((int)icon);
+                        g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+                        using (Brush brush = new SolidBrush(iconColor))
+                        {
+                            g.DrawString(iconString, font, brush, new PointF(-2, 0));
+                        }
+                    }
+                }
                 removeColumn.Image = iconBitmap;
             }
             catch (Exception) { /* Font not found */ }
@@ -409,7 +481,7 @@ namespace Internet_Cafe_Manager_App.UI.Admin.Child_AdminMainDashboard
                 if (pc.TimeRemaining.HasValue && pc.TimeRemaining.Value.TotalSeconds <= 0) { pc.Status = PCStatus.TimeEnded; pc.TimeEndedTimestamp = DateTime.Now; pcsToSave.Add(pc); }
                 else if (pc.TimeRemaining.HasValue && pc.TimeRemaining.Value < notificationThreshold && !pc.IsTopUpRequestSent) { pc.IsTopUpRequestSent = true; CreateAutoDepositRequest(pc); }
             }
-            foreach (var pc in pcList.Where(p => p.Status == PCStatus.TimeEnded && p.TimeEndedTimestamp.HasValue && (DateTime.Now - p.TimeEndedTimestamp.Value).TotalSeconds >= 20))
+            foreach (var pc in pcList.Where(p => p.Status == PCStatus.TimeEnded && p.TimeEndedTimestamp.HasValue && (DateTime.Now - p.TimeEndedTimestamp.Value).TotalSeconds >= 600))
             {
                 pc.Status = PCStatus.Available; pc.CurrentUser = null; pc.StartTime = null; pc.TimeRemaining = TimeSpan.Zero; pc.Budget = 0; pc.IsTopUpRequestSent = false; pc.TimeEndedTimestamp = null; pcsToSave.Add(pc);
             }

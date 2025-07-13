@@ -103,44 +103,42 @@
             // 
             // dataGridViewPCs
             // 
-            dataGridViewPCs.AllowUserToAddRows = false;
-            dataGridViewPCs.AllowUserToDeleteRows = false;
-            dataGridViewPCs.BackgroundColor = Color.FromArgb(36, 38, 65);
-            dataGridViewPCs.BorderStyle = BorderStyle.None;
-            dataGridViewPCs.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
-            dataGridViewPCs.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(36, 38, 80);
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle1.ForeColor = Color.WhiteSmoke;
-            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(41, 44, 80);
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dataGridViewPCs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dataGridViewPCs.ColumnHeadersHeight = 40;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(26, 28, 55);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9.5F);
-            dataGridViewCellStyle2.ForeColor = Color.WhiteSmoke;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(41, 44, 100);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
-            dataGridViewPCs.DefaultCellStyle = dataGridViewCellStyle2;
-            dataGridViewPCs.Dock = DockStyle.Fill;
-            dataGridViewPCs.EnableHeadersVisualStyles = false;
-            dataGridViewPCs.GridColor = Color.FromArgb(41, 44, 100);
-            dataGridViewPCs.Location = new Point(0, 0);
-            dataGridViewPCs.Margin = new Padding(3, 4, 3, 4);
-            dataGridViewPCs.Name = "dataGridViewPCs";
-            dataGridViewPCs.ReadOnly = true;
-            dataGridViewPCs.RowHeadersVisible = false;
-            dataGridViewPCs.RowHeadersWidth = 51;
-            dataGridViewCellStyle3.BackColor = Color.FromArgb(26, 28, 55);
-            dataGridViewPCs.RowsDefaultCellStyle = dataGridViewCellStyle3;
-            dataGridViewPCs.RowTemplate.Height = 35;
-            dataGridViewPCs.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewPCs.Size = new Size(850, 801);
-            dataGridViewPCs.TabIndex = 0;
+            this.dataGridViewPCs.AllowUserToAddRows = false;
+            this.dataGridViewPCs.AllowUserToDeleteRows = false;
+            this.dataGridViewPCs.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(38)))), ((int)(((byte)(65)))));
+            this.dataGridViewPCs.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewPCs.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
+            this.dataGridViewPCs.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(38)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(80)))));
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewPCs.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewPCs.ColumnHeadersHeight = 40;
+
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.WhiteSmoke;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewPCs.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewPCs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewPCs.EnableHeadersVisualStyles = false;
+            this.dataGridViewPCs.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(44)))), ((int)(((byte)(100)))));
+            this.dataGridViewPCs.Location = new System.Drawing.Point(0, 0);
+            this.dataGridViewPCs.Name = "dataGridViewPCs";
+            this.dataGridViewPCs.ReadOnly = true;
+            this.dataGridViewPCs.RowHeadersVisible = false;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(28)))), ((int)(((byte)(55)))));
+            this.dataGridViewPCs.RowsDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewPCs.RowTemplate.Height = 35;
+            this.dataGridViewPCs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewPCs.Size = new System.Drawing.Size(850, 640);
+            this.dataGridViewPCs.TabIndex = 0;
             // 
             // panelControls
             // 
